@@ -4,7 +4,7 @@ const createRole = (req, res) => {
 
   const { role } = req.body;
 
-  pool.query(`INSERT INTO role (role) VALUES ($1)`, [role])
+  pool.query(`INSERT INTO roles (role) VALUES ($1)`, [role])
       .then((result) => {
     res.status(201).json({
       success: true,
@@ -26,7 +26,7 @@ const createPermission = (req, res) => {
   const { permission } = req.body;
 
   pool
-    .query(`INSERT INTO permission (permission) VALUES ($1) RETURNING *`, [permission])
+    .query(`INSERT INTO permissions (permission) VALUES ($1) RETURNING *`, [permission])
     .then((result) => {
       res.status(201).json({
         success: true,
