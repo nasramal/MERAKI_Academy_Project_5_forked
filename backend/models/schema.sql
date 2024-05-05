@@ -1,4 +1,3 @@
-//............................................................................................................................................
 CREATE TABLE roles (
   id SERIAL NOT NULL,
   role VARCHAR(255) NOT NULL,
@@ -111,4 +110,4 @@ id SERIAL PRIMARY KEY,
   FOREIGN KEY (provider_id) REFERENCES provider(provider_id),
     FOREIGN KEY (review_id) REFERENCES review(review_id)
 );
-//
+
