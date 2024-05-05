@@ -4,13 +4,13 @@ require("dotenv").config();
 const db = require("./models/db")
 const app = express();
 
- register
-const usersRouter = require("./routes/users");
+ 
+const usersRouter = require("./routes/user");
 
 
 
 const rolesRouter = require("./routes/role");
- main
+
 
 
 app.use(cors());
@@ -18,11 +18,11 @@ app.use(express.json());
 
 
 
- register
+ 
 app.use("/users", usersRouter);
 
 app.use("/roles", rolesRouter);
- main
+ 
 
 
 // Handles any other endpoints [unassigned - endpoints]
