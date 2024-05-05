@@ -6,7 +6,7 @@ const {
   createRole,
   createPermission,
   createRolePermission,
-} = require("../controllers/role");
+} = require("../controllers/rolesController");
 
 const rolesRouter = express.Router();
 

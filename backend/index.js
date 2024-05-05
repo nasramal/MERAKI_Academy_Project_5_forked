@@ -6,7 +6,7 @@ const app = express();
 
 
 
-const rolesRouter = require("./routes/roles");
+const rolesRouter = require("./routes/role");
 
 
 app.use(cors());
