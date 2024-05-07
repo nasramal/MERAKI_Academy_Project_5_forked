@@ -70,8 +70,8 @@ notes VARCHAR(255),
 );
 CREATE TABLE workingHours (
  workingHours_id SERIAL PRIMARY KEY,
-date VARCHAR(255),
-fromTime VARCHAR(255),
+date DATE,
+fromTime time,
 toTime VARCHAR(255),
     is_deleted SMALLINT DEFAULT 0
 );
