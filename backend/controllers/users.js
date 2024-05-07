@@ -4,18 +4,23 @@ const saltRounds = parseInt(process.env.SALT);
 
 const register = async (req, res) => {
 
-  const { firstName, lastName, age, email, password , phone} = req.body;
-  
+
+  const { firstName, lastName, age, email, password,role_id, phone } = req.body;
+ 
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
   pool
-    .query(`INSERT INTO users (firstName, lastName, age, email, password, role_id,phone) VALUES ($1,$2,$3,$4,$5,$6,$7)`,[
+    .query(`INSERT INTO users (firstName, lastName, age, email, password, role_id , phone) VALUES ($1,$2,$3,$4,$5,$6,$7)`,[
+
+  
       firstName,
       lastName,
       age,
       email.toLowerCase(),
       encryptedPassword,
+
       role_id,
+
       phone
     ])
     .then((result) => {
