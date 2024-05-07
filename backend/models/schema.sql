@@ -1,4 +1,3 @@
-
 CREATE TABLE roles (
   roles_id SERIAL NOT NULL,
   role VARCHAR(255) NOT NULL,
@@ -15,14 +14,14 @@ CREATE TABLE role_permission (
   role_id INT,
   permission_id INT,
   FOREIGN KEY (role_id) REFERENCES roles(roles_id),
-  FOREIGN KEY (permission_id) REFERENCES permissions(permission_id),
-  PRIMARY KEY (id)
+  FOREIGN KEY (permission_id) REFERENCES permissions(permission_id),  
 );
 
 CREATE TABLE history (
  history_id SERIAL PRIMARY KEY,
 medications VARCHAR(255),
 medicalHistory VARCHAR(255),
+
     created_at TIMESTAMP,
     is_deleted SMALLINT DEFAULT 0
 );
@@ -116,9 +115,3 @@ FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id),
 is_deleted SMALLINT DEFAULT 0,
  FOREIGN KEY (users_id) REFERENCES users(users_id)
 );
-
-
-
-
-
-
