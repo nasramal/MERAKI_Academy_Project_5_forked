@@ -7,6 +7,7 @@ const app = express();
 const usersRouter = require("./routes/users");
 const rolesRouter = require("./routes/role");
 const historyRouter = require("./routes/history")
+const insuranceRouter = require("./routes/insurance")
 app.use(cors());
 app.use(express.json());
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/users", usersRouter);
 app.use("/roles", rolesRouter);
 app.use("/history",historyRouter)
+app.use("/insurance",insuranceRouter)
 
 
 
