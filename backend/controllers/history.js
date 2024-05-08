@@ -49,7 +49,7 @@ const user_id = req.token.userId
     const user_id  = req.token.userId;
     let { medications, medicalHistory } = req.body;
   
-    const query = `UPDATE history SET medications = COALESCE($1,medications), medicalHistory = COALESCE($2, medicalHistory ) WHERE id=$3 AND is_deleted = 0  RETURNING *;`;
+    const query = `UPDATE history SET medications = COALESCE($1,medications), medicalHistory = COALESCE($2, medicalHistory ) WHERE user_id=$3 AND is_deleted = 0  RETURNING *;`;
     const data = [medications || null, medicalHistory || null, user_id ];
     pool
       .query(query, data)
