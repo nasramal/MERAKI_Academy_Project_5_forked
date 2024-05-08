@@ -50,7 +50,7 @@ const login = (req, res) => {
           if (err) res.json(err);
           if (response) {
             const payload = {
-              userId: result.rows[0].id,
+              userId: result.rows[0].users_id,
               firstName: result.rows[0].firstName,
               role: result.rows[0].role_id,
             };
