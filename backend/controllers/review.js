@@ -1,9 +1,10 @@
 const pool = require("../models/db");
 const createreviewByUserId = (req, res) => {
-    const user_id = req.params.id
+    const users_id = req.token.userId
+    const provider_id = req.params.id
         const {comment} = req.body;
       
-        pool.query(`INSERT INTO review (comment) VALUES ($1) RETURNING * `,[comment])
+        pool.query(`INSERT INTO review (comment,users_id,provider_id) VALUES ($1,$2,$3) RETURNING * `,[comment,users_id,provider_id])
     
             .then((result) => {
           res.status(201).json({
@@ -24,19 +25,48 @@ const createreviewByUserId = (req, res) => {
 
     
 const deletereviewByUserId = (req, res) => {
-    const user_id = req.params.id
-    const query = `delete from review where user_id = $1;`;
-    const data = [user_id];
+    const users_id = req.token.userId
+    const provider_id = req.params.id
+    const query = `delete from review where provider_id= $1;`;
+    const data = [provider_id];
     pool
       .query(query, data)
       .then((result) => {
         if (result.rowCount !== 0) {
           res.status(200).json({
             success: true,
-            message: `Review with id: ${user_id} deleted successfully`,
+            message: `Review with id: ${provider_id} deleted successfully`,
           });
         } else {
           throw new Error("Error happened while deleting review");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
+
+  const getreviewByproviderid = (req, res) => {
+    const provider_id = req.params.id;
+    const query = `SELECT * FROM review WHERE provider_id = $1`;
+    const data = [provider_id];
+  
+    pool
+      .query(query, data)
+      .then((result) => {
+        if (result.rows.length !== 0) {
+          res.status(200).json({
+            success: true,
+            message: `The review with id: ${provider_id}`,
+            result: result.rows,
+          });
+        } else {
+          throw new Error("Error happened while getting review");
         }
       })
       .catch((err) => {
@@ -49,7 +79,7 @@ const deletereviewByUserId = (req, res) => {
   };
 
       module.exports = {
-        createreviewByUserId,deletereviewByUserId
+        createreviewByUserId,deletereviewByUserId,getreviewByproviderid
       };
       
     

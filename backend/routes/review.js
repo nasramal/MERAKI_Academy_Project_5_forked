@@ -1,8 +1,10 @@
 const express = require("express");
-const {createreviewByUserId,deletereviewByUserId}=require("../controllers/review")
+const {createreviewByUserId,deletereviewByUserId,getreviewByproviderid}=require("../controllers/review")
 const reviewRouter = express.Router();
-reviewRouter.post("/:id",createreviewByUserId)
-reviewRouter.delete("/:id",deletereviewByUserId)
+const authentication = require("../middlewares/authentication")
+reviewRouter.post("/:id",authentication,createreviewByUserId)
+reviewRouter.delete("/:id",authentication,deletereviewByUserId)
+reviewRouter.get("/:id",getreviewByproviderid)
 
 
 module.exports = reviewRouter;
