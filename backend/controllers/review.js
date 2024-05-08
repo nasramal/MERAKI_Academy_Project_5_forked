@@ -22,8 +22,34 @@ const createreviewByUserId = (req, res) => {
     
       };
 
+    
+const deletereviewByUserId = (req, res) => {
+    const user_id = req.params.id
+    const query = `delete from review where user_id = $1;`;
+    const data = [user_id];
+    pool
+      .query(query, data)
+      .then((result) => {
+        if (result.rowCount !== 0) {
+          res.status(200).json({
+            success: true,
+            message: `Review with id: ${user_id} deleted successfully`,
+          });
+        } else {
+          throw new Error("Error happened while deleting review");
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
+
       module.exports = {
-        createreviewByUserId
+        createreviewByUserId,deletereviewByUserId
       };
       
     
