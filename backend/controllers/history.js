@@ -1,10 +1,10 @@
 const pool = require("../models/db");
 
 const createHistoryByUserId = (req, res) => {
-const user_id = req.token.userId
-    const {medications, medicalHistory } = req.body;
+const users_id = req.params.id
+    const {medications, medicalHistory} = req.body;
   
-    pool.query(`INSERT INTO history (medications, medicalHistory,user_id) VALUES ($1,$2,$3) RETURNING * `,[medications, medicalHistory,user_id])
+    pool.query(`INSERT INTO history (medications, medicalHistory,users_id) VALUES ($1,$2,$3) RETURNING * `,[medications, medicalHistory,users_id])
 
         .then((result) => {
       res.status(201).json({
@@ -20,19 +20,19 @@ const user_id = req.token.userId
         err: err.message,
       });
     });
-    //"err": "column \"user_id\" of relation \"history\" does not exist" we have to chnage the schema
+    
   };
 
   const getHistoryByUserId = (req, res) => {
-    const user_id = req.token.userId;
-    const query = `SELECT * FROM history WHERE user_id = $1`;
-    const data = [user_id];
+    const users_id = req.params.id;
+    const query = `SELECT * FROM history WHERE users_id = $1`;
+    const data = [users_id];
     pool
       .query(query, data)
       .then((result) => {
         res.status(200).json({
           success: true,
-          message: `All  history for history: ${user_id}`,
+          message: `All  history for history: ${users_id}`,
           history: result.rows,
         });
       })
@@ -46,18 +46,18 @@ const user_id = req.token.userId
   };
   
   const updateHistoryByUserId = (req, res) => {
-    const user_id  = req.token.userId;
+    const users_id  = req.params.id;
     let { medications, medicalHistory } = req.body;
   
-    const query = `UPDATE history SET medications = COALESCE($1,medications), medicalHistory = COALESCE($2, medicalHistory ) WHERE user_id=$3 AND is_deleted = 0  RETURNING *;`;
-    const data = [medications || null, medicalHistory || null, user_id ];
+    const query = `UPDATE history SET medications = COALESCE($1,medications), medicalHistory = COALESCE($2, medicalHistory ) WHERE users_id=$3 AND is_deleted = 0  RETURNING *;`;
+    const data = [medications || null, medicalHistory || null, users_id ];
     pool
       .query(query, data)
       .then((result) => {
         if (result.rows.length !== 0) {
           res.status(200).json({
             success: true,
-            message: `History with id: ${user_id } updated successfully `,
+            message: `History with id: ${users_id} updated successfully `,
             history: result.rows[0],
           });
         } 
