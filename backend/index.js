@@ -4,7 +4,6 @@ require("dotenv").config();
 const db = require("./models/db");
 const app = express();
 
-const usersRouter = require("./routes/user");
 
 const usersRouter = require("./routes/users");
 const rolesRouter = require("./routes/role");
