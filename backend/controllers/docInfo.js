@@ -57,7 +57,7 @@ const updateDocInfoByProviderId = (req, res) => {
       if (result.rows.length !== 0) {
         res.status(200).json({
           success: true,
-          message: `Article with id: ${id} updated successfully `,
+          message: `provider with id: ${id} updated successfully `,
           result: result.rows[0],
         });
       } else {
@@ -82,7 +82,7 @@ const deleteDocInfoByProviderId = (req, res) => {
       if (result.rowCount !== 0) {
         res.status(200).json({
           success: true,
-          message: `Article with id: ${id} deleted successfully`,
+          message: `provider with id: ${id} deleted successfully`,
         });
       } else {
         throw new Error("Error happened while deleting article");
