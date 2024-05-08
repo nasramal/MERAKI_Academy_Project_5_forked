@@ -6,8 +6,13 @@ const app = express();
 
 const usersRouter = require("./routes/users");
 const rolesRouter = require("./routes/role");
+
 const historyRouter = require("./routes/history")
 const insuranceRouter = require("./routes/insurance")
+const reviewRouter = require("./routes/review")
+const docInfoRouter = require("./routes/docInfo");
+const specialtyRouter =require("./routes/specialty");
+
 app.use(cors());
 app.use(express.json());
 
@@ -15,9 +20,11 @@ app.use(express.json());
 
 app.use("/users", usersRouter);
 app.use("/roles", rolesRouter);
-app.use("/history",historyRouter)
-app.use("/insurance",insuranceRouter)
-
+app.use("/review",reviewRouter)
+app.use("/history",historyRouter);
+app.use("/insurance",insuranceRouter);
+app.use("/docInfo",docInfoRouter);
+app.use("/specialty",specialtyRouter);
 
 
 // Handles any other endpoints [unassigned - endpoints]
