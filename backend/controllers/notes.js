@@ -1,6 +1,6 @@
 const pool = require("../models/db");
 const createnotesByProviderId = (req, res) => {
-    const provider_id =  req.token.users_id
+    const provider_id =  req.token.userId
         const {notes} = req.body;
       
         pool.query(`INSERT INTO notes (notes) VALUES ($1) RETURNING * `,[notes])
