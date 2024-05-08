@@ -26,7 +26,7 @@ const createDocInfoByProviderId = async (req, res) => {
 const getDocInfoByProviderId = async (req, res) => {
   const provider_id = req.token.userId;
   pool
-    .query(`SELECT * FROM docInfo  WHERE provider_id = $1 .is_deleted=0`, [
+    .query(`SELECT * FROM docInfo  WHERE provider_id = $1 `, [
       provider_id,
     ])
     .then((result) => {
@@ -57,7 +57,7 @@ const updateDocInfoByProviderId = (req, res) => {
       if (result.rows.length !== 0) {
         res.status(200).json({
           success: true,
-          message: `provider with id: ${id} updated successfully `,
+          message: `provider with id: ${provider_id} updated successfully `,
           result: result.rows[0],
         });
       } else {
@@ -65,6 +65,7 @@ const updateDocInfoByProviderId = (req, res) => {
       }
     })
     .catch((err) => {
+        console.log(err);
       res.status(500).json({
         success: false,
         message: "Server error",
@@ -82,7 +83,7 @@ const deleteDocInfoByProviderId = (req, res) => {
       if (result.rowCount !== 0) {
         res.status(200).json({
           success: true,
-          message: `provider with id: ${id} deleted successfully`,
+          message: `provider with id: ${provider_id} deleted successfully`,
         });
       } else {
         throw new Error("Error happened while deleting article");

@@ -17,9 +17,7 @@ const register = async (req, res) => {
         age,
         email.toLowerCase(),
         encryptedPassword,
-
         role_id,
-
         phone,
       ]
     )
