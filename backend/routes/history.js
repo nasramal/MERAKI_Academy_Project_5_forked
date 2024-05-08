@@ -3,8 +3,8 @@ const {createHistoryByUserId, getHistoryByUserId ,updateHistoryByUserId} = requi
 const historyRouter = express.Router();
 const authentication = require("../middlewares/authentication")
 historyRouter.post("/",authentication,createHistoryByUserId)
-historyRouter.post("/",authentication,getHistoryByUserId)
-historyRouter.post("/",authentication,updateHistoryByUserId)
+historyRouter.get("/",authentication,getHistoryByUserId)
+historyRouter.put("/",authentication,updateHistoryByUserId)
 
 
 module.exports = historyRouter;
