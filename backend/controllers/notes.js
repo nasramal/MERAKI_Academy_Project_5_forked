@@ -51,11 +51,39 @@ const getNotesByUserId = (req, res) => {
       });
   };
 
+  const getNotesByProviderId = (req, res) => {
+    const provider_id = req.params.id
+
+    pool.query(`SELECT notes FROM users INNER JOIN notes ON users.users_id=notes.provider_id WHERE notes.users_id=$1   `, [provider_id])
+
+
+    .then((result) => {
+        if (result.rows.length !== 0) {
+          res.status(200).json({
+            success: true,
+            message: `all notes for the doctor with id: ${provider_id}`,
+            result: result.rows,
+          });
+        } else {
+          throw new Error("Error happened while getting article");
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
+
+
 
 
 
 module.exports = {
     createNotesByProviderId,
-    getNotesByUserId
+    getNotesByUserId,
+    getNotesByProviderId
 
 }
