@@ -24,7 +24,7 @@ const createSpecialty = async (req, res) => {
 const getSpecialty = async (req, res) => {
     
     pool
-      .query(`SELECT * FROM specialty  WHERE  .is_deleted=0`)
+      .query(`SELECT * FROM specialty `)
       .then((result) => {
         res.status(200).json({
           success: true,

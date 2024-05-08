@@ -5,12 +5,13 @@ const {
   updateDocInfoByProviderId,
   deleteDocInfoByProviderId,
 } = require("../controllers/docInfo");
+const authentication = require("../middlewares/authentication")
 
 const docInfoRouter = express.Router();
 
-docInfoRouter.post("/", createDocInfoByProviderId);
-docInfoRouter.get("/", getDocInfoByProviderId);
-docInfoRouter.put("/", updateDocInfoByProviderId);
-docInfoRouter.delete("/", deleteDocInfoByProviderId);
+docInfoRouter.post("/", authentication,createDocInfoByProviderId);
+docInfoRouter.get("/", authentication,getDocInfoByProviderId);
+docInfoRouter.put("/",authentication, updateDocInfoByProviderId);
+docInfoRouter.delete("/",authentication, deleteDocInfoByProviderId);
 
 module.exports = docInfoRouter;
