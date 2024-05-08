@@ -1,5 +1,6 @@
 const pool = require("../models/db");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const saltRounds = parseInt(process.env.SALT);
 
 const register = async (req, res) => {
@@ -51,7 +52,7 @@ const login = (req, res) => {
           if (err) res.json(err);
           if (response) {
             const payload = {
-              userId: result.rows[0].id,
+              userId: result.rows[0].users_id ,
               firstName: result.rows[0].firstName,
               role: result.rows[0].role_id,
             };
@@ -63,7 +64,7 @@ const login = (req, res) => {
                 token,
                 success: true,
                 message: `Valid login credentials`,
-                userId:result.rows[0].id
+                userId:result.rows[0].users_id 
               });
             } else {
               throw Error;
