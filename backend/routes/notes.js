@@ -6,7 +6,7 @@ const authentication = require("../middlewares/authentication")
 
 const notesRouter = express.Router();
 
-docInfoRouter.post("/newNotes", authentication,createnotesByProviderId);
+notesRouter.post("/newNotes", authentication,createnotesByProviderId);
 
 
-module.exports = docInfoRouter;
+module.exports = notesRouter;
