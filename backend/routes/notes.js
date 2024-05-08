@@ -1,12 +1,14 @@
 const express = require("express");
 const {
-    createnotesByProviderId
+    createNotesByProviderId,
+    getNotesByUserId
 } = require("../controllers/notes");
 const authentication = require("../middlewares/authentication")
 
 const notesRouter = express.Router();
 
-notesRouter.post("/newNotes", authentication,createnotesByProviderId);
+notesRouter.post("/newNotes", authentication,createNotesByProviderId);
+notesRouter.get("/:id", authentication,getNotesByUserId);
 
 
 module.exports = notesRouter;
