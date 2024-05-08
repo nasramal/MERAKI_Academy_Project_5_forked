@@ -21,7 +21,6 @@ CREATE TABLE history (
  history_id SERIAL PRIMARY KEY,
 medications VARCHAR(255),
 medicalHistory VARCHAR(255),
-
     created_at TIMESTAMP,
     is_deleted SMALLINT DEFAULT 0
 );

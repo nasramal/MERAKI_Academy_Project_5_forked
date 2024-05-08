@@ -1,10 +1,9 @@
 const express = require("express");
 const {createHistoryByUserId, getHistoryByUserId ,updateHistoryByUserId} = require ("../controllers/history")
 const historyRouter = express.Router();
-const authentication = require("../middlewares/authentication")
-historyRouter.post("/",authentication,createHistoryByUserId)
-historyRouter.get("/",authentication,getHistoryByUserId)
-historyRouter.put("/",authentication,updateHistoryByUserId)
+historyRouter.post("/:id",createHistoryByUserId)
+historyRouter.get("/:id",getHistoryByUserId)
+historyRouter.put("/:id",updateHistoryByUserId)
 
 
 module.exports = historyRouter;
