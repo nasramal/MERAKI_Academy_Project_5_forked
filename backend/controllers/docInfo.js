@@ -1,6 +1,6 @@
 const pool = require("../models/db");
 
-const createDocInfoByProviderId = async (req, res) => {
+const createDocInfoByProviderId =  (req, res) => {
   const { specialty, experience, certificates } = req.body;
   const provider_id = req.token.userId;
   pool
@@ -23,7 +23,7 @@ const createDocInfoByProviderId = async (req, res) => {
     });
 };
 
-const getDocInfoByProviderId = async (req, res) => {
+const getDocInfoByProviderId =  (req, res) => {
   const provider_id = req.token.userId;
   pool
     .query(`SELECT * FROM docInfo  WHERE provider_id = $1 `, [

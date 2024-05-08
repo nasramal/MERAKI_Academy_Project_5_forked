@@ -1,6 +1,6 @@
 const pool = require("../models/db");
 
-const createSpecialty = async (req, res) => {
+const createSpecialty =  (req, res) => {
   const { specialty } = req.body;
   pool
     .query(`INSERT INTO specialty (specialty) VALUES ($1)`, [
@@ -21,7 +21,7 @@ const createSpecialty = async (req, res) => {
     });
 };
 
-const getSpecialty = async (req, res) => {
+const getSpecialty =  (req, res) => {
     
     pool
       .query(`SELECT * FROM specialty `)
