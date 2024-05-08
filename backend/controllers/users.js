@@ -1,5 +1,6 @@
 const pool = require("../models/db");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const saltRounds = parseInt(process.env.SALT);
 
 const register = async (req, res) => {
