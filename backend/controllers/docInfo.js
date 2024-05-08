@@ -26,7 +26,7 @@ const createDocInfoByProviderId = async (req, res) => {
 const getDocInfoByProviderId = async (req, res) => {
   const provider_id = req.token.userId;
   pool
-    .query(`SELECT * FROM docInfo  WHERE user_id = $1 .is_deleted=0`, [
+    .query(`SELECT * FROM docInfo  WHERE provider_id = $1 .is_deleted=0`, [
       provider_id,
     ])
     .then((result) => {
@@ -50,7 +50,7 @@ const updateDocInfoByProviderId = (req, res) => {
   let { experience, certificates } = req.body;
   pool
     .query(
-      `UPDATE docInfo SET experience = COALESCE($1,experience), certificates = COALESCE($2, experience) WHERE id=$3 AND is_deleted = 0  RETURNING *`,
+      `UPDATE docInfo SET experience = COALESCE($1,experience), certificates = COALESCE($2, experience) WHERE provider_id=$3 AND is_deleted = 0  RETURNING *`,
       [experience || null, certificates || null, provider_id]
     )
     .then((result) => {
