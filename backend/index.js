@@ -7,9 +7,9 @@ const app = express();
 const usersRouter = require("./routes/users");
 const rolesRouter = require("./routes/role");
 
-const historyRouter = require("./routes/history")
-const insuranceRouter = require("./routes/insurance")
-const reviewRouter = require("./routes/review")
+const historyRouter = require("./routes/history");
+const insuranceRouter = require("./routes/insurance");
+const reviewRouter = require("./routes/review");
 const docInfoRouter = require("./routes/docInfo");
 const specialtyRouter =require("./routes/specialty");
 const notesRouter =require("./routes/notes");
