@@ -1,12 +1,10 @@
 const pool = require("../models/db");
 
-const createSpecialtyByProviderId = async (req, res) => {
+const createSpecialty = async (req, res) => {
   const { specialty } = req.body;
-  const provider_id = req.token.userId;
   pool
-    .query(`INSERT INTO specialty (specialty,provider_id) VALUES ($1,$2)`, [
+    .query(`INSERT INTO specialty (specialty) VALUES ($1)`, [
       specialty,
-      provider_id,
     ])
     .then((result) => {
       res.status(200).json({
@@ -23,7 +21,26 @@ const createSpecialtyByProviderId = async (req, res) => {
     });
 };
 
+const getSpecialty = async (req, res) => {
+    
+    pool
+      .query(`SELECT * FROM specialty  WHERE  .is_deleted=0`)
+      .then((result) => {
+        res.status(200).json({
+          success: true,
+          message: "specialty ",
+          result: result.rows,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
 
 module.exports = {
-    createSpecialtyByProviderId,
+    createSpecialty,getSpecialty
   };
