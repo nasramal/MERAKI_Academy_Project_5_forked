@@ -23,9 +23,11 @@ const users_id = req.params.id
     
   };
 
+
   const getHistoryByUserId = (req, res) => {
     const users_id = req.params.id;
-    const query = `SELECT * FROM history WHERE users_id = $1`;
+    // const query = `SELECT * FROM history WHERE users_id = $1`;
+    const query = ` SELECT history.medications , history.medicalHistory, history.users_id FROM history WHERE history.users_id =$1`
     const data = [users_id];
     pool
       .query(query, data)

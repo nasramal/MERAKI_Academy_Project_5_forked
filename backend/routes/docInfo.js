@@ -12,6 +12,6 @@ const docInfoRouter = express.Router();
 docInfoRouter.post("/", authentication,createDocInfoByProviderId);
 docInfoRouter.get("/", authentication,getDocInfoByProviderId);
 docInfoRouter.put("/",authentication, updateDocInfoByProviderId);
-docInfoRouter.delete("/",authentication, deleteDocInfoByProviderId);
+docInfoRouter.put("/",authentication, deleteDocInfoByProviderId);
 
 module.exports = docInfoRouter;

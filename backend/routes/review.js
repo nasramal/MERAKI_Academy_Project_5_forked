@@ -3,7 +3,7 @@ const {createreviewByUserId,deletereviewByUserId,getreviewByproviderid}=require(
 const reviewRouter = express.Router();
 const authentication = require("../middlewares/authentication")
 reviewRouter.post("/:id",authentication,createreviewByUserId)
-reviewRouter.delete("/:id",authentication,deletereviewByUserId)
+reviewRouter.put("/:id",authentication,deletereviewByUserId)
 reviewRouter.get("/:id",getreviewByproviderid)
 
 
