@@ -1,4 +1,5 @@
 const pool = require("../models/db");
+
 const createreviewByUserId = (req, res) => {
     const users_id = req.token.userId
     const provider_id = req.params.id
@@ -22,13 +23,14 @@ const createreviewByUserId = (req, res) => {
         });
     
       };
-
+ 
+      
     
 const deletereviewByUserId = (req, res) => {
     const users_id = req.token.userId
     const provider_id = req.params.id
-    const query = `delete from review where provider_id= $1;`;
-    const data = [provider_id];
+    const query = `UPDATE review SET is_deleted=1 WHERE users_id=$1 AND provider_id=$2  RETURNING *`;
+    const data = [users_id,provider_id];
     pool
       .query(query, data)
       .then((result) => {
@@ -51,8 +53,10 @@ const deletereviewByUserId = (req, res) => {
       });
   };
 
+  
   const getreviewByproviderid = (req, res) => {
     const provider_id = req.params.id;
+   
     const query = `SELECT * FROM review WHERE provider_id = $1`;
     const data = [provider_id];
   

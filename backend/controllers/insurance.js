@@ -1,4 +1,6 @@
 const pool = require("../models/db");
+
+
 const createInsurance = (req, res) => {
     
     const {insuranceName} = req.body;
