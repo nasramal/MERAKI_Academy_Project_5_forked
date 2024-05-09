@@ -32,7 +32,7 @@ const getScheduleByProviderId =  (req, res) => {
       .then((result) => {
         res.status(200).json({
           success: true,
-          message: "Schedule ",
+          message: "All Schedule ",
           result: result.rows,
         });
       })
@@ -45,7 +45,28 @@ const getScheduleByProviderId =  (req, res) => {
       });
   };
 
-
+const updatedScheduleByProviderId =(req,res)=>{
+    const provider_id = req.token.userId;
+    const {date, timeFrom, timeTo }= req.body
+    pool
+      .query(`UPDATE schedule SET date = COALESCE($1,date), timeFrom = COALESCE($2, timeFrom), timeTo = COALESCE($3, timeTo) WHERE provider_id=$4 AND is_deleted = 0  RETURNING *`, [
+        date, timeFrom, timeTo ,provider_id
+      ])
+      .then((result) => {
+        res.status(200).json({
+          success: true,
+          message: "Schedule update",
+          result: result.rows,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+}
 
 
 
@@ -60,5 +81,6 @@ const getScheduleByProviderId =  (req, res) => {
 
 
 module.exports = {
-    createScheduleByProviderId,getScheduleByProviderId
+    createScheduleByProviderId,getScheduleByProviderId,
+    updatedScheduleByProviderId
   };

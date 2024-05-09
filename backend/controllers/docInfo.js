@@ -50,7 +50,7 @@ const updateDocInfoByProviderId = (req, res) => {
   let { experience, certificates } = req.body;
   pool
     .query(
-      `UPDATE docInfo SET experience = COALESCE($1,experience), certificates = COALESCE($2, experience) WHERE provider_id=$3 AND is_deleted = 0  RETURNING *`,
+      `UPDATE docInfo SET experience = COALESCE($1,experience), certificates = COALESCE($2, certificates) WHERE provider_id=$3 AND is_deleted = 0  RETURNING *`,
       [experience || null, certificates || null, provider_id]
     )
     .then((result) => {
