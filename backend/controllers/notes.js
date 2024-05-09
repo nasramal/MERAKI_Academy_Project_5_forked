@@ -26,9 +26,11 @@ const createNotesByProviderId = (req, res) => {
 // it views the notes for the user id (WHERE notes.users_id=$1)that was written by the provider id(users.users_id=notes.provider_id)
 
 const getNotesByUserId = (req, res) => {
-    const user_id = req.params.id
+    const user_id = req.token.userId
 
-    pool.query(`SELECT notes FROM users INNER JOIN notes ON users.users_id=notes.provider_id WHERE notes.users_id=$1   `, [user_id])
+    pool.query(`SELECT notes.notes,notes.provider_id FROM notes WHERE notes.users_id =$1   `, [user_id])
+
+// pool.query (`SELECT * FROM notes WHERE users_id=$1 AND is_deleted=0`,[user_id])
 
 
     .then((result) => {
@@ -52,10 +54,11 @@ const getNotesByUserId = (req, res) => {
   };
 
   const getNotesByProviderId = (req, res) => {
-    const provider_id = req.params.id
+    const user_id  = req.params.id
+    const provider_id= req.token.userId
 
-    pool.query(`SELECT notes FROM users INNER JOIN notes ON users.users_id=notes.provider_id WHERE notes.users_id=$1   `, [provider_id])
-
+    pool.query(`SELECT notes.notes, notes.users_id FROM users INNER JOIN notes ON users.users_id=notes.provider_id  WHERE notes.users_id=$1 AND notes.provider_id =$2  `, [user_id,provider_id])
+    
 
     .then((result) => {
         if (result.rows.length !== 0) {
@@ -84,6 +87,7 @@ const getNotesByUserId = (req, res) => {
 module.exports = {
     createNotesByProviderId,
     getNotesByUserId,
-    getNotesByProviderId
+    getNotesByProviderId,
+
 
 }
