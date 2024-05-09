@@ -13,6 +13,7 @@ const reviewRouter = require("./routes/review");
 const docInfoRouter = require("./routes/docInfo");
 const specialtyRouter =require("./routes/specialty");
 const notesRouter =require("./routes/notes");
+const scheduleRouter =require("./routes/schedule");
 
 
 app.use(cors());
@@ -28,7 +29,7 @@ app.use("/insurance",insuranceRouter);
 app.use("/docInfo",docInfoRouter);
 app.use("/specialty",specialtyRouter);
 app.use("/notes",notesRouter);
-
+app.use("/schedule",scheduleRouter)
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
