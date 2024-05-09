@@ -69,7 +69,27 @@ const updatedScheduleByProviderId =(req,res)=>{
 }
 
 
-
+const deleteScheduleByProviderId =(req,res)=>{
+    const provider_id = req.token.userId;
+    pool
+      .query(`UPDATE schedule SET is_deleted=1 WHERE provider_id=$1 AND is_deleted = 0  RETURNING *`, [
+        provider_id
+      ])
+      .then((result) => {
+        res.status(200).json({
+          success: true,
+          message: "Schedule deleted",
+          result: result.rows,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+}
 
 
 
@@ -82,5 +102,6 @@ const updatedScheduleByProviderId =(req,res)=>{
 
 module.exports = {
     createScheduleByProviderId,getScheduleByProviderId,
-    updatedScheduleByProviderId
+    updatedScheduleByProviderId,
+    deleteScheduleByProviderId
   };
