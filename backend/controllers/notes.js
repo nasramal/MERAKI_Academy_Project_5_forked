@@ -81,6 +81,36 @@ const getNotesByUserId = (req, res) => {
   };
 
 
+  
+  const deleteNotesByProviderId = (req, res) => {
+    const provider_id = req.token.userId
+    const users_id = req.params.id;
+    pool.query(`UPDATE notes SET is_deleted=1 WHERE provider_id=$1 AND users_id=$2 RETURNING * `, [provider_id,users_id])
+    
+
+    .then((result) => {
+    
+      if (result.rows.length !== 0) {
+          res.status(200).json({
+            success: true,
+            message: `notes  with doctor: ${provider_id} were deleted successfully`,
+            result: result.rows,
+          });
+        } else {
+          throw new Error("Error happened while getting article");
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
+
+
+
 
 
 
@@ -88,6 +118,6 @@ module.exports = {
     createNotesByProviderId,
     getNotesByUserId,
     getNotesByProviderId,
-
+    deleteNotesByProviderId
 
 }
