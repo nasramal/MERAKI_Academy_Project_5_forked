@@ -5,7 +5,7 @@ const createScheduleByProviderId = (req, res) => {
   const provider_id = req.token.userId;
   pool
     .query(
-      `INSERT INTO schedule (date, timeFrom, timeTo,provider_id) VALUES ($1,$2,$3,$4)`,
+      `INSERT INTO schedule (date, timeFrom, timeTo,provider_id) VALUES ($1,$2,$3,$4) RETURNING *`,
       [date, timeFrom, timeTo, provider_id]
     )
     .then((result) => {
@@ -26,7 +26,7 @@ const createScheduleByProviderId = (req, res) => {
 const getScheduleByProviderId =  (req, res) => {
     const provider_id = req.token.userId;
     pool
-      .query(`SELECT * FROM Schedule WHERE provider_id = $1 `, [
+      .query(`SELECT * FROM Schedule WHERE provider_id = $1 RETURNING *`, [
         provider_id,
       ])
       .then((result) => {

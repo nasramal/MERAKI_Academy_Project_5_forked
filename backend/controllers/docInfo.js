@@ -5,7 +5,7 @@ const createDocInfoByProviderId =  (req, res) => {
   const provider_id = req.token.userId;
   pool
     .query(
-      `INSERT INTO docInfo (specialty,experience,certificates,provider_id) VALUES ($1,$2,$3,$4)`,
+      `INSERT INTO docInfo (specialty,experience,certificates,provider_id) VALUES ($1,$2,$3,$4)RETURNING *`,
       [specialty, experience, certificates, provider_id]
     )
     .then((result) => {
@@ -22,11 +22,11 @@ const createDocInfoByProviderId =  (req, res) => {
       });
     });
 };
-
+// true false 
 const getDocInfoByProviderId =  (req, res) => {
   const provider_id = req.token.userId;
   pool
-    .query(`SELECT * FROM docInfo  WHERE provider_id = $1 `, [
+    .query(`SELECT * FROM docInfo  WHERE provider_id = $1 AND status = false RETURNING *`, [
       provider_id,
     ])
     .then((result) => {
@@ -78,7 +78,7 @@ const deleteDocInfoByProviderId = (req, res) => {
   const provider_id = req.token.userId;
  
   pool
-    .query(`delete from docInfo where provider_id = $1;`, [provider_id])
+    .query(`delete from docInfo where provider_id = $1 RETURNING *`, [provider_id])
     .then((result) => {
       if (result.rowCount !== 0) {
         res.status(200).json({
