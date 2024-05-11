@@ -6,7 +6,7 @@ const createAppointmentByUserId = (req, res) => {
   const user_id = req.token.userId;
   pool
     .query(
-      `INSERT INTO appointment (date, timeFrom, timeTo,provider_id,user_id) VALUES ($1,$2,$3,$4,$5)`,
+      `INSERT INTO appointmint (date, timeFrom, timeTo,provider_id,user_id) VALUES ($1,$2,$3,$4,$5) RETURNING *`,
       [date, timeFrom, timeTo, provider_id ,user_id]
     )
     .then((result) => {
@@ -25,6 +25,28 @@ const createAppointmentByUserId = (req, res) => {
 };
 
 
+const getByAppointmentByUserId =  (req, res) => {
+    const user_id = req.token.userId;
+
+    pool
+      .query(`SELECT * FROM appointmint  WHERE user_id = $1 RETURNING *`, [
+        user_id,
+      ])
+      .then((result) => {
+        res.status(200).json({
+          success: true,
+          message: "appointment's ",
+          result: result.rows,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
 
 
 
@@ -36,5 +58,5 @@ const createAppointmentByUserId = (req, res) => {
 
 
 module.exports = {
-    createAppointmentByUserId,
+    createAppointmentByUserId,getByAppointmentByUserId
   };
