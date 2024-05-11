@@ -22,11 +22,11 @@ const createDocInfoByProviderId =  (req, res) => {
       });
     });
 };
-// true false 
+ 
 const getDocInfoByProviderId =  (req, res) => {
   const provider_id = req.token.userId;
   pool
-    .query(`SELECT * FROM docInfo  WHERE provider_id = $1 AND status = false RETURNING *`, [
+    .query(`SELECT * FROM docInfo  WHERE provider_id = $1 RETURNING *`, [
       provider_id,
     ])
     .then((result) => {

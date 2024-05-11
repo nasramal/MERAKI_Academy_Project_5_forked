@@ -92,7 +92,27 @@ const deleteScheduleByProviderId =(req,res)=>{
 }
 
 
-
+const updatedScheduleToBooked = (req,res)=>{
+    const provider_id = req.token.userId;
+    pool
+      .query(`UPDATE schedule SET booked = COALESCE(true,booked) WHERE provider_id=$1 AND is_deleted = 0  RETURNING *`, [
+        provider_id
+      ])
+      .then((result) => {
+        res.status(200).json({
+          success: true,
+          message: "Schedule Booked",
+          result: result.rows,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+}
 
 
 
@@ -103,5 +123,6 @@ const deleteScheduleByProviderId =(req,res)=>{
 module.exports = {
     createScheduleByProviderId,getScheduleByProviderId,
     updatedScheduleByProviderId,
-    deleteScheduleByProviderId
+    deleteScheduleByProviderId,
+    updatedScheduleToBooked
   };
