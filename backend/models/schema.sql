@@ -102,6 +102,8 @@ user_id INT,
 FOREIGN KEY (user_id) REFERENCES users(users_id),
 FOREIGN KEY (provider_id) REFERENCES users(users_id),
 status varchar(255) DEFAULT 'pending'
+-- booked BOOLEAN DEFAULT false 
+
 );
 
 CREATE TABLE notification (
