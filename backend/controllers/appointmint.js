@@ -48,7 +48,27 @@ const getByAppointmentByUserId =  (req, res) => {
       });
   };
 
-
+  const deleteAppointmentByUserId =(req,res)=>{
+    const user_id = req.token.userId;
+    pool
+      .query(`UPDATE appointmint SET is_deleted=1 WHERE user_id=$1 AND is_deleted = 0  RETURNING *`, [
+        user_id
+      ])
+      .then((result) => {
+        res.status(200).json({
+          success: true,
+          message: "appointment deleted",
+          result: result.rows,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+}
 
 
 
@@ -58,5 +78,6 @@ const getByAppointmentByUserId =  (req, res) => {
 
 
 module.exports = {
-    createAppointmentByUserId,getByAppointmentByUserId
+    createAppointmentByUserId,getByAppointmentByUserId,
+    deleteAppointmentByUserId
   };
