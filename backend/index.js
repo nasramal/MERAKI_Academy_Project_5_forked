@@ -7,14 +7,14 @@ const notificationmw= require ("./middlewares/notificationmw")
 
 
 const users={}
-const patient = io.of("/patient")
-const doctor = io.of("/doctor")
-patient.on ("connection",(socket)=>{
+const user = io.of("/user")
+// const doctor = io.of("/doctor")
+user.on ("connection",(socket)=>{
   console.log("from patient")
 })
-doctor.on ("connection",(socket)=>{
-  console.log("from patient")
-})
+// doctor.on ("connection",(socket)=>{
+//   console.log("from patient")
+// })
 
 io.use(auth)
 
