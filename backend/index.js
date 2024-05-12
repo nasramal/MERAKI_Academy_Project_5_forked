@@ -1,5 +1,67 @@
+
+const {Server} = require ('socket.io')
+const http = require("http");
+const io = new Server(8080,{cors:{origin : "*"}})
+const auth = require ("./middlewares/auth")
+const notificationmw= require ("./middlewares/notificationmw")
+
+
+const users={}
+const patient = io.of("/patient")
+const doctor = io.of("/doctor")
+patient.on ("connection",(socket)=>{
+  console.log("from patient")
+})
+doctor.on ("connection",(socket)=>{
+  console.log("from patient")
+})
+
+io.use(auth)
+
+
+
+io.on("connection", (socket) => {
+ socket.use (notificationmw) 
+const user_id = socket.handshake.headers.user_id
+users[user_id] ={socket_id:socket.id,user_id}
+console.log(users);
+
+
+notification(socket,io)
+socket.on("error",(error)=>{
+  socket.emit("error",{error:error.notification})
+})
+
+socket.on("disconnect",()=>{
+
+  for (const key in users) {
+    if (users[key].socket_id===socket.id){
+      delete users[key]
+    }
+  }
+  console.log(users);
+})
+
+
+
+})
+
+
+
+
+
+
+
+
+
+  
+
+
+
 const express = require("express");
 const cors = require("cors");
+
+
 require("dotenv").config();
 const db = require("./models/db");
 const app = express();
@@ -33,6 +95,8 @@ app.use("/schedule",scheduleRouter)
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
+
+
 
 const PORT = process.env.PORT || 5000;
 
