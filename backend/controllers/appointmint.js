@@ -71,13 +71,42 @@ const getByAppointmentByUserId =  (req, res) => {
 }
 
 
+// provider use
+//update status = prov or cancle
 
-
-
-
+const updateAppointmentByAppointmentId = (req, res) => {
+    // const user_id = req.token.userId;
+    let { status } = req.body;
+    const appointment_id = req.params.id;
+    pool
+      .query(
+        `UPDATE appointmint SET status = COALESCE($1,status) WHERE appointment_id=$2 AND is_deleted = 0  RETURNING *`,
+        [status , appointment_id]
+      )
+      .then((result) => {
+        if (result.rows.length !== 0) {
+          res.status(200).json({
+            success: true,
+            message: `appointment with id: ${appointment_id} updated successfully `,
+            result: result.rows[0],
+          });
+        } else {
+          throw new Error("Error happened while updating article");
+        }
+      })
+      .catch((err) => {
+          console.log(err);
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
+  
 
 
 module.exports = {
     createAppointmentByUserId,getByAppointmentByUserId,
-    deleteAppointmentByUserId
+    deleteAppointmentByUserId,updateAppointmentByAppointmentId
   };

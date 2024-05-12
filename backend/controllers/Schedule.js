@@ -26,7 +26,7 @@ const createScheduleByProviderId = (req, res) => {
 const getScheduleByProviderId =  (req, res) => {
     const provider_id = req.token.userId;
     pool
-      .query(`SELECT * FROM Schedule WHERE provider_id = $1 RETURNING *`, [
+      .query(`SELECT * FROM Schedule WHERE provider_id = $1  RETURNING *`, [
         provider_id,
       ])
       .then((result) => {
@@ -45,12 +45,36 @@ const getScheduleByProviderId =  (req, res) => {
       });
   };
 
-const updatedScheduleByProviderId =(req,res)=>{
+// user used
+  const getNotBookedScheduleByProviderId =  (req, res) => {
     const provider_id = req.token.userId;
-    const {date, timeFrom, timeTo }= req.body
     pool
-      .query(`UPDATE schedule SET date = COALESCE($1,date), timeFrom = COALESCE($2, timeFrom), timeTo = COALESCE($3, timeTo) WHERE provider_id=$4 AND is_deleted = 0  RETURNING *`, [
-        date, timeFrom, timeTo ,provider_id
+      .query(`SELECT * FROM Schedule WHERE provider_id = $1 AND booked = false RETURNING *`, [
+        provider_id,
+      ])
+      .then((result) => {
+        res.status(200).json({
+          success: true,
+          message: "All Schedule ",
+          result: result.rows,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
+// booked updat
+const updatedScheduleByID =(req,res)=>{
+    // const provider_id = req.token.userId;
+    const schedule_id = req.params.id;
+    const {date, timeFrom, timeTo, booked }= req.body
+    pool
+      .query(`UPDATE schedule SET date = COALESCE($1,date), timeFrom = COALESCE($2, timeFrom), timeTo = COALESCE($3, timeTo) , booked = COALESCE($4,booked) WHERE schedule_id=$5 AND is_deleted = 0  RETURNING *`, [
+        date, timeFrom, timeTo ,booked, schedule_id
       ])
       .then((result) => {
         res.status(200).json({
@@ -70,10 +94,10 @@ const updatedScheduleByProviderId =(req,res)=>{
 
 
 const deleteScheduleByProviderId =(req,res)=>{
-    const provider_id = req.token.userId;
+    const schedule_id = req.params.id;
     pool
-      .query(`UPDATE schedule SET is_deleted=1 WHERE provider_id=$1 AND is_deleted = 0  RETURNING *`, [
-        provider_id
+      .query(`UPDATE schedule SET is_deleted=1 WHERE schedule_id=$1 AND is_deleted = 0  RETURNING *`, [
+        schedule_id
       ])
       .then((result) => {
         res.status(200).json({
@@ -92,27 +116,27 @@ const deleteScheduleByProviderId =(req,res)=>{
 }
 
 
-const updatedScheduleToBooked = (req,res)=>{
-    const provider_id = req.token.userId;
-    pool
-      .query(`UPDATE schedule SET booked = COALESCE(true,booked) WHERE provider_id=$1 AND is_deleted = 0  RETURNING *`, [
-        provider_id
-      ])
-      .then((result) => {
-        res.status(200).json({
-          success: true,
-          message: "Schedule Booked",
-          result: result.rows,
-        });
-      })
-      .catch((err) => {
-        res.status(500).json({
-          success: false,
-          message: "Server error",
-          err: err,
-        });
-      });
-}
+// const updatedScheduleToBooked = (req,res)=>{
+//     const provider_id = req.token.userId;
+//     pool
+//       .query(`UPDATE schedule SET booked = COALESCE(true,booked) WHERE provider_id=$1 AND is_deleted = 0  RETURNING *`, [
+//         provider_id
+//       ])
+//       .then((result) => {
+//         res.status(200).json({
+//           success: true,
+//           message: "Schedule Booked",
+//           result: result.rows,
+//         });
+//       })
+//       .catch((err) => {
+//         res.status(500).json({
+//           success: false,
+//           message: "Server error",
+//           err: err,
+//         });
+//       });
+// }
 
 
 
@@ -122,7 +146,7 @@ const updatedScheduleToBooked = (req,res)=>{
 
 module.exports = {
     createScheduleByProviderId,getScheduleByProviderId,
-    updatedScheduleByProviderId,
+    updatedScheduleByID,
     deleteScheduleByProviderId,
-    updatedScheduleToBooked
+    getNotBookedScheduleByProviderId
   };
