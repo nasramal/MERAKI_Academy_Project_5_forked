@@ -86,7 +86,36 @@ const login = (req, res) => {
     });
 };
 
+const getuserinfo = (req, res)=>{
+  const users_id = req.token.userId
+  //SELECT name, email FROM users
+  
+  const query = `SELECT firstName, lastName, age, email,phone FROM users WHERE users_id= $1`;
+  const data = [users_id];
+
+  pool
+    .query(query, data)
+    .then((result) => {
+      if (result.rows.length !== 0) {
+        res.status(200).json({
+          success: true,
+          message: `The user info`,
+          result: result.rows,
+        });
+      } else {
+        throw new Error("Error happened while getting review");
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err,
+      });
+    });
+}
 module.exports = {
   register,
   login,
+  getuserinfo
 };
