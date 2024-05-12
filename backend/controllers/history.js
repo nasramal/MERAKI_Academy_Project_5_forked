@@ -1,7 +1,7 @@
 const pool = require("../models/db");
 
 const createHistoryByUserId = (req, res) => {
-const users_id = req.params.id
+    const users_id  = req.token.userId
     const {medications, medicalHistory} = req.body;
   
     pool.query(`INSERT INTO history (medications, medicalHistory,users_id) VALUES ($1,$2,$3) RETURNING * `,[medications, medicalHistory,users_id])
@@ -25,7 +25,7 @@ const users_id = req.params.id
 
 
   const getHistoryByUserId = (req, res) => {
-    const users_id = req.params.id;
+    const users_id  = req.token.userId
     // const query = `SELECT * FROM history WHERE users_id = $1`;
     const query = ` SELECT history.medications , history.medicalHistory, history.users_id FROM history WHERE history.users_id =$1`
     const data = [users_id];
@@ -48,7 +48,7 @@ const users_id = req.params.id
   };
   
   const updateHistoryByUserId = (req, res) => {
-    const users_id  = req.params.id;
+    const users_id  = req.token.userId
     let { medications, medicalHistory } = req.body;
   
     const query = `UPDATE history SET medications = COALESCE($1,medications), medicalHistory = COALESCE($2, medicalHistory ) WHERE users_id=$3 AND is_deleted = 0  RETURNING *;`;
