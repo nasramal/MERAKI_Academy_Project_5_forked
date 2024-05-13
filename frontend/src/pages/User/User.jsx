@@ -1,17 +1,19 @@
 
-import React, { useContext, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import "./User.css";
 import axios from "axios";
  import { useDispatch, useSelector } from "react-redux";
-import {setuser} from "./Service/Redux/auth/Store.js"/// from the redux.. 
+import {} from "./Service/Redux/auth/Store.js"
 const User = () => {
     const {users} = useSelector((state) => {
        
         return {
-            users: state.users.users /// from the redux.. 
+            users: state.users.users 
         };
       });
-    // const { token, isLoggedIn, users_Id } = useContext(AuthContext); /// from the redux.. 
+      const {token,userId} =useSelector((state)=>{
+        return{ auth : state.auth.auth,
+      }})
 
     const [message, setMessage] = useState("");
     
@@ -21,7 +23,7 @@ const User = () => {
         try {
           const result = await axios.get("http://localhost:5000/users/info", {
             headers: {
-              Authorization: `Bearer ${token}`,// we have to creat Authorization
+              Authorization: `Bearer ${token}`,
             },
           });
           if (result.data.success) {
