@@ -9,21 +9,22 @@ import "./style.css";
 
 import axios from "axios";
 
-import { AuthContext } from "../../contexts/authContext";
+
 
 //===============================================================
 
 const Login = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate();
+
  const {token,isLoggedIn} = useSelector ((state)=>{
   return {
     token:state.auth.token,
     isLoggedIn:state.auth.isLoggedIn
   }
  })
-  // const { isLoggedIn, saveToken } = useContext(AuthContext);
-  const history = useNavigate();
-
+ 
+  
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [password, setPassword] = useState("");
@@ -41,9 +42,7 @@ const Login = () => {
   
       if (result.data) {
         setMessage("");
-        // localStorage.setItem("token", result.data.token);
-        // localStorage.setItem("userId", result.data.userId);
-        // saveToken(result.data.token, result.data.userId);
+        
 dispatch (setLogin (result.data.token))
 dispatch (setUserId (result.data.userId))
 
@@ -60,7 +59,7 @@ dispatch (setUserId (result.data.userId))
 
   useEffect(() => {
     if (isLoggedIn) {
-      history("/landing");
+      navigate("/landing");
     }
   });
 
