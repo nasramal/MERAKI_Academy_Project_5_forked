@@ -3,9 +3,9 @@ import React, {useEffect, useState } from "react";
 import "./User.css";
 import axios from "axios";
  import { useDispatch, useSelector } from "react-redux";
-import {} from "./Service/Redux/auth/Store.js"
+import {setuser} from "./Service/Redux/auth/Store.js"
 const User = () => {
-    const {users} = useSelector((state) => {
+    const users = useSelector((state) => {
        
         return {
             users: state.users.users 
