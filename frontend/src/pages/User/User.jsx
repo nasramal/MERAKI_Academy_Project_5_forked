@@ -4,11 +4,10 @@ import "./User.css";
 import axios from "axios";
  import { useDispatch, useSelector } from "react-redux";
 
-import {setuser} from "./Service/Redux/auth/Store.js"
+import {setUsers} from "./Service/Redux/auth/Store.js"
 
 const User = () => {
-    const users = useSelector((state) => {
-       
+    const {users} = useSelector((state) => {
         return {   
             users: state.users.users 
         };
@@ -22,7 +21,7 @@ const User = () => {
 
     const dispatch = useDispatch();
     
-    const getuserinfo = async () => {
+    const getUserInfo = async () => {
         try {
           const result = await axios.get("http://localhost:5000/users/info",
           //  {
@@ -44,12 +43,12 @@ const User = () => {
         }
       };
       useEffect(() => {
-        getuserinfo();
+        getUserInfo();
       }, []);
 
   return (
   <>
-  {users?.map((users,index)=>{
+  {users&& users.map((users,index)=>{
     <div key={index} className="users">
           <h1>{users.firstName}</h1>
           <h2>{users.lastName}</h2>
