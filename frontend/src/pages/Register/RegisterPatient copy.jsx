@@ -42,6 +42,7 @@ const RegisterPatient = () => {
       if (result.data.success) {
         setStatus(true);
         setMessage(result.data.message);
+        navigate("/login")
       } else throw Error;
     } catch (error) {
       console.log (error)
