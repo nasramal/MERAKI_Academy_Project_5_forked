@@ -1,14 +1,12 @@
 import React, { useContext, useState } from "react";
-import "./style.css";
 import axios from "axios";
 
-import { AuthContext } from "../../contexts/authContext";
 
 // =================================================================
 
 const RegisterPatient = () => {
 
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn } = useContext();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);

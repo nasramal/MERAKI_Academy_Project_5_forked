@@ -1,11 +1,8 @@
 import React from 'react'
-import { Routes, Route, useNavigate } from "react-router-dom";
-import "./style.css"
-
-
+// import { useNavigate } from "react-router-dom";
 
 const PatientOrDoctor = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
   return (
     <div className='PatientOrDoctor'>
@@ -13,13 +10,13 @@ const PatientOrDoctor = () => {
     <img className='tecImg' src=""/>
 
       <button className='patButton' onClick={()=>{
-navigate("/patientregister")
+// navigate("/patientregister")
       }}>Patient</button>
     </div>
        <div className='DoctorButton'>
        <img className='stuImg' src=""/>
        <button className='DocButton' onClick={()=>{
- navigate("/doctorregister")
+//  navigate("/doctorregister")
        }}>Doctor</button>
        
      </div>
@@ -27,4 +24,4 @@ navigate("/patientregister")
  </div>
 
   )}
-  export default Default
+  export default PatientOrDoctor

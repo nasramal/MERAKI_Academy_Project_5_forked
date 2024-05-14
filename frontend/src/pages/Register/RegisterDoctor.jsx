@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import "./style.css";
+
 import axios from "axios";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/authContext";
+import {  useNavigate } from "react-router-dom";
+// import { AuthContext } from "../../contexts/authContext";
 
 // =================================================================
 
@@ -94,7 +94,7 @@ const RegisterDoctor = () => {
               <input
                 type="number"
                 placeholder="phone number"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPhone(e.target.value)}
               />
               <br />
               <input

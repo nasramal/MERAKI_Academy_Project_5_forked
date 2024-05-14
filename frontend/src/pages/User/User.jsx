@@ -4,7 +4,7 @@ import "./User.css";
 import axios from "axios";
  import { useDispatch, useSelector } from "react-redux";
 
-import {setUsers} from "./Service/Redux/auth/Store.js"
+import {setUsers} from "../../Service/Redux/Slice/Users"
 
 const User = () => {
     const {users} = useSelector((state) => {
