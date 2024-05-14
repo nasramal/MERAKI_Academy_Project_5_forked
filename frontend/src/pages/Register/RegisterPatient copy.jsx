@@ -6,9 +6,9 @@ import { AuthContext } from "../../contexts/authContext";
 
 // =================================================================
 
-const Register = () => {
-  const { isLoggedIn } = useContext(AuthContext);
+const RegisterPatient = () => {
 
+  const { isLoggedIn } = useContext(AuthContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
@@ -23,7 +23,10 @@ const Register = () => {
  
   // =================================================================
 
-  const addNewUser = async (e) => {
+  const addNewPatient = async (e) => {
+    const role_id=1
+    const navigate = useNavigate();
+
     e.preventDefault();
     try {
       const result = await axios.post("http://localhost:5000/users/register", {
@@ -34,11 +37,12 @@ const Register = () => {
         email,
         password,
         phone,
-        userRole
+        role_id
       });
       if (result.data.success) {
         setStatus(true);
         setMessage(result.data.message);
+        navigate("/login")
       } else throw Error;
     } catch (error) {
       console.log (error)
@@ -50,6 +54,8 @@ const Register = () => {
       setMessage("Error happened while register, please try again");
     }
   };
+
+  
 
   // =================================================================
 
@@ -75,13 +81,6 @@ const Register = () => {
               <br />
               <input
                 type="number"
-                placeholder="phone"
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              <br />
-
-              <input
-                type="number"
                 placeholder="Age"
                 onChange={(e) => setAge(e.target.value)}
               />
@@ -90,6 +89,12 @@ const Register = () => {
                 type="text"
                 placeholder="Country"
                 onChange={(e) => setCountry(e.target.value)}
+              />
+              <br />
+              <input
+                type="number"
+                placeholder="phone number"
+                onChange={(e) => setPassword(e.target.value)}
               />
               <br />
               <input
@@ -104,16 +109,11 @@ const Register = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <br />
-              <input
-                type="userRole"
-                placeholder="if you are a patient, press 1"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-               <br />
-              <button className="registButton" onClick={()=>{
-    addNewUser()
-    navigate("/Login")
-}}>Register Now</button>
+
+              <button className="patregbut" onClick={
+                addNewPatient()
+              }
+              >Register</button>
               <br />
             </form>
             {status
@@ -128,4 +128,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPatient;

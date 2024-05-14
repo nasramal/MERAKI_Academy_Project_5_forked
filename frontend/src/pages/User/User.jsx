@@ -3,32 +3,37 @@ import React, {useEffect, useState } from "react";
 import "./User.css";
 import axios from "axios";
  import { useDispatch, useSelector } from "react-redux";
+
 import {setuser} from "./Service/Redux/auth/Store.js"
+
 const User = () => {
     const users = useSelector((state) => {
        
-        return {
+        return {   
             users: state.users.users 
         };
       });
       const {token,userId} =useSelector((state)=>{
-        return{ auth : state.auth.auth,
+        return{ auth: state.auth.auth
       }})
 
     const [message, setMessage] = useState("");
     
 
-
+    const dispatch = useDispatch();
+    
     const getuserinfo = async () => {
         try {
-          const result = await axios.get("http://localhost:5000/users/info", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const result = await axios.get("http://localhost:5000/users/info",
+          //  {
+          //   headers: {
+          //     Authorization: `Bearer ${token}`,
+          //   },
+          // }
+          );
           if (result.data.success) {
             console.log(result.data);
-             dispatch(setuser(result.data));
+             dispatch(setUsers(result.data));
             setMessage("");
           } else throw Error;
         } catch (error) {
