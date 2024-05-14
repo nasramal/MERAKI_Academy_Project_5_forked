@@ -4,7 +4,7 @@ import "./User.css";
 import axios from "axios";
  import { useDispatch, useSelector } from "react-redux";
 
-import {setuser} from "./Service/Redux/auth/Store.js"
+import {setUsers} from "../../Service/Redux/Slice/Users"
 
 const User = () => {
     const users = useSelector((state) => {
@@ -49,7 +49,7 @@ const User = () => {
 
   return (
   <>
-  {users?.map((users,index)=>{
+  {users.lenght && users.map((users,index)=>{
     <div key={index} className="users">
           <h1>{users.firstName}</h1>
           <h2>{users.lastName}</h2>
