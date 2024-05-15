@@ -65,7 +65,7 @@ const RegisterDoctor = () => {
         {!isLoggedIn ? (
           <>
             <p className="Title">Register:</p>
-            <form onSubmit={addNewUser}>
+            <form onSubmit={addNewDoctor}>
               <br />
               <input
                 type="text"
@@ -110,7 +110,7 @@ const RegisterDoctor = () => {
               />
               <br />
 
-              <button className="docregbut" onClick={
+              <button className="docRegBut" onClick={
                 addNewDoctor()
            
               }>Register</button>

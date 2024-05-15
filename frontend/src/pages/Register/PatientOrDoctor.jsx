@@ -7,14 +7,14 @@ const PatientOrDoctor = () => {
   return (
     <div className='PatientOrDoctor'>
     <div className='PatientButton'>
-    <img className='tecImg' src=""/>
+    <img className='patImg' src=""/>
 
       <button className='patButton' onClick={()=>{
 // navigate("/patientregister")
       }}>Patient</button>
     </div>
        <div className='DoctorButton'>
-       <img className='stuImg' src=""/>
+       <img className='docImg' src=""/>
        <button className='DocButton' onClick={()=>{
 //  navigate("/doctorregister")
        }}>Doctor</button>
