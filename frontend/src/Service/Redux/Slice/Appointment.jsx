@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
+
 export const appointmentSlice = createSlice({
     name: "appointment",
     initialState: {
@@ -17,7 +18,7 @@ export const appointmentSlice = createSlice({
           return elem;
         });
       },
-      
+
       addAppointment: (state, action) => {
         state.appointment = state.appointment.map((elem, i) => {
           if (elem.appointment_id == action.payload.appointment_id) {
