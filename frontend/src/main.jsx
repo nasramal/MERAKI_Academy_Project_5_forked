@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import Store from "./Service/Redux/auth/Store.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider Store={Store}>
+  <Provider store={Store}>
     <React.StrictMode>
       <App />
     </React.StrictMode>

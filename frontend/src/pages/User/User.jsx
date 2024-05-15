@@ -49,7 +49,7 @@ const User = () => {
 
   return (
   <>
-  {users.lenght && users.map((users,index)=>{
+  {users.lenght &&users.map((users,index)=>{
     <div key={index} className="users">
           <h1>{users.firstName}</h1>
           <h2>{users.lastName}</h2>
