@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
+
 import User from "../pages/User/User"
 import Schedual from "../pages/Schedual/Schedual"
 import Notes from "../pages/Notes/Notes"
@@ -82,4 +83,3 @@ export const router = createBrowserRouter([
                 path: "*",
                   element: <NotFound/>,
                 },]}
-]);
