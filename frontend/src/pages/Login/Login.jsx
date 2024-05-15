@@ -1,10 +1,8 @@
 import React, {  useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { configureStore } from "@reduxjs/toolkit";
 import {  useDispatch, useSelector } from "react-redux";
-import {setLogin,setUserId} from "../../Service/Redux/Slice/Auth"
-
-
+import {setLogin,setUserId,setLogout} from "../../Service/Redux/Slice/Auth"
 
 import axios from "axios";
 

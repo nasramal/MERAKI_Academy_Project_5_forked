@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-
+import {  useNavigate } from "react-router-dom";
 
 // =================================================================
 
 const RegisterPatient = () => {
 
-  const { isLoggedIn } = useContext();
+  const { isLoggedIn } = useContext(AuthContext);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
@@ -14,7 +15,6 @@ const RegisterPatient = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [userRole, setUserRole] = useState(1);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(false);
 
@@ -63,7 +63,7 @@ const RegisterPatient = () => {
         {!isLoggedIn ? (
           <>
             <p className="Title">Register:</p>
-            <form onSubmit={addNewUser}>
+            <form onSubmit={addNewPatient}>
               <br />
               <input
                 type="text"
@@ -92,7 +92,7 @@ const RegisterPatient = () => {
               <input
                 type="number"
                 placeholder="phone number"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setPhone(e.target.value)}
               />
               <br />
               <input
@@ -108,7 +108,7 @@ const RegisterPatient = () => {
               />
               <br />
 
-              <button className="patregbut" onClick={
+              <button className="patRegBut" onClick={
                 addNewPatient()
               }
               >Register</button>
