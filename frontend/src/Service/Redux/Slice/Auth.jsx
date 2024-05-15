@@ -5,8 +5,9 @@ name:"auth",
 initialState:{
     token : null || localStorage.getItem("token"),
     userId : null || localStorage.getItem("userId"),
-    isLoggedIn : localStorage.getItem("token")?true:false ,
-},
+
+    isLoggedIn : localStorage.getItem("token")?true:false,
+
 
 reducers:{
 setLogin :(state,action)=>{
