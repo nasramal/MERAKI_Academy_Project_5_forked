@@ -30,7 +30,7 @@ localStorage.clear();
     
 }
 }
-})
+}})
 
 
 export const {setLogin, setUserId,setLogout } = authSlice.actions;
