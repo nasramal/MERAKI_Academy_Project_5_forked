@@ -15,7 +15,6 @@ import DocProvider from "../pages/Provider/Provider"
 import NotFound from "../pages/NotFound/NotFound"
 import Diagnosis from "../pages/Diagnosis/Diagnosis"
 import Landing from "../pages/Landing/Landing"
-import Footer from "../pages/Footer/Footer";
 import Main from "../layouts/Main";
 
 
@@ -25,7 +24,6 @@ export const router = createBrowserRouter([
     element: <Main/>,
     children:[
   
- 
   {
     path: "/Register",
     element: <PatientOrDoctor/>,
@@ -78,7 +76,6 @@ export const router = createBrowserRouter([
                     path: "/User",
                       element: <User/>,
                     },
-                   
               {
                 path: "*",
                   element: <NotFound/>,
