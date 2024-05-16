@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 
 import User from "../pages/User/User"
-import Schedual from "../pages/Schedual/Schedual"
+import Schedule from "../pages/Provider/Schedule"
 import Notes from "../pages/Notes/Notes"
 import RegisterPatient from "../pages/Register/RegisterPatient";
 import PatientOrDoctor from "../pages/Register/PatientOrDoctor"
@@ -65,8 +65,8 @@ export const router = createBrowserRouter([
                 element: <Notes/>,
               },
               {
-                path: "/Schedual",
-                  element: <Schedual/>,
+                path: "/Schedule",
+                  element: <Schedule/>,
                 },
                 {
                   path: "/Provider",

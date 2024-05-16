@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import "./Provider.css";
 import img from "./profile.png";
+
 function Provider() {
   const [information, setInformation] = useState(null);
   const [docInfo, setDocInfo] = useState(null);
@@ -20,6 +21,7 @@ function Provider() {
       })
       .then((result) => {
         setInformation(result.data.result);
+        
       })
       .catch((err) => {
         console.log(err);
