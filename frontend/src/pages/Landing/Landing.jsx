@@ -1,8 +1,72 @@
-import React from 'react'
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import "./Landing.css";
 function Landing() {
+  const specialtiesWithPhotos = [
+    { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG5X52F9HR3UXmzg6jIM4WWua1AhkYncSxFEP_2R16CA&s' },
+    {  photo: 'https://www.topdoctors.co.uk/files/Image/large/58b0424e-411c-4243-9228-4a0725bbab96.jpg' },
+    { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDVnh7I7lki1MkthjPXjsZTlpVPnst5CipHCidC3F8kQ&s' },
+    { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6E8xzYvzO0Lk7IcGqAoo-vxVJiYgASeZwQasDsK6sBw&s' },
+    // Add more specialties as needed
+  ];
+  const articles = [
+    { id: 1, title: "Biological standard of living", imageUrl: "https://www.investopedia.com/thmb/mxy4kAXcyjvx0J4pM1jg0aJFuyk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1153697801-575a3cdd2f2448a68677dde062945ac2.jpg", link: "https://en.wikipedia.org/wiki/Biological_standard_of_living" },
+    { id: 2, title: "Childbirth", imageUrl: "https://images.ctfassets.net/6m9bd13t776q/4Kb0NVb6LR2hFDTYsrbYKh/a66fc371ea7c49eb8f5a40c4356e7105/Sopotnicki-hero.webp?fm=webp&q=75&w=660", link: "https://en.wikipedia.org/wiki/Childbirth" },
+    { id: 3, title: "Diet (nutrition)", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWvjgVGZelgcup37Qh1sZYDs-pywUEgOlFyz2G6wqBAw&s", link: "https://en.wikipedia.org/wiki/Diet_(nutrition)" },
+    { id: 4, title: "Disease", imageUrl: "https://hms.harvard.edu/sites/default/files/media/pathogenesis%20main.jpg", link: "https://en.wikipedia.org/wiki/Disease#Terminology" }
+    // Add more articles as needed
+  ];
+  const [specialties, setSpecialties] =useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/specialty')
+      .then((result) => {
+        if (result.data) {
+          console.log(result.data.result);
+          setSpecialties(result.data.result);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching specialties:', error);
+      });
+  }, []);
+
+  const handleArticleClick = (link) => {
+    window.open(link, "_blank");
+  };
   return (
-    <div>Landing</div>
+    <div className="home-container">
+ <div className="slideshow">
+        <h2>Medical Articles</h2>
+        <div className="slideshow-container">
+          {articles.map((article,i) => (
+            <div key={article.id} className="slide" onClick={() => handleArticleClick(article.link)}>
+              <img src={articles[i].imageUrl} alt={articles[i].title} />
+              <p>{articles[i].title}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="user-experience">
+        <h2>User Experience</h2>
+        <p>
+          To use our health app, simply log in with your credentials or register if you are new. Once logged in, you can book appointments with specialized doctors, receive notifications, and manage your health journey seamlessly.
+        </p>
+      </div>
+
+      <div className="specialties">
+        <h2>Our Specialists</h2>
+        <div className="specialties-container">
+          {specialties.map((specialty,i) => (
+            <div key={specialty.specialty_id} className="specialty">
+              <img src={specialtiesWithPhotos[i].photo} alt={"img"} />
+              <h3>{specialty.specialty}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
 
