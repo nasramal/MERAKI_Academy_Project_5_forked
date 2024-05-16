@@ -7,14 +7,13 @@ import axios from "axios";
 import {setUsers} from "../../Service/Redux/Slice/Users"
 
 const User = () => {
-    const {users} = useSelector((state) => {
+    const {users,token} = useSelector((state) => {
         return {   
-            users: state.users.users 
+            users: state.users.users ,
+            token: state.auth.token
         };
       });
-      const {token,userId} =useSelector((state)=>{
-        return{ auth: state.auth.auth
-      }})
+     
 
     const [message, setMessage] = useState("");
     
@@ -31,8 +30,8 @@ const User = () => {
           }
           );
           if (result.data.success) {
-            console.log(result.data);
-             dispatch(setUsers(result.data));
+            console.log(result.data.result);
+             dispatch(setUsers(result.data.result));
             setMessage("");
           } else throw Error;
         } catch (error) {
@@ -48,13 +47,14 @@ const User = () => {
 
   return (
   <>
-  {users&& users.map((users,index)=>{
-    <div key={index} className="users">
-          <h1>{users.firstName}</h1>
-          <h2>{users.lastName}</h2>
-          <h3>{users.age}</h3>
-          <h4>{users.email}</h4>
-          <h5>{users.phone}</h5>
+  {users.length && users.map((user,index)=>{
+    console.log(user);
+    return<div key={index} className="users">
+          <h1>{user.firstname}</h1>
+          <h2>{user.lastname}</h2>
+          <h3>{user.age}</h3>
+          <h4>{user.email}</h4>
+          <h5>{user.phone}</h5>
     </div>
   })}
 
