@@ -1,3 +1,4 @@
+import { GoogleLogin } from '@react-oauth/google';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -70,6 +71,16 @@ const Login = () => {
         ) : (
           message && <div className="ErrorMessage">{message}</div>
         )}
+      </div>
+      <div className='google' style={{ textAlign: 'center' }}>
+        <GoogleLogin
+          onSuccess={credentialResponse => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
       </div>
     </>
   );
