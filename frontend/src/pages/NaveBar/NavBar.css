@@ -1,0 +1,60 @@
+.NavBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #007bff; /* Navbar background color */
+  padding: 10px 20px; /* Adjust padding as needed */
+}
+
+.logoContainer {
+  margin-right: auto; /* Pushes the logo and navLinks to the left */
+}
+
+.logo {
+  width: 100px; /* Adjust the width of the logo as needed */
+}
+
+.navLinks {
+  display: flex;
+}
+
+.Link {
+  color: #fff; /* Text color for links */
+  text-decoration: none;
+  margin: 0 10px; /* Adjust spacing between links */
+}
+
+.logout {
+  color: #fff;
+  background-color: #dc3545; /* Background color for logout button */
+  border: none;
+  cursor: pointer;
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+
+.logout:hover {
+  background-color: #c82333; /* Background color on hover */
+}
+
+/* Style for search input and button */
+.searchInput {
+  padding: 8px;
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 5px;
+  margin-right: 10px; /* Adjust margin between input and button */
+}
+
+.searchButton {
+  padding: 8px 15px;
+  background-color: #fff; /* Button background color */
+  color: #007bff; /* Button text color */
+  border: 1px solid #007bff; /* Button border */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  background-color: #007bff; /* Button background color on hover */
+  color: #fff; /* Button text color on hover */
+}
