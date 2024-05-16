@@ -114,6 +114,9 @@ const getuserinfo = (req, res)=>{
       });
     });
 }
+
+
+
 module.exports = {
   register,
   login,

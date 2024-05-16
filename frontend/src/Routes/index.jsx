@@ -11,7 +11,7 @@ import Appointment from "../pages/Appointment/Appointment"
 import ContactUs from "../pages/ContactUs/ContactUs"
 import RegisterDoctor from "../pages/Register/RegisterDoctor";
 import Login from "../pages/Login/Login";
-import DocProvider from "../pages/Provider/ProviderInfo"
+import DocProvider from "../pages/Provider/Provider"
 import NotFound from "../pages/NotFound/NotFound"
 import Diagnosis from "../pages/Diagnosis/Diagnosis"
 import Landing from "../pages/Landing/Landing"

@@ -91,3 +91,23 @@
 #btn:hover {
   background: #2A26FF;
 }
+
+
+.infoContainer{
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  padding: 2rem;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  
+}
+.providerImg{
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  padding: 2rem;
+  justify-content: space-around;
+  align-content :center;
+  align-items:center;
+  
+}
