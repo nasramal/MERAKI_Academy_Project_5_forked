@@ -27,7 +27,7 @@ const getDocInfoByProviderId =  (req, res) => {
   const provider_id = req.token.userId;
   console.log(provider_id);
   pool
-    .query(`SELECT * FROM docInfo WHERE provider_id = $1`, [provider_id])
+    .query(`SELECT * FROM docInfo INNER JOIN specialty ON docInfo.specialty=specialty.specialty_id WHERE provider_id = $1`, [provider_id])
     .then((result) => {
       res.status(200).json({
         success: true,

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import "./Provider.css";
-
+import img from "./profile.png";
 function Provider() {
   const [information, setInformation] = useState(null);
   const [docInfo, setDocInfo] = useState(null);
@@ -46,14 +46,13 @@ function Provider() {
     getInfo();
     getDocInfo();
   }, []);
-
+console.log(docInfo);
   return (
-    <>
+    <><div className="infoContainer">
       {information && (
-        <div className="infoContainer">
           <div className="providerImg">
-            <img src="YOUR_IMAGE_URL_HERE" alt="Provider Image" />
-            <div>
+            <img style={{width:"200px"}} src={img} alt="Provider Image" />
+            <div className="infoo">
               <p>
                 {information[0].firstname} {information[0].lastname}<br/>
               </p>
@@ -62,16 +61,16 @@ function Provider() {
               <p>📧{information[0].email}</p>
             </div>
           </div>
-        </div>
+        
       )}
 
       {docInfo && (
-        <div>
+        <div className="info">
           <p>Specialty: {docInfo[0].specialty}</p>
           <p>Experience: {docInfo[0].experience}</p>
           <p>Certificates: {docInfo[0].certificates}</p>
         </div>
-      )}
+      )}</div>
     </>
   );
 }
