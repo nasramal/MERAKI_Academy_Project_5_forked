@@ -20,6 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const login = async (e) => {
+    console.log("test")
     e.preventDefault();
     try {
       const result = await axios.post("http://localhost:5000/users/login", {
@@ -30,9 +31,9 @@ const Login = () => {
       if (result.data) {
         setMessage("");
 
-        dispatch(setLogin(result.data.token));
+        dispatch(setLogin(result.data));
         dispatch(setUserId(result.data.userId));
-        setStatus(true); 
+        // setStatus(true); 
         navigate("/");
       } else throw Error;
     } catch (error) {
@@ -40,6 +41,7 @@ const Login = () => {
         setMessage(error.response.data.message);
 
       } else {
+        console.log(error)
         setMessage("Error happened while Login, please try again");
 
       }
