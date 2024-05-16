@@ -22,7 +22,7 @@ const NavBar = () => {
     };
   
     const handleSearchSubmit = () => {
-      // Implement your search logic here, e.g., redirect to search results page
+     
       console.log('Searching for:', searchQuery);
     };
   
@@ -55,11 +55,11 @@ const NavBar = () => {
       )}
       {!isLoggedIn && (
         <>
-          <NavLink className="Link" to="/landing">Home Page</NavLink>
+          <NavLink className="Link" to="/">Home Page</NavLink>
           <NavLink className="Link" to="/about">About</NavLink>
           <NavLink className="Link" to="/Contactus">Contact Us</NavLink>
           <NavLink className="Link" to="/register">Register</NavLink>
-          <NavLink to="/login">Login</NavLink>
+          <NavLink className="Link" to="/login">Login</NavLink>
         </>
       )}
     </div>

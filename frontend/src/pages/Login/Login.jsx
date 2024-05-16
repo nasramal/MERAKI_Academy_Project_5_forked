@@ -33,7 +33,7 @@ const Login = () => {
         dispatch(setLogin(result.data.token));
         dispatch(setUserId(result.data.userId));
         setStatus(true); 
-
+        navigate("/");
       } else throw Error;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -48,7 +48,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+  
     }
   }, []); 
 
