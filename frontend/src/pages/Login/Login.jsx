@@ -43,7 +43,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/landing");
+      navigate("/");
     }
   }, [isLoggedIn]); // Added isLoggedIn to the dependency array
 

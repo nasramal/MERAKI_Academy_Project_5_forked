@@ -4,13 +4,13 @@ import img from "./profile.png";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function ProviderInfo() {
     const [information, setInformation] = useState(null);
-
+    const navigate = useNavigate();
     const { token } = useSelector((state) => ({
       token: state.auth.token
     }));
@@ -59,7 +59,9 @@ export default function ProviderInfo() {
         <p>📧{information[0].email}</p>
         </p>
       </div>
-      <p id="btn">visit</p>
+      <p id="btn" onClick={()=>{
+        navigate("/")
+      }}>visit</p>
     </div>
   </div>)}
 
