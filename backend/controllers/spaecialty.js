@@ -24,7 +24,7 @@ const createSpecialty =  (req, res) => {
 const getSpecialty =  (req, res) => {
     
     pool
-      .query(`SELECT * FROM specialty RETURNING * `)
+      .query(`SELECT * FROM specialty `)
       .then((result) => {
         res.status(200).json({
           success: true,
