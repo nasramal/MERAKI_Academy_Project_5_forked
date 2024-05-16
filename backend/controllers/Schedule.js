@@ -26,7 +26,7 @@ const createScheduleByProviderId = (req, res) => {
 const getScheduleByProviderId =  (req, res) => {
     const provider_id = req.token.userId;
     pool
-      .query(`SELECT * FROM Schedule WHERE provider_id = $1  RETURNING *`, [
+      .query(`SELECT * FROM Schedule WHERE provider_id = $1 `, [
         provider_id,
       ])
       .then((result) => {
