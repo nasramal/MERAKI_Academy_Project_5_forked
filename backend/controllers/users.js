@@ -62,7 +62,7 @@ const login = (req, res) => {
                 token,
                 success: true,
                 message: `Valid login credentials`,
-                userId: result.rows[0].id,
+                userId: result.rows[0].users_id,
               });
             } else {
               throw Error;
@@ -114,8 +114,38 @@ const getuserinfo = (req, res)=>{
       });
     });
 }
+
+const getProviderBySpecialty = (req, res)=>{
+  const specialty_id = req.params.id
+  //SELECT name, email FROM users
+  
+  const query = `SELECT * FROM users WHERE specialty= $1`;
+  const data = [specialty_id];
+
+  pool
+    .query(query, data)
+    .then((result) => {
+      if (result.rows.length !== 0) {
+        res.status(200).json({
+          success: true,
+          message: `The user info`,
+          result: result.rows,
+        });
+      } else {
+        throw new Error("Error happened while getting review");
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err,
+      });
+    });
+}
+
 module.exports = {
   register,
   login,
-  getuserinfo
+  getuserinfo,getProviderBySpecialty
 };

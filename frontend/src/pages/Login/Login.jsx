@@ -8,6 +8,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
   const { token, isLoggedIn } = useSelector((state) => ({
     token: state.auth.token,
     isLoggedIn: state.auth.isLoggedIn,
@@ -27,24 +28,29 @@ const Login = () => {
 
       if (result.data) {
         setMessage("");
+
         dispatch(setLogin(result.data.token));
         dispatch(setUserId(result.data.userId));
         setStatus(true); 
+
       } else throw Error;
     } catch (error) {
       if (error.response && error.response.data) {
         setMessage(error.response.data.message);
+
       } else {
         setMessage("Error happened while Login, please try again");
+
       }
     }
   };
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/landing");
+      navigate("/");
     }
   }, []); 
+
   return (
     <>
       <div className="Form">
