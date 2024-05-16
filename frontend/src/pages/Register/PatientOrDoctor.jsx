@@ -1,8 +1,8 @@
 import React from 'react'
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PatientOrDoctor = () => {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
   return (
     <div className='PatientOrDoctor'>
@@ -10,13 +10,13 @@ const PatientOrDoctor = () => {
     <img className='patImg' src=""/>
 
       <button className='patButton' onClick={()=>{
-// navigate("/patientregister")
+navigate("/Register_patient")
       }}>Patient</button>
     </div>
        <div className='DoctorButton'>
        <img className='docImg' src=""/>
        <button className='DocButton' onClick={()=>{
-//  navigate("/doctorregister")
+ navigate("/Register_Provider")
        }}>Doctor</button>
        
      </div>
