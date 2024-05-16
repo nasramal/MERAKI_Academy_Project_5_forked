@@ -52,7 +52,7 @@ const login = (req, res) => {
             const payload = {
               userId: result.rows[0].users_id,
               firstName: result.rows[0].firstName,
-              role: result.rows[0].role_id,
+              role_id: result.rows[0].role_id,
             };
             const options = { expiresIn: "60m" };
             const secret = process.env.SECRET;
@@ -63,6 +63,7 @@ const login = (req, res) => {
                 success: true,
                 message: `Valid login credentials`,
                 userId: result.rows[0].users_id,
+                role_id: result.rows[0].role_id
               });
             } else {
               throw Error;

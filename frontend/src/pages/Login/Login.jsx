@@ -3,15 +3,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setLogin, setUserId, setLogout } from "../../Service/Redux/Slice/Auth";
+import { setLogin, setUserId, setLogout, setRoleId } from "../../Service/Redux/Slice/Auth";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
-  const { token, isLoggedIn } = useSelector((state) => ({
+  const { token, isLoggedIn , role_id} = useSelector((state) => ({
     token: state.auth.token,
+    role_id: state.auth.role_id,
     isLoggedIn: state.auth.isLoggedIn,
   }));
 
@@ -20,7 +21,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const login = async (e) => {
-    console.log("test")
     e.preventDefault();
     try {
       const result = await axios.post("http://localhost:5000/users/login", {
@@ -29,11 +29,13 @@ const Login = () => {
       });
 
       if (result.data) {
+        console.log(result.data.role_id);
         setMessage("");
+        dispatch(setRoleId(result.data.role_id));
 
         dispatch(setLogin(result.data));
         dispatch(setUserId(result.data.userId));
-        // setStatus(true); 
+        setStatus(true); 
         navigate("/");
       } else throw Error;
     } catch (error) {
