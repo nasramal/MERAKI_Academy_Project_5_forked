@@ -62,7 +62,7 @@ const login = (req, res) => {
                 token,
                 success: true,
                 message: `Valid login credentials`,
-                userId: result.rows[0].id,
+                userId: result.rows[0].users_id,
               });
             } else {
               throw Error;

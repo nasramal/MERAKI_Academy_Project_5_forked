@@ -1,5 +1,11 @@
+:root {
+    --main-color: #0070CD;
+    --sup-main-color: #666666;
+    --main-color-alt: #1787E0;
+    --main-padding: 55px 0;
+    --section-background: rgb(226, 230, 234);
+  }
 
-
-
-
-
+  .justTest {
+    background-color: var(--main-color);
+  }
