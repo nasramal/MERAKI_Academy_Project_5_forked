@@ -20,12 +20,12 @@ export const authSlice = createSlice({
 
       setUserId: (state, action) => {
         state.userId = action.payload;
-        localStorage.setItem("userId", state.userId)
+        localStorage.setItem("userId", action.payload)
       },
 
       setRoleId: (state, action) => {
-        state.role_id = action.payload.role_id;
-        localStorage.setItem("role_id", state.role_id)
+        state.role_id = action.payload;
+        localStorage.setItem("role_id", action.payload)
       },
 
       setLogout: (state, action) => {

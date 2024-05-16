@@ -3,15 +3,16 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setLogin, setUserId, setLogout } from "../../Service/Redux/Slice/Auth";
+import { setLogin, setUserId, setRoleId, setLogout } from "../../Service/Redux/Slice/Auth";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
-  const { token, isLoggedIn } = useSelector((state) => ({
+  const { token, isLoggedIn, role_id } = useSelector((state) => ({
     token: state.auth.token,
+    role_id:state.auth.role_id,
     isLoggedIn: state.auth.isLoggedIn,
   }));
 
@@ -30,10 +31,11 @@ const Login = () => {
 
       if (result.data) {
         setMessage("");
-
+console.log(result.data)
         dispatch(setLogin(result.data));
+        dispatch(setRoleId(result.data.role_id));
         dispatch(setUserId(result.data.userId));
-        // setStatus(true); 
+    
         navigate("/");
       } else throw Error;
     } catch (error) {
