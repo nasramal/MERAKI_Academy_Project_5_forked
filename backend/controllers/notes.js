@@ -159,7 +159,7 @@ const upDateNotesByProviderId = (req, res) => {
       if (result.rows.length !== 0) {
         res.status(200).json({
           success: true,
-          message: `notes  with doctor: ${provider_id} were deleted successfully`,
+          message: `notes  with doctor: ${provider_id} were update successfully`,
           result: result.rows,
         });
       } else {
