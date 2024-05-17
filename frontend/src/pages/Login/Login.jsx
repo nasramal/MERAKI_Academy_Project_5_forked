@@ -35,7 +35,6 @@ const Login = () => {
 
         dispatch(setLogin(result.data));
         dispatch(setUserId(result.data.userId));
-        setStatus(true); 
         navigate("/");
       } else throw Error;
     } catch (error) {
@@ -52,7 +51,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-  
+
     }
   }, []); 
 

@@ -58,3 +58,6 @@
   background-color: #007bff; /* Button background color on hover */
   color: #fff; /* Button text color on hover */
 }
+ .active{
+  background-color: aqua;
+ }
