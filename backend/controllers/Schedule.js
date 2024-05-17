@@ -26,7 +26,7 @@ const createScheduleByProviderId = (req, res) => {
 const getScheduleByProviderId =  (req, res) => {
     const provider_id = req.token.userId;
     pool
-      .query(`SELECT * FROM Schedule WHERE provider_id = $1 `, [
+      .query(`SELECT * FROM Schedule WHERE provider_id = $1 AND is_deleted=0 `, [
         provider_id,
       ])
       .then((result) => {
