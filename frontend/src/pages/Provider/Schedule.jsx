@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./Provider.css";
 import {
@@ -73,7 +73,7 @@ function Schedule() {
                           }
                         )
                         .then((result) => {
-                          console.log(result.data.result);
+                          console.log(result);
                           dispatch(updateSchedules(schedule.schedule_id));
                         })
                         .catch((err) => {
@@ -92,17 +92,18 @@ function Schedule() {
       <button
         onClick={() => {
           axios
-            .post(`http://localhost:5000/schedule/`, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-              data,
-              timeFrom,
-              timeTo,
-            })
+            .post(
+              `http://localhost:5000/schedule/`,
+              { timeFrom: timeFrom, timeTo: timeTo, date: data },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
             .then((result) => {
-              console.log(result.data.result);
-              dispatch(addSchedules(result.data.result));
+              console.log(result);
+              dispatch(addSchedules(result));
             })
             .catch((err) => {
               console.log(err);
@@ -132,7 +133,8 @@ function Schedule() {
             type="time"
             placeholder="timeTo"
             onChange={(e) => {
-              setTimeTo(e.target.value)}}
+              setTimeTo(e.target.value);
+            }}
           />
         </form>
       </div>
