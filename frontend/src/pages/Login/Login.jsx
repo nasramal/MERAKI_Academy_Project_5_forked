@@ -32,7 +32,6 @@ const Login = () => {
         console.log(result.data.role_id);
         setMessage("");
         dispatch(setRoleId(result.data.role_id));
-
         dispatch(setLogin(result.data));
         dispatch(setUserId(result.data.userId));
         navigate("/");

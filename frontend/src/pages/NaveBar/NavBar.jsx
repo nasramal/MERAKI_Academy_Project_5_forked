@@ -45,7 +45,7 @@ const NavBar = () => {
           ) : (logged && role_id === 2) ? (
             <>
               <NavLink className="Link" to="/">Home Page</NavLink>
-              <NavLink className="Link" to="/Appointment">My Appointments</NavLink>
+              <NavLink className="Link" to="/Appointments">My Appointments</NavLink>
               <NavLink className="Link" to="/schedule">My Schedule</NavLink>
               <NavLink className="Link" to="/notes">My Notes</NavLink>
               <NavLink className="Link" to="/provider">My Profile</NavLink>

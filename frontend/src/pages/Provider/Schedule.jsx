@@ -65,7 +65,7 @@ function Schedule() {
   useEffect(() => {
     getSchedule();
   }, []);
-  // console.log(schedules);
+  console.log(schedules);
   return (
     <div>
       <Table>
@@ -86,7 +86,7 @@ function Schedule() {
                   <td>{schedule.date.split("T")[0]}</td>
                   <td>{schedule.timefrom}</td>
                   <td>{schedule.timeto}</td>
-                  <td>{schedule.status}</td>
+                  <td>{schedule.booked.toString()}</td>
                   {/* *********delete schedule************* */}
                   <td
                     onClick={() => {

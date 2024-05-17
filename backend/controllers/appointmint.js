@@ -1,7 +1,7 @@
 const pool = require("../models/db");
 
 const createAppointmentByUserId = (req, res) => {
-    const provider_id = req.params.providerId;
+    const provider_id = req.params.id;
   const { date, timeFrom, timeTo } = req.body;
   const user_id = req.token.userId;
   pool
@@ -29,7 +29,7 @@ const getByAppointmentByUserId =  (req, res) => {
     const user_id = req.token.userId;
 
     pool
-      .query(`SELECT * FROM appointmint  WHERE user_id = $1 RETURNING *`, [
+      .query(`SELECT * FROM appointmint WHERE user_id = $1 RETURNING *`, [
         user_id,
       ])
       .then((result) => {
@@ -47,12 +47,33 @@ const getByAppointmentByUserId =  (req, res) => {
         });
       });
   };
+  const getByAppointmentByProviderId =  (req, res) => {
+    const provider_id = req.token.userId;
 
-  const deleteAppointmentByUserId =(req,res)=>{
-    const user_id = req.token.userId;
     pool
-      .query(`UPDATE appointmint SET is_deleted=1 WHERE user_id=$1 AND is_deleted = 0  RETURNING *`, [
-        user_id
+      .query(`SELECT * FROM appointmint WHERE provider_id = $1`, [
+        provider_id,
+      ])
+      .then((result) => {
+        res.status(200).json({
+          success: true,
+          message: "appointment's ",
+          result: result.rows,
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
+  const deleteAppointmentByUserId =(req,res)=>{
+    const provider_id = req.token.userId;
+    pool
+      .query(`UPDATE appointmint SET is_deleted=1 WHERE provider_id=$1 AND is_deleted = 0  RETURNING *`, [
+        provider_id
       ])
       .then((result) => {
         res.status(200).json({
@@ -80,7 +101,7 @@ const updateAppointmentByAppointmentId = (req, res) => {
     const appointment_id = req.params.id;
     pool
       .query(
-        `UPDATE appointmint SET status = COALESCE($1,status) WHERE appointment_id=$2 AND is_deleted = 0  RETURNING *`,
+        `UPDATE appointmint SET status = COALESCE($1,status) WHERE appointment_id=$2 AND is_deleted = 0 RETURNING *`,
         [status , appointment_id]
       )
       .then((result) => {
@@ -108,5 +129,5 @@ const updateAppointmentByAppointmentId = (req, res) => {
 
 module.exports = {
     createAppointmentByUserId,getByAppointmentByUserId,
-    deleteAppointmentByUserId,updateAppointmentByAppointmentId
+    deleteAppointmentByUserId,updateAppointmentByAppointmentId,getByAppointmentByProviderId
   };

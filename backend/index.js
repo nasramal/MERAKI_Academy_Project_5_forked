@@ -68,7 +68,7 @@ const app = express();
 
 const usersRouter = require("./routes/users");
 const rolesRouter = require("./routes/role");
-
+const appointmentRouter =require("./routes/appointment")
 const historyRouter = require("./routes/history");
 const insuranceRouter = require("./routes/insurance");
 const reviewRouter = require("./routes/review");
@@ -91,7 +91,8 @@ app.use("/insurance",insuranceRouter);
 app.use("/docInfo",docInfoRouter);
 app.use("/specialty",specialtyRouter);
 app.use("/notes",notesRouter);
-app.use("/schedule",scheduleRouter)
+app.use("/schedule",scheduleRouter);
+app.use("/appointment",appointmentRouter);
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));

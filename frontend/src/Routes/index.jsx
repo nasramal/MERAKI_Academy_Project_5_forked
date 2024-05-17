@@ -8,6 +8,7 @@ import RegisterPatient from "../pages/Register/RegisterPatient";
 import PatientOrDoctor from "../pages/Register/PatientOrDoctor"
 import About from "../pages/About/About"
 import Appointment from "../pages/Appointment/Appointment"
+import Appointments from "../pages/Provider/Appointment"
 import ContactUs from "../pages/ContactUs/ContactUs"
 import RegisterDoctor from "../pages/Register/RegisterDoctor";
 import Login from "../pages/Login/Login";
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
                     path: "/Providers",
                       element: <DrProvider/>,
                     },
+                    {
+                      path: "/Appointments",
+                        element: <Appointments/>,
+                      },
                   {
                     path: "/User",
                       element: <User/>,
