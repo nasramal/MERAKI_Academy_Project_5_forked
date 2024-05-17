@@ -19,7 +19,7 @@ export const noteSlice = createSlice({
     },
     addNote: (state, action) => {
         state.note = state.note.map((elem, i) => {
-            if (elem.notes_id == action.payload.notes_id) {
+            if (elem.provider_id == action.payload.provider_id) {
               return elem.note.push(action.payload.note);
   
     }

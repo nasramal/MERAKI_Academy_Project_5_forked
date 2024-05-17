@@ -2,11 +2,12 @@ import "./Notes.css";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-
 import { addNote, setNote, updateNote } from "../../Service/Redux/Slice/Note";
 
 export default function ProviderInfo() {
-  // const [information, setInformation] = useState(null);
+  const [showInput, setShowInput] = useState(false);
+  const [users_id, setUserId] = useState("");
+  const [note1, setNoteCreate] = useState("");
   const [NewNote, setNewNote] = useState("");
   const dispatch = useDispatch();
   const { token, note } = useSelector((state) => ({
@@ -22,7 +23,6 @@ export default function ProviderInfo() {
         },
       })
       .then((result) => {
-        console.log(result.data.result);
         dispatch(setNote(result.data.result));
       })
       .catch((err) => {
@@ -33,8 +33,6 @@ export default function ProviderInfo() {
   useEffect(() => {
     getInfo();
   }, []);
-
-  console.log(note);
 
   return (
     <div>
@@ -72,7 +70,6 @@ export default function ProviderInfo() {
                         }
                       )
                       .then((result) => {
-                        console.log(result.data);
                         dispatch(updateNote(result.data.result));
                       })
                       .catch((err) => {
@@ -86,9 +83,56 @@ export default function ProviderInfo() {
             </div>
           );
         })}
-
+      <br></br>
       {/* ***************Create Note For User********************** */}
-      <button onClick={() => {}}>Create Note</button>
+      <p
+        id="btn"
+        onClick={() => {
+          setShowInput(true);
+        }}
+      >
+        Create Note
+      </p>
+      {showInput && (
+        <div>
+          <input
+            type="text"
+            placeholder="user_id"
+            onChange={(e) => {
+              setUserId(e.target.value);
+            }}
+          />
+          <br />
+          <input
+            type="text"
+            placeholder="Note"
+            onChange={(e) => {
+              setNoteCreate(e.target.value);
+            }}
+          />
+          <button
+            id="btn"
+            onClick={axios
+              .post(
+                `http://localhost:5000/notes/newNotes`,
+                { users_id: users_id, notes: note1 },
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              )
+              .then((result) => {
+                dispatch(addNote(result.data.result));
+              })
+              .catch((err) => {
+                console.log(err);
+              })}
+          >
+            Save
+          </button>
+        </div>
+      )}
     </div>
   );
 }
