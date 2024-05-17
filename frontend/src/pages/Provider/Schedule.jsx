@@ -8,6 +8,7 @@ import {
   addSchedules,
 } from "../../Service/Redux/Slice/Schedules";
 import Table from "react-bootstrap/Table";
+import { ToastContainer, toast } from "react-toastify";
 
 function Schedule() {
   const dispatch = useDispatch();
@@ -21,6 +22,32 @@ function Schedule() {
   const { token } = useSelector((state) => ({
     token: state.auth.token,
   }));
+  // **************for notification************************
+  const notifySucc = () =>
+    toast.success("Schedule Add Successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+
+  const notifyErr = () =>
+    toast.error("Schedule Deleted Successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  // *****************************************
+
   const getSchedule = () => {
     axios
       .get(`http://localhost:5000/schedule/`, {
@@ -29,7 +56,6 @@ function Schedule() {
         },
       })
       .then((result) => {
-        console.log(result.data.result);
         dispatch(setSchedules(result.data.result));
       })
       .catch((err) => {
@@ -39,7 +65,7 @@ function Schedule() {
   useEffect(() => {
     getSchedule();
   }, []);
-  console.log(schedules);
+  // console.log(schedules);
   return (
     <div>
       <Table>
@@ -57,10 +83,11 @@ function Schedule() {
             return (
               <tbody>
                 <tr>
-                  <td>{schedule.date}</td>
+                  <td>{schedule.date.split("T")[0]}</td>
                   <td>{schedule.timefrom}</td>
                   <td>{schedule.timeto}</td>
                   <td>{schedule.status}</td>
+                  {/* *********delete schedule************* */}
                   <td
                     onClick={() => {
                       axios
@@ -73,8 +100,9 @@ function Schedule() {
                           }
                         )
                         .then((result) => {
-                          console.log(result);
+                          // console.log(result);
                           dispatch(updateSchedules(schedule.schedule_id));
+                          notifyErr();
                         })
                         .catch((err) => {
                           console.log(err);
@@ -88,7 +116,7 @@ function Schedule() {
             );
           })}
       </Table>
-
+      {/* *****************add new schedule******************** */}
       <button
         onClick={() => {
           axios
@@ -102,8 +130,9 @@ function Schedule() {
               }
             )
             .then((result) => {
-              console.log(result);
+              // console.log(result);
               dispatch(addSchedules(result));
+              notifySucc();
             })
             .catch((err) => {
               console.log(err);
@@ -138,6 +167,7 @@ function Schedule() {
           />
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 }
