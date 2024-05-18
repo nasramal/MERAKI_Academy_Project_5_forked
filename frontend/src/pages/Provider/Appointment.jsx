@@ -48,12 +48,20 @@ console.log(appointment);
                             <p className="stats-text">Date: {appointment.date.split("T")[0]}</p>
                             <p className="stats-text">From: {appointment.timefrom}</p>
                             <p className="stats-text">To: {appointment.timeto}</p>
+                            <p className="stats-text">status : {appointment.status}</p>
                         </div>
-                        <button id="btn" onClick={() =>{}}>Accept</button>
+                        <button id="btn" onClick={() =>{axios
+        .put(`http://localhost:5000/appointment/status/${appointment.appointmint_id}`, { status: "approved" })
+        .then((result) => {
+            console.log(result.data);
+            dispatch(updateAppointment(result.data.result)); 
+        })
+        .catch((err) => {
+            console.log(err);
+        });}}>Accept</button>
                         <button id="btn" style={{background:"red"}} onClick={() => {axios
         .put(`http://localhost:5000/appointment`, { appointmint_id: appointment.appointmint_id })
         .then((result) => {
-            console.log(result.data);
             dispatch(updateAppointment(result.data.result)); 
         })
         .catch((err) => {

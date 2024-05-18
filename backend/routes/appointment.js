@@ -11,6 +11,6 @@ appointmentRouter.post("/:id", authentication,createAppointmentByUserId);
 appointmentRouter.get("/", authentication,getByAppointmentByUserId);
 appointmentRouter.get("/provider", authentication,getByAppointmentByProviderId);
 appointmentRouter.put("/", deleteAppointmentByUserId);
-appointmentRouter.put("/status/:id",authentication, updateAppointmentByAppointmentId);
+appointmentRouter.put("/status/:id", updateAppointmentByAppointmentId);
 
 module.exports = appointmentRouter;
