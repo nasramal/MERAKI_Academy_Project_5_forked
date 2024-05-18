@@ -116,20 +116,21 @@ const User = () => {
     useEffect(() => {
         getUserInfo();
     }, []);
-
+console.log(users);
+console.log(medicalHistory);
     return (
         <div className="container">
             {users.length > 0 && users.map((user, index) => (
                 <div key={index} className="users">
-                    <h1>{user.firstname}</h1>
-                    <h2>{user.lastname}</h2>
-                    <h3>{user.age}</h3>
-                    <h4>{user.email}</h4>
-                    <h5>{user.phone}</h5>
+                    <h1>First Name : {user.firstname}</h1>
+                    <h2>Last Name : {user.lastname}</h2>
+                    <h3>Age : {user.age}</h3>
+                    <h4>Email : {user.email}</h4>
+                    <h5>Phone number:{user.phone}</h5>
                     {user.history ? (
                         <div className="history">
                             <h3>Medications: {user.history.medications}</h3>
-                            <h3>Medical History: {user.history.medicalHistory}</h3>
+                            <h3>Medical History: {user.history.medicalhistory}</h3>
                         </div>
                     ) : (
                         <button className="Show" onClick={() => getHistoryByUserId(user.users_id)}>
