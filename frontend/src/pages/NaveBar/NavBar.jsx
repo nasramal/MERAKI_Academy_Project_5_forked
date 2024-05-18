@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { setLogout } from "../../Service/Redux/Slice/Auth";
+
 import "./NavBar.css";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
   
   const logged = localStorage.getItem("token")
+
 
   const [searchQuery, setSearchQuery] = useState('');
   const { isLoggedIn, role_id } = useSelector((state) => ({
@@ -20,12 +26,11 @@ const NavBar = () => {
 
   const handleSearchSubmit = () => {
     console.log('Searching for:', searchQuery);
-    // Add your search functionality here
   };
-
+  
   const logout = () => {
-    // Dispatch logout action here
-    dispatch({ type: 'LOGOUT' });
+    dispatch(setLogout());
+    navigate("/");
   };
 
   return (
@@ -38,9 +43,13 @@ const NavBar = () => {
           {(logged && role_id === 1) ? (
             <>
               <NavLink className="Link" to="/">Home Page</NavLink>
+
+              <NavLink className="Link" to="/Diagnosis">My Diagnosis</NavLink>
+
               <NavLink className="Link" to="/notes">My Notes</NavLink>
+
               <NavLink className="Link" to="/Appointment">Book Appointment</NavLink>
-              <NavLink className="Link" to="/User">My Profile</NavLink>
+              <NavLink className="Link" to="/user">My Profile</NavLink>
             </>
           ) : (logged && role_id === 2) ? (
             <>
@@ -70,7 +79,9 @@ const NavBar = () => {
           <button onClick={handleSearchSubmit}>Search</button>
         </div>
         {isLoggedIn && (
-          <button className="logout" onClick={logout}>Logout</button>
+          <button className="logout" onClick={logout}>
+            Logout
+          </button>
         )}
       </div>
     </>

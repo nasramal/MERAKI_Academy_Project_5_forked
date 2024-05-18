@@ -3,16 +3,22 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setLogin, setUserId, setLogout, setRoleId } from "../../Service/Redux/Slice/Auth";
+
+import { setLogin, setUserId, setRoleId, setLogout } from "../../Service/Redux/Slice/Auth";
+// import jwt_decode from "jwt-decode"
+
+
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
 
-  const { token, isLoggedIn , role_id} = useSelector((state) => ({
+
+  const { token, isLoggedIn, role_id } = useSelector((state) => ({
     token: state.auth.token,
-    role_id: state.auth.role_id,
+    role_id:state.auth.role_id,
+
     isLoggedIn: state.auth.isLoggedIn,
   }));
 
@@ -21,6 +27,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const login = async (e) => {
+
     e.preventDefault();
     try {
       const result = await axios.post("http://localhost:5000/users/login", {
@@ -31,8 +38,9 @@ const Login = () => {
       if (result.data) {
         console.log(result.data.role_id);
         setMessage("");
-        dispatch(setRoleId(result.data.role_id));
+console.log(result.data)
         dispatch(setLogin(result.data));
+        dispatch(setRoleId(result.data.role_id));
         dispatch(setUserId(result.data.userId));
         navigate("/");
       } else throw Error;
@@ -47,6 +55,8 @@ const Login = () => {
       }
     }
   };
+
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -82,8 +92,11 @@ const Login = () => {
       </div>
       <div className='google' style={{ textAlign: 'center' }}>
         <GoogleLogin
-          onSuccess={credentialResponse => {
-            console.log(credentialResponse);
+          onSuccess={(credentialResponse)=>{
+            console.log (credentialResponse)
+          
+          // const credentialResponsedDec = jwt_decode(credentialResponse.credential)
+          //   }
           }}
           onError={() => {
             console.log('Login Failed');
