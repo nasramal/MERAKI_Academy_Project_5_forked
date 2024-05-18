@@ -18,11 +18,10 @@ const RegisterPatient = () => {
   const addNewPatient = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post("http://localhost:5000/users/register", {
+      const result = await axios.post("http://localhost:5000/users/registerPatient", {
         firstName,
         lastName,
         age,
-        country,
         email,
         password,
         phone,
@@ -70,12 +69,7 @@ const RegisterPatient = () => {
             onChange={(e) => setAge(e.target.value)}
           />
           <br />
-          <input
-            type="text"
-            placeholder="Country"
-            onChange={(e) => setCountry(e.target.value)}
-          />
-          <br />
+          
           <input
             type="number"
             placeholder="Phone number"
