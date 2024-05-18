@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from 'react-redux'; // Import useDispatch
+import { setProvider } from '../../Service/Redux/Slice/Provider';
 import "./Landing.css";
+
 function Landing() {
   const specialtiesWithPhotos = [
     { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG5X52F9HR3UXmzg6jIM4WWua1AhkYncSxFEP_2R16CA&s' },
@@ -14,9 +19,11 @@ function Landing() {
     { id: 2, title: "Childbirth", imageUrl: "https://images.ctfassets.net/6m9bd13t776q/4Kb0NVb6LR2hFDTYsrbYKh/a66fc371ea7c49eb8f5a40c4356e7105/Sopotnicki-hero.webp?fm=webp&q=75&w=660", link: "https://en.wikipedia.org/wiki/Childbirth" },
     { id: 3, title: "Diet (nutrition)", imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWvjgVGZelgcup37Qh1sZYDs-pywUEgOlFyz2G6wqBAw&s", link: "https://en.wikipedia.org/wiki/Diet_(nutrition)" },
     { id: 4, title: "Disease", imageUrl: "https://hms.harvard.edu/sites/default/files/media/pathogenesis%20main.jpg", link: "https://en.wikipedia.org/wiki/Disease#Terminology" }
-    // Add more articles as needed
+    
   ];
-  const [specialties, setSpecialties] =useState([]);
+  const [specialties, setSpecialties] = useState([]);
+const navigate = useNavigate();
+  const dispatch = useDispatch(); 
 
   useEffect(() => {
     axios.get('http://localhost:5000/specialty')
@@ -31,12 +38,33 @@ function Landing() {
       });
   }, []);
 
+  const getDocbySpecialty = (id) => {
+    axios.get(`http://localhost:5000/users/provBySpec/${id}`)
+      .then((result) => {
+        if (result.data.success) {
+          dispatch(setProvider(result.data.result));
+          navigate("/providers")
+          console.log(result.data.result);
+        } else {
+          console.error('Error fetching doctors:', result.data.message);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching doctors:', error);
+      });
+  };
+
+  useEffect(() => {
+    getDocbySpecialty(); // Call the function
+  }, []);
+
   const handleArticleClick = (link) => {
     window.open(link, "_blank");
   };
+
   return (
     <div className="home-container">
- <div className="slideshow">
+      <div className="slideshow">
         <h2>Medical Articles</h2>
         <div className="slideshow-container">
           {articles.map((article,i) => (
@@ -60,7 +88,9 @@ function Landing() {
         <div className="specialties-container">
           {specialties.map((specialty,i) => (
             <div key={specialty.specialty_id} className="specialty">
-              <img src={specialtiesWithPhotos[i].photo} alt={"img"} />
+              <img src={specialtiesWithPhotos[i].photo} alt={"img"}  onClick={()=>{
+                getDocbySpecialty(specialty.specialty_id); // Pass the specialty_id
+              }}/>
               <h3>{specialty.specialty}</h3>
             </div>
           ))}
@@ -70,4 +100,4 @@ function Landing() {
   )
 }
 
-export default Landing
+export default Landing;
