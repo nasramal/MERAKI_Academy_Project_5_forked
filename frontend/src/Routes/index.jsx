@@ -17,7 +17,7 @@ import NotFound from "../pages/NotFound/NotFound"
 import Diagnosis from "../pages/Diagnosis/Diagnosis"
 import Landing from "../pages/Landing/Landing"
 import Main from "../layouts/Main";
-import DrProvider from "../pages/Provider/Providers"
+import DrProviders from "../pages/Provider/Providers"
 
 export const router = createBrowserRouter([
   {
@@ -75,7 +75,7 @@ export const router = createBrowserRouter([
                   },
                   {
                     path: "/Providers",
-                      element: <DrProvider/>,
+                      element: <DrProviders/>,
                     },
                     {
                       path: "/Appointments",
