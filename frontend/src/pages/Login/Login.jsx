@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setLogin, setUserId, setRoleId, setLogout } from "../../Service/Redux/Slice/Auth";
+// import jwt_decode from "jwt-decode"
+
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const login = async (e) => {
-    console.log("test")
+  
     e.preventDefault();
     try {
       const result = await axios.post("http://localhost:5000/users/login", {
@@ -35,7 +37,6 @@ console.log(result.data)
         dispatch(setLogin(result.data));
         dispatch(setRoleId(result.data.role_id));
         dispatch(setUserId(result.data.userId));
-    
         navigate("/");
       } else throw Error;
     } catch (error) {
@@ -49,6 +50,8 @@ console.log(result.data)
       }
     }
   };
+
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -84,8 +87,11 @@ console.log(result.data)
       </div>
       <div className='google' style={{ textAlign: 'center' }}>
         <GoogleLogin
-          onSuccess={credentialResponse => {
-            console.log(credentialResponse);
+          onSuccess={(credentialResponse)=>{
+            console.log (credentialResponse)
+          
+          // const credentialResponsedDec = jwt_decode(credentialResponse.credential)
+          //   }
           }}
           onError={() => {
             console.log('Login Failed');
