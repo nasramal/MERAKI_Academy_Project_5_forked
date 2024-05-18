@@ -1,0 +1,37 @@
+/* Appointment.css */
+
+/* Container styles */
+.Appointment {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Appointment item styles */
+  .Appointment p {
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Message styles */
+  .message {
+    margin-top: 20px;
+    padding: 10px;
+    color: #fff;
+    background-color: #f44336;
+    border-radius: 5px;
+  }
+  /* Responsive styles */
+@media (max-width: 768px) {
+    .Appointment {
+      padding: 10px;
+    }
+  
+    .Appointment p {
+      font-size: 14px;
+    }
+  }
+  
