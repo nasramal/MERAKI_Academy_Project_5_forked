@@ -18,9 +18,7 @@ export default function ProviderInfo() {
     const getInfo = () => {
       axios
         .get(`http://localhost:5000/users/info`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          
         })
         .then((result) => {
           setInformation(result.data.result);
