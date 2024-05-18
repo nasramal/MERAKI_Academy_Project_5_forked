@@ -10,7 +10,7 @@ const appointmentRouter = express.Router();
 appointmentRouter.post("/:id", authentication,createAppointmentByUserId);
 appointmentRouter.get("/", authentication,getByAppointmentByUserId);
 appointmentRouter.get("/provider", authentication,getByAppointmentByProviderId);
-appointmentRouter.put("/",authentication, deleteAppointmentByUserId);
+appointmentRouter.put("/", deleteAppointmentByUserId);
 appointmentRouter.put("/status/:id",authentication, updateAppointmentByAppointmentId);
 
 module.exports = appointmentRouter;

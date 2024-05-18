@@ -2,14 +2,18 @@ import "./Provider.css";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { setAppointment, updateAppointment, addAppointment } from "../../Service/Redux/Slice/Appointment";
+
 
 export default function Appointment() {
-    const [information, setInformation] = useState(null);
-    const { token } = useSelector((state) => ({
-        token: state.auth.token
+    const dispatch = useDispatch();
+    
+    const { token ,appointment } = useSelector((state) => ({
+        token: state.auth.token,
+        appointment :state.appointment.appointment
       }));
 
-    const getInfo = () => {
+    const getAppointments = () => {
         axios
         .get(`http://localhost:5000/appointment/provider`, {
             headers: {
@@ -18,7 +22,7 @@ export default function Appointment() {
         })
         .then((result) => {
             console.log(result.data);
-          setInformation(result.data.result);
+            dispatch(setAppointment(result.data.result));
         })
         .catch((err) => {
           console.log(err);
@@ -26,50 +30,38 @@ export default function Appointment() {
       };
 
       useEffect(() => {
-        getInfo();
+        getAppointments();
       }, []);
 
 
 
-
+console.log(appointment);
 
   return (
-    <div>{information  &&   (
-        <div id="card">
-    <div id="info">
-      <p id="name">{information[0].user_id}</p>
-      <p id="activity"> </p>
-      <div id="stats">
-        <p className="stats-text">Date :
-        {information[0].date.split("T")[0]}
-        </p>
-        <p className="stats-text">
-        <p>From :{information[0].timefrom}</p>
-        </p>
-        <p className="stats-text">
-        <p>To :{information[0].timeto}</p>
-        </p>
-      </div>
-      <p id="btn" onClick={()=>{
-       
-      }}>Accept</p>
-       <p id="btn" style={{background:"red"}} onClick={()=>{
-        axios
-        .put(`http://localhost:5000/appointment`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-              },
-        })
+    <div>
+        {appointment.map((appointment, index) => (
+                <div id="card" key={index}>
+                    <div id="info">
+                        <p id="name">{appointment.user_id}</p>
+                        <p id="activity"> </p>
+                        <div id="stats">
+                            <p className="stats-text">Date: {appointment.date.split("T")[0]}</p>
+                            <p className="stats-text">From: {appointment.timefrom}</p>
+                            <p className="stats-text">To: {appointment.timeto}</p>
+                        </div>
+                        <button id="btn" onClick={() =>{}}>Accept</button>
+                        <button id="btn" style={{background:"red"}} onClick={() => {axios
+        .put(`http://localhost:5000/appointment`, { appointmint_id: appointment.appointmint_id })
         .then((result) => {
             console.log(result.data);
-          setInformation(result.data.result);
+            dispatch(updateAppointment(result.data.result)); 
         })
         .catch((err) => {
-          console.log(err);
-        });
-    }}>Reject</p>
-    </div>
-  </div>)}
+            console.log(err);
+        });}}>Reject</button>
+                    </div>
+                </div>
+            ))}
 
   </div>
   )
