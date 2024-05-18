@@ -1,0 +1,60 @@
+/* Diagnosis.css */
+
+.Diagnosis {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .Diagnosis h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .Diagnosis h2 {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  .message {
+    padding: 10px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  /* Media queries */
+  @media screen and (max-width: 768px) {
+    .Diagnosis {
+      padding: 15px;
+    }
+  
+    .Diagnosis h1 {
+      font-size: 22px;
+    }
+  
+    .Diagnosis h2 {
+      font-size: 16px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .Diagnosis {
+      margin-bottom: 15px;
+    }
+  
+    .Diagnosis h1 {
+      font-size: 20px;
+    }
+  
+    .Diagnosis h2 {
+      font-size: 14px;
+    }
+  }
+  

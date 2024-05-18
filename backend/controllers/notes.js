@@ -33,7 +33,7 @@ const getNotesByUserId = (req, res) => {
 
   pool
     .query(
-      `SELECT notes.notes,notes.provider_id FROM notes WHERE notes.users_id =$1   `,
+      `SELECT notes.notes, notes.provider_id, users.* FROM notes INNER JOIN users ON notes.provider_id = users.users_id WHERE notes.users_id = $1 `,
       [user_id]
     )
 
