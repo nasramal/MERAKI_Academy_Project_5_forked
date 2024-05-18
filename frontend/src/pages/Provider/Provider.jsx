@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import "./Provider.css";
+import "./Providerr.css";
 import img from "./profile.png";
 
 function Provider() {

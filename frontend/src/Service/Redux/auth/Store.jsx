@@ -15,8 +15,8 @@ export default configureStore({
     users: usersReducer,
     appointment:appointment,
     provider:provider,
-    schedules:schedules
-   
+    schedules:schedules,
+    note:note,
 
   },
 });

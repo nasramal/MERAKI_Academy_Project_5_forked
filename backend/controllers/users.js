@@ -54,7 +54,7 @@ const login = (req, res) => {
               firstName: result.rows[0].firstName,
               role_id: result.rows[0].role_id,
             };
-            const options = { expiresIn: "200m" };
+            const options = { expiresIn: "1day" };
             const secret = process.env.SECRET;
             const token = jwt.sign(payload, secret, options);
             if (token) {

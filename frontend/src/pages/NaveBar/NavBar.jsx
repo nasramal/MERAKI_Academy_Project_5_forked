@@ -43,11 +43,7 @@ const NavBar = () => {
           {(logged && role_id === 1) ? (
             <>
               <NavLink className="Link" to="/">Home Page</NavLink>
-
               <NavLink className="Link" to="/Diagnosis">My Diagnosis</NavLink>
-
-              <NavLink className="Link" to="/notes">My Notes</NavLink>
-
               <NavLink className="Link" to="/Appointment">Book Appointment</NavLink>
               <NavLink className="Link" to="/user">My Profile</NavLink>
             </>
