@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
-import { useDispatch } from 'react-redux'; // Import useDispatch
+import img from"./profile.png";
+import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch
 import { setProvider } from '../../Service/Redux/Slice/Provider';
 import "./Landing.css";
 
@@ -22,8 +22,12 @@ function Landing() {
     
   ];
   const [specialties, setSpecialties] = useState([]);
-const navigate = useNavigate();
+  const [show, setShow] = useState(false)
+  const navigate = useNavigate();
   const dispatch = useDispatch(); 
+  const {provider} = useSelector((state) => ({
+    provider: state.provider.provider,
+  }));
 
   useEffect(() => {
     axios.get('http://localhost:5000/specialty')
@@ -43,7 +47,8 @@ const navigate = useNavigate();
       .then((result) => {
         if (result.data.success) {
           dispatch(setProvider(result.data.result));
-          navigate("/providers")
+          setShow(true); // Update show state
+          // navigate("/providers")
           console.log(result.data.result);
         } else {
           console.error('Error fetching doctors:', result.data.message);
@@ -61,7 +66,7 @@ const navigate = useNavigate();
   const handleArticleClick = (link) => {
     window.open(link, "_blank");
   };
-
+console.log(provider);
   return (
     <div className="home-container">
       <div className="slideshow">
@@ -89,15 +94,43 @@ const navigate = useNavigate();
           {specialties.map((specialty,i) => (
             <div key={specialty.specialty_id} className="specialty">
               <img src={specialtiesWithPhotos[i].photo} alt={"img"}  onClick={()=>{
-                getDocbySpecialty(specialty.specialty_id); // Pass the specialty_id
+                getDocbySpecialty(specialty.specialty_id);
+                setShow(true); // Pass the specialty_id
               }}/>
               <h3>{specialty.specialty}</h3>
             </div>
           ))}
         </div>
       </div>
+
+      {show?provider && provider.map((pro,i) => (
+            <div key={i} id="card">
+              <img 
+                id="avatar"
+                src={img}
+                alt="avatar"
+              />
+              <div id="info">
+                <p id="name">{pro.firstname} {pro.lastname}</p>
+                <p id="activity"> </p>
+                <div id="stats">
+                  <p className="stats-text">
+                    <span>📞</span>{pro.phone}
+                  </p>
+                  <p className="stats-text">
+                    <span>📧</span>{pro.email}
+                  </p>
+                </div>
+                <p id="btn" onClick={()=>{
+                  // navigate("/")
+                }}>visit</p>
+              </div>
+            </div>
+          )):<></>}
+        
+      
     </div>
-  )
+  );
 }
 
 export default Landing;
