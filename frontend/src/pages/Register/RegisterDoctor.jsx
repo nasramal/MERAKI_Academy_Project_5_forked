@@ -6,6 +6,7 @@ const RegisterDoctor = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
+  const [speciality, setSpeciality] = useState("");
   const [country, setCountry] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,11 +23,12 @@ const RegisterDoctor = () => {
         firstName,
         lastName,
         age,
+        Speciality,
         country,
         email,
         password,
         phone,
-        role_id: 2 
+        role_id: 2
       });
       if (result.data.success) {
         setStatus(true);
@@ -69,6 +71,27 @@ const RegisterDoctor = () => {
             placeholder="Age"
             onChange={(e) => setAge(e.target.value)}
           />
+          <br />
+          <form onSubmit={(e) => {
+        e.preventDefault()}}>
+           
+            <select id="speciality" value={speciality} onChange={(e) => {
+              setSpeciality(e.target.value);
+            }} required>
+              <option value="">Speciality</option>
+              <option value="General">General</option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Internal Medicine">Internal Medicine</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="OB/GYN">OB/GYN</option>
+              <option value="Surgery">Surgery</option>
+              <option value="Neurology">Neurology</option>
+              <option value="Urology">Urology</option>
+              <option value="dentistry">dentistry</option>
+            </select>
+            <br />
+           
+          </form>
           <br />
           <input
             type="text"
