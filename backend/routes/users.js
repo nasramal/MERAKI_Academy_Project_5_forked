@@ -7,7 +7,7 @@ const usersRouter = express.Router();
 usersRouter.post("/register", register);
 usersRouter.post("/login",login)
 usersRouter.get("/info",authentication,getuserinfo)
-usersRouter.get("/provBySpec/:id",authentication,getProviderBySpecialty)
+usersRouter.get("/provBySpec/:id",getProviderBySpecialty)
 
 
 module.exports = usersRouter;
