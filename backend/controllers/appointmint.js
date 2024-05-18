@@ -51,7 +51,7 @@ const getByAppointmentByUserId =  (req, res) => {
     const provider_id = req.token.userId;
 
     pool
-      .query(`SELECT * FROM appointmint WHERE provider_id = $1`, [
+      .query(`SELECT * FROM appointmint WHERE provider_id = $1 AND is_deleted=0`, [
         provider_id,
       ])
       .then((result) => {
@@ -70,10 +70,10 @@ const getByAppointmentByUserId =  (req, res) => {
       });
   };
   const deleteAppointmentByUserId =(req,res)=>{
-    const provider_id = req.token.userId;
+    const {appointmint_id} = req.body;
     pool
-      .query(`UPDATE appointmint SET is_deleted=1 WHERE provider_id=$1 AND is_deleted = 0  RETURNING *`, [
-        provider_id
+      .query(`UPDATE appointmint SET is_deleted=1 WHERE appointmint_id=$1 AND is_deleted=0`, [
+        appointmint_id
       ])
       .then((result) => {
         res.status(200).json({
@@ -82,7 +82,7 @@ const getByAppointmentByUserId =  (req, res) => {
           result: result.rows,
         });
       })
-      .catch((err) => {
+      .catch((err) => {console.log(err);
         res.status(500).json({
           success: false,
           message: "Server error",
