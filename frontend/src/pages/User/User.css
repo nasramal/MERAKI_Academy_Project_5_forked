@@ -1,0 +1,145 @@
+/* Basic styling for the body and container */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Styling for user information */
+.users {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.users h1, .users h2, .users h3, .users h4, .users h5 {
+    margin: 0;
+    padding: 5px 0;
+    color: #333;
+    text-align: center;
+}
+
+.users .history {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f0f0f0;
+    border-left: 5px solid #2ecc71;
+    border-radius: 5px;
+}
+
+.history h3 {
+    margin: 5px 0;
+    color: #333;
+    text-align: center;
+}
+
+/* Styling for buttons */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px; /* Adjusted padding for better touch interaction */
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.Show {
+    background-color: #1abc9c;
+}
+
+.Show:hover {
+    background-color: #16a085;
+}
+
+/* Styling for textarea */
+textarea.historyBox {
+    width: 100%;
+    height: 120px; /* Adjusted height for better visibility */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    font-size: 16px;
+    resize: vertical;
+}
+
+.commentBtn {
+    margin-top: 10px;
+    background-color: #e74c3c;
+}
+
+.commentBtn:hover {
+    background-color: #c0392b;
+}
+
+/* Message styling */
+.message {
+    padding: 10px;
+    background-color: #f1c40f;
+    color: #333;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Responsive media queries */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .users {
+        padding: 15px;
+    }
+
+    textarea.historyBox {
+        height: 100px;
+    }
+
+    button {
+        padding: 8px 16px;  
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .users h1, .users h2, .users h3, .users h4, .users h5 {
+        font-size: 14px;
+    }
+
+    textarea.historyBox {
+        font-size: 14px;
+    }
+
+    button {
+        padding: 6px 12px; 
+        font-size: 12px;
+    }
+}

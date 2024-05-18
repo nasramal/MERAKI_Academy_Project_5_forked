@@ -7,7 +7,12 @@ import "./NavBar.css";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
+
+  
+  const logged = localStorage.getItem("token")
+
 
   const [searchQuery, setSearchQuery] = useState('');
   const { isLoggedIn, role_id } = useSelector((state) => ({
@@ -35,20 +40,24 @@ const NavBar = () => {
           <img src="medical_logo.png" alt="Medical Logo" className="logo" />
         </div>
         <div className="navLinks">
-          {(isLoggedIn && role_id === 1) ? (
+          {(logged && role_id === 1) ? (
             <>
               <NavLink className="Link" to="/">Home Page</NavLink>
+
               <NavLink className="Link" to="/Diagnosis">My Diagnosis</NavLink>
+
+              <NavLink className="Link" to="/notes">My Notes</NavLink>
+
               <NavLink className="Link" to="/Appointment">Book Appointment</NavLink>
-              <NavLink className="Link" to="/provider">My Profile</NavLink>
+              <NavLink className="Link" to="/user">My Profile</NavLink>
             </>
-          ) : (isLoggedIn && role_id === 2) ? (
+          ) : (logged && role_id === 2) ? (
             <>
               <NavLink className="Link" to="/">Home Page</NavLink>
-              <NavLink className="Link" to="/Appointment">My Appointments</NavLink>
-              <NavLink className="Link" to="/Schedual">My Schedule</NavLink>
-              <NavLink className="Link" to="/Notes">My Notes</NavLink>
-              <NavLink className="Link" to="/User">My Profile</NavLink>
+              <NavLink className="Link" to="/Appointments">My Appointments</NavLink>
+              <NavLink className="Link" to="/schedule">My Schedule</NavLink>
+              <NavLink className="Link" to="/notes">My Notes</NavLink>
+              <NavLink className="Link" to="/provider">My Profile</NavLink>
             </>
           ) : (
             <>

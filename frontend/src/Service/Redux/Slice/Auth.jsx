@@ -26,6 +26,7 @@ export const authSlice = createSlice({
       setRoleId: (state, action) => {
         state.role_id = action.payload;
         localStorage.setItem("role_id", action.payload)
+
       },
 
       setLogout: (state, action) => {

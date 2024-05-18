@@ -2,12 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 
 
 import User from "../pages/User/User"
-import Schedual from "../pages/Schedual/Schedual"
+import Schedule from "../pages/Provider/Schedule"
 import Notes from "../pages/Notes/Notes"
 import RegisterPatient from "../pages/Register/RegisterPatient";
 import PatientOrDoctor from "../pages/Register/PatientOrDoctor"
 import About from "../pages/About/About"
 import Appointment from "../pages/Appointment/Appointment"
+import Appointments from "../pages/Provider/Appointment"
 import ContactUs from "../pages/ContactUs/ContactUs"
 import RegisterDoctor from "../pages/Register/RegisterDoctor";
 import Login from "../pages/Login/Login";
@@ -65,8 +66,8 @@ export const router = createBrowserRouter([
                 element: <Notes/>,
               },
               {
-                path: "/Schedual",
-                  element: <Schedual/>,
+                path: "/Schedule",
+                  element: <Schedule/>,
                 },
                 {
                   path: "/Provider",
@@ -76,6 +77,10 @@ export const router = createBrowserRouter([
                     path: "/Providers",
                       element: <DrProvider/>,
                     },
+                    {
+                      path: "/Appointments",
+                        element: <Appointments/>,
+                      },
                   {
                     path: "/User",
                       element: <User/>,

@@ -11,12 +11,12 @@ export const appointmentSlice = createSlice({
       },
 
       updateAppointment: (state, action) => {
-        state.appointment = state.users.map((elem, i) => {
-          if (elem.appointment_id == action.payload.appointment_id) {
-            elem = action.payload.appointment;
+        state.appointment = state.appointment.map((appointment,i) => {
+          if (appointment.appointment_id === action.payload.appointment_id) {
+              return action.payload.appointment;
           }
-          return elem;
-        });
+          return appointment;
+      });
       },
 
       addAppointment: (state, action) => {
