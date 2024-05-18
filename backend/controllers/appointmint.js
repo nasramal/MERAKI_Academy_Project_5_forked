@@ -72,7 +72,7 @@ const getByAppointmentByUserId =  (req, res) => {
   const deleteAppointmentByUserId =(req,res)=>{
     const {appointmint_id} = req.body;
     pool
-      .query(`UPDATE appointmint SET is_deleted=1 WHERE appointmint_id=$1 AND is_deleted=0`, [
+      .query(`UPDATE appointmint SET is_deleted=1 , status='reject' WHERE appointmint_id=$1 AND is_deleted=0`, [
         appointmint_id
       ])
       .then((result) => {
@@ -101,7 +101,7 @@ const updateAppointmentByAppointmentId = (req, res) => {
     const appointment_id = req.params.id;
     pool
       .query(
-        `UPDATE appointmint SET status = COALESCE($1,status) WHERE appointment_id=$2 AND is_deleted = 0 RETURNING *`,
+        `UPDATE appointmint SET status = COALESCE($1,status) WHERE appointmint_id=$2 AND is_deleted = 0 RETURNING *`,
         [status , appointment_id]
       )
       .then((result) => {
