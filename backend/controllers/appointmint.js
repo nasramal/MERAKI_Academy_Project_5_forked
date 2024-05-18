@@ -28,7 +28,10 @@ const getByAppointmentByUserId = (req, res) => {
   const user_id = req.token.userId;
 
   pool
-    .query(`SELECT * FROM appointmint WHERE user_id = $1 RETURNING *`, [
+    .query(`SELECT appointmint.*, users.firstname, users.lastname
+    FROM appointmint
+    INNER JOIN users ON appointmint.provider_id = users.users_id
+    WHERE appointmint.user_id = $1`, [
       user_id,
     ])
     .then((result) => {
