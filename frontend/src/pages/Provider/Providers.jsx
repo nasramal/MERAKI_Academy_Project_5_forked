@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import {  useDispatch,useSelector } from "react-redux";
 import img from "./profile.png";
 import axios from "axios"
+import {addAppointment} from "../../Service/Redux/Slice/Appointment"
 export default function Providers() {
+  const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
   const [schedules, setSchedules] = useState("");
+  const [date, setDate] = useState("")
+  const [timeFrom, setTimeFrom] = useState("")
+  const [timeTo, setTimeTo] = useState("")
+  const dispatch = useDispatch();
 
 
-  const { providerId } = useSelector((state) => ({
+  const { providerId, token  } = useSelector((state) => ({
     providerId: state.providerId.providerId,
+    token: state.auth.token,
   }));
   const getNotBookedSchedule = () => {
     axios
@@ -27,9 +34,6 @@ export default function Providers() {
   }, []);
   console.log(schedules);
 console.log(providerId.users_id);
-
-
-
 
   return (
     <>
@@ -70,6 +74,30 @@ console.log(providerId.users_id);
             </p>
             <>{show1 ? <div> {schedules && schedules.map((schedule,i)=>{return<div key={i}>
 <button onClick={()=>{
+setDate(schedule.date)
+setTimeFrom(schedule.timefrom)
+setTimeTo(schedule.timeto)
+try {
+  const result = axios.post(
+      `http://localhost:5000/appointment/${providerId.users_id}`,
+      { date, timeFrom, timeTo},
+      {
+          headers: {
+              Authorization: `Bearer ${token}`,
+          },
+      }
+  );
+  if (result.data.success) {
+    dispatch(addAppointment(result.data.result))
+    console.log(result.data.result);
+      setMessage("Appointment added successfully.");
+  } else {
+      setMessage("Failed to add Appointment.");
+  }
+} catch (error) {
+  console.log(error);
+  setMessage("Error happened while creating history, please try again.");
+}
 
 }}>{schedule.date.split("T")[0]} - {schedule.timefrom} - {schedule.timeto}</button>
 </div>
