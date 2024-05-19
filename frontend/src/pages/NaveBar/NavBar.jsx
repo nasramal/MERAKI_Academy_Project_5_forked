@@ -7,6 +7,8 @@ import "./NavBar.css";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const navigate = useNavigate();
 
