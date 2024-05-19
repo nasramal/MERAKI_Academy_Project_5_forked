@@ -42,8 +42,8 @@ function Appointment() {
       {appointments.length > 0 &&
         appointments.map((elem, index) => {
           const statusClass =
-            elem.status === "accept"
-              ? "status-accept"
+            elem.status === "approved"
+              ? "status-approved"
               : elem.status === "pending"
               ? "status-pending"
               : "status-reject";
