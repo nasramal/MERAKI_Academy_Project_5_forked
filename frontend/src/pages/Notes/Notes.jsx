@@ -84,7 +84,7 @@ console.log(note);
           );
         })}
       <br></br>
-      {/* ***************Create Note For User********************** */}
+      
       <p
         id="btn"
         onClick={() => {
