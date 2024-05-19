@@ -127,6 +127,7 @@ axios
 })
 .then((result) => {
   setDocInfo(result);
+  
 })
 .catch((err) => {
   console.log(err);

@@ -70,6 +70,7 @@ console.log(note);
                         }
                       )
                       .then((result) => {
+                        console.log(result.data.result);
                         dispatch(updateNote(result.data.result));
                       })
                       .catch((err) => {
