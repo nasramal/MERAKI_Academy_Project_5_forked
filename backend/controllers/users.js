@@ -156,6 +156,40 @@ const getuserinfo = (req, res)=>{
     });
 }
 
+
+
+const getUserByFirstName = (req, res) => {
+ 
+  const firstname = req.query.firstname;
+  
+  const query = `SELECT * FROM users WHERE firstname = $1 AND role_id = 2`;
+  const data = [firstname];
+
+  pool.query(query, data)
+    .then((result) => {
+      console.log(result);
+      if (result.rows.length === 0) {
+        res.status(404).json({
+          success: false,
+          message: `The doctor: ${firstname} is not exist`,
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: ` ${firstname}`,
+          result: result.rows,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err,
+      });
+    });
+};
+
 const getProviderBySpecialty = (req, res)=>{
   const specialty_id = req.params.id
   
@@ -221,5 +255,8 @@ module.exports = {
   registerDoctor,
   registerPatient,
   login,
-  getuserinfo,getProviderBySpecialty,getProviderById
+  getuserinfo,
+  getProviderBySpecialty,
+  getProviderById,
+  getUserByFirstName
 };
