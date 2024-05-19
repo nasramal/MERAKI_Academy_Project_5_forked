@@ -3,6 +3,7 @@ import {  useDispatch,useSelector } from "react-redux";
 import img from "./profile.png";
 import axios from "axios"
 import {addAppointment} from "../../Service/Redux/Slice/Appointment"
+import{updateSchedules}from "../../Service/Redux/Slice/Schedules"
 export default function Providers() {
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
@@ -98,7 +99,27 @@ try {
   console.log(error);
   setMessage("Error happened while creating history, please try again.");
 }
-
+try {
+  const result = axios.put(
+      `http://localhost:5000/schedule/update/${schedule.schedule_id}`,
+      {booked:true},
+      {
+          headers: {
+              Authorization: `Bearer ${token}`,
+          },
+      }
+  );
+  if (result.data.success) {
+    dispatch(updateSchedules(result.data.result))
+    console.log(result.data.result);
+      setMessage("Appointment updeted successfully.");
+  } else {
+      setMessage("Failed to updete Appointment.");
+  }
+} catch (error) {
+  console.log(error);
+  setMessage("Error happened while creating history, please try again.");
+}
 }}>{schedule.date.split("T")[0]} - {schedule.timefrom} - {schedule.timeto}</button>
 </div>
             })}</div> : <></>}</>
