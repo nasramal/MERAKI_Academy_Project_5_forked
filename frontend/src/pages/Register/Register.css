@@ -1,0 +1,26 @@
+
+
+
+.PatientOrDoctor {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+    width: 80%; 
+    margin: auto; 
+  }
+  
+  
+  .Patient, .Doctor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .patImgs, .docImgs {
+    width: 250px; 
+    height: auto; 
+    margin-bottom: 10px;
+  }
+  

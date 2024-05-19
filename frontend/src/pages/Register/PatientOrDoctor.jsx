@@ -1,23 +1,29 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-
+import "./Register.css"
 const PatientOrDoctor = () => {
     const navigate = useNavigate();
 
   return (
-    <div className='PatientOrDoctor'>
-    <div className='PatientButton'>
-    <img className='patImg' src=""/>
-
-      <button className='patButton' onClick={()=>{
+    <div className='Patient,Doctor'>
+    <div className='Patient'>
+      <h1>Patient</h1>
+    <img className='patImgs' src="https://img.freepik.com/free-vector/tiny-doctor-heart-patient-with-high-blood-pressure-medical-checkup-hospital-clinic-risk-cholesterol-cardiovascular-disease-flat-vector-illustration-cardiology-health-concept_74855-20983.jpg?size=626&ext=jpg&ga=GA1.1.44546679.1716076800&semt=sph" onClick={()=>{
 navigate("/Register_patient")
-      }}>Patient</button>
+      }}/>
+
+      {/* <button className='PatientButton' onClick={()=>{
+navigate("/Register_patient")
+      }}>Patient</button> */}
     </div>
-       <div className='DoctorButton'>
-       <img className='docImg' src=""/>
-       <button className='DocButton' onClick={()=>{
+       <div className='Doctor'>
+        <h2>Doctor</h2>
+       <img className='docImgs' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq5WoQ_ei9oSS3sxMdAH8BEj0wXQdx7LU-vrqwYgLcHg&s" onClick={()=>{
  navigate("/Register_Provider")
-       }}>Doctor</button>
+       }}/>
+       {/* <button className='PatientOrDoctor' onClick={()=>{
+ navigate("/Register_Provider")
+       }}>Doctor</button> */}
        
      </div>
      
