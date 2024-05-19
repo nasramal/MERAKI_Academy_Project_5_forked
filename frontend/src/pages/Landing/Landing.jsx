@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import img from"./profile.png";
-import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch
+import { useDispatch, useSelector } from 'react-redux'; 
 import { setProvider } from '../../Service/Redux/Slice/Provider';
 import "./Landing.css";
 import Providers from '../Provider/Providers';
@@ -13,7 +13,7 @@ function Landing() {
     {  photo: 'https://www.topdoctors.co.uk/files/Image/large/58b0424e-411c-4243-9228-4a0725bbab96.jpg' },
     { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDVnh7I7lki1MkthjPXjsZTlpVPnst5CipHCidC3F8kQ&s' },
     { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6E8xzYvzO0Lk7IcGqAoo-vxVJiYgASeZwQasDsK6sBw&s' },
-    // Add more specialties as needed
+    
   ];
   const articles = [
     { id: 1, title: "Biological standard of living", imageUrl: "https://www.investopedia.com/thmb/mxy4kAXcyjvx0J4pM1jg0aJFuyk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1153697801-575a3cdd2f2448a68677dde062945ac2.jpg", link: "https://en.wikipedia.org/wiki/Biological_standard_of_living" },
@@ -48,8 +48,8 @@ function Landing() {
       .then((result) => {
         if (result.data.success) {
           dispatch(setProvider(result.data.result));
-          setShow(true); // Update show state
-          // navigate("/providers")
+          setShow(true); 
+          
           console.log(result.data.result);
         } else {
           console.error('Error fetching doctors:', result.data.message);
@@ -61,7 +61,7 @@ function Landing() {
   };
 
   useEffect(() => {
-    getDocbySpecialty(); // Call the function
+    getDocbySpecialty();
   }, []);
 
   const handleArticleClick = (link) => {
@@ -71,7 +71,7 @@ console.log(provider);
   return (
     <div className="home-container">
       <div className="slideshow">
-        <h2>Medical Articles</h2>
+        <h2>Healthcare</h2>
         <div className="slideshow-container">
           {articles.map((article,i) => (
             <div key={article.id} className="slide" onClick={() => handleArticleClick(article.link)}>
@@ -83,20 +83,20 @@ console.log(provider);
       </div>
 
       <div className="user-experience">
-        <h2>User Experience</h2>
+        <h2>Join Us</h2>
         <p>
           To use our health app, simply log in with your credentials or register if you are new. Once logged in, you can book appointments with specialized doctors, receive notifications, and manage your health journey seamlessly.
         </p>
       </div>
 
       <div className="specialties">
-        <h2>Our Specialists</h2>
+        <h2>Doctors specialties</h2>
         <div className="specialties-container">
           {specialties.map((specialty,i) => (
             <div key={specialty.specialty_id} className="specialty">
               <img src={specialtiesWithPhotos[i].photo} alt={"img"}  onClick={()=>{
                 getDocbySpecialty(specialty.specialty_id);
-                setShow(true); // Pass the specialty_id
+                setShow(true); 
               }}/>
               <h3>{specialty.specialty}</h3>
             </div>

@@ -1,0 +1,72 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .Form {
+    max-width: 400px;
+    margin: 50px auto; 
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center; 
+  }
+  
+  .Title {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  input[type='email'],
+  input[type='password'] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+ 
+  .SuccessMessage,
+  .ErrorMessage {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #28a745; 
+  }
+  
+  .ErrorMessage {
+    color: #dc3545; 
+  }
+  
+ 
+  .google {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .google button {
+    margin-top: 10px;
+  }
+  

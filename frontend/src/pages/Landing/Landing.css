@@ -1,6 +1,3 @@
-/* Home.css */
-
-/* Global Styles */
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -19,7 +16,6 @@ body {
   overflow: hidden;
 }
 
-/* Slideshow Styles */
 .slideshow {
   margin-bottom: 40px;
 }
@@ -44,10 +40,9 @@ body {
 }
 
 .slide {
-  min-width: 300px;
-  height: 200px;
+  min-width: 350px; 
+  height: 250px; 
   background-color: #f0f0f0;
-  margin-right: 20px;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -63,10 +58,9 @@ body {
 
 .slide img {
   width: 100%;
-  height: 180px;
+  height: 200px; 
   object-fit: cover;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  border-radius: 8px 8px 0 0;
 }
 
 .slide p {
@@ -76,7 +70,6 @@ body {
   text-align: center;
 }
 
-/* User Experience Styles */
 .user-experience {
   margin-bottom: 40px;
   text-align: center;
@@ -95,7 +88,7 @@ body {
   padding: 0 15px;
 }
 
-/* Specialist Styles */
+
 .specialties {
   margin-bottom: 40px;
   text-align: center;
@@ -121,8 +114,8 @@ body {
 }
 
 .specialty img {
-  width: 150px;
-  height: 150px;
+  width: 200px; 
+  height: 200px;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -144,8 +137,67 @@ body {
   transform: scale(1.05);
 }
 
-/* Media Queries */
-@media only screen and (max-width: 768px) {
+#card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+#card:hover {
+  transform: scale(1.02);
+}
+
+#avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+#info {
+  text-align: center;
+}
+
+#name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+#stats {
+  margin-top: 10px;
+}
+
+.stats-text {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+}
+
+#btn {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+#btn:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
   .home-container {
     padding: 15px;
   }
@@ -155,7 +207,12 @@ body {
   }
 
   .slide {
-    min-width: 250px;
+    min-width: 300px;
+    height: 220px;
+  }
+
+  .slide img {
+    height: 170px;
   }
 
   .user-experience p {
@@ -165,9 +222,18 @@ body {
   .specialties-container {
     justify-content: center;
   }
+
+  .specialty img {
+    width: 170px;
+    height: 170px;
+  }
+
+  #card {
+    width: 100%;
+  }
 }
 
-@media only screen and (max-width: 480px) {
+@media (max-width: 480px) {
   .home-container {
     padding: 10px;
   }
@@ -179,7 +245,12 @@ body {
   }
 
   .slide {
-    min-width: 200px;
+    min-width: 250px;
+    height: 200px;
+  }
+
+  .slide img {
+    height: 150px;
   }
 
   .user-experience p {
@@ -193,8 +264,8 @@ body {
   }
 
   .specialty img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
   }
 
   .specialty h3 {
