@@ -5,6 +5,8 @@ import axios from "axios";
 import { setLogout } from "../../Service/Redux/Slice/Auth";
 import Modal from "./Modal"; // Import the Modal component
 import "./NavBar.css";
+import img from "./logo.jpg"
+
 const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,7 +51,7 @@ const NavBar = () => {
   return (
     <div className="NavBar">
       <div className="logoContainer">
-        <img src="medical_logo.png" alt="Medical Logo" className="logo" />
+        <img src={img} alt="Medical Logo" className="logo" />
       </div>
       <div className="navLinks">
         {isLoggedIn ? (

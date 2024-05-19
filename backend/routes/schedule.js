@@ -13,6 +13,6 @@ scheduleRouter.post("/", authentication,createScheduleByProviderId);
 scheduleRouter.get("/", authentication,getScheduleByProviderId);
 scheduleRouter.put("/update/:id",authentication,updatedScheduleByID);
 scheduleRouter.put("/delete/:id",deleteScheduleByProviderId);
-scheduleRouter.get("/notBooked",authentication,getNotBookedScheduleByProviderId)
+scheduleRouter.get("/notBooked/:id",getNotBookedScheduleByProviderId)
 
 module.exports = scheduleRouter;
