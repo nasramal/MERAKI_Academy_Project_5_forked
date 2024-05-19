@@ -1,6 +1,6 @@
 const express = require("express");
 
-const {registerDoctor,registerPatient,login,getuserinfo ,getProviderBySpecialty} = require("../controllers/users");
+const {registerDoctor,registerPatient,login,getuserinfo ,getProviderBySpecialty,getProviderById} = require("../controllers/users");
 const authentication = require("../middlewares/authentication")
 const usersRouter = express.Router();
 
@@ -9,6 +9,7 @@ usersRouter.post("/registerPatient", registerPatient);
 usersRouter.post("/login",login)
 usersRouter.get("/info",authentication,getuserinfo)
 usersRouter.get("/provBySpec/:id",getProviderBySpecialty)
+usersRouter.get("/provById/:id",getProviderById)
 
 
 module.exports = usersRouter;

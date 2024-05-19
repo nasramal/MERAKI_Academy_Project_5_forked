@@ -1,22 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import the reducer
+
 import authReducer from "../Slice/Auth";
 import usersReducer from "../Slice/Users";
-import schedules from "../Slice/Schedules";
-import appointment from "../Slice/Appointment";
-import provider from "../Slice/Provider";
-import note from "../Slice/Note";
+import schedulesReducer from "../Slice/Schedules"; 
+import appointmentReducer from "../Slice/Appointment"; 
+import providerReducer from "../Slice/Provider"; 
+import noteReducer from "../Slice/Note"; 
+import providerIdReducer from "../Slice/ProviderId"; 
 
 export default configureStore({
   reducer: {
-    // add the reducers to the store
 
-    auth : authReducer,
+    auth: authReducer,
     users: usersReducer,
-    appointment:appointment,
-    provider:provider,
-    schedules:schedules,
-    note:note,
-
+    appointment: appointmentReducer,
+    provider: providerReducer,
+    schedules: schedulesReducer,
+    note: noteReducer,
+    providerId: providerIdReducer,
   },
 });

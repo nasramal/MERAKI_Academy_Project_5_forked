@@ -17,13 +17,6 @@ export const providerSlice = createSlice({
           return elem;
         });
       },
-      addProvider: (state, action) => {
-        state.provider = state.users.map((elem, i) => {
-          if (elem.history_id == action.payload.history_id) {
-            return elem.history.push(action.payload.history);
-          }
-        });
-      },
     },
   });
   export const {setProvider,updateProvider,addProvider} = providerSlice.actions

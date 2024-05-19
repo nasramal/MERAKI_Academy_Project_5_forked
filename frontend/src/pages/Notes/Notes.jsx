@@ -112,7 +112,7 @@ console.log(note);
           />
           <button
             id="btn"
-            onClick={axios
+            onClick={()=>{axios
               .post(
                 `http://localhost:5000/notes/newNotes`,
                 { users_id: users_id, notes: note1 },
@@ -127,7 +127,7 @@ console.log(note);
               })
               .catch((err) => {
                 console.log(err);
-              })}
+              })}}
           >
             Save
           </button>
