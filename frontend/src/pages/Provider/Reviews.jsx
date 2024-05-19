@@ -59,7 +59,7 @@ const Reviews = ({ providerId, userId }) => {
 
   useEffect(() => {
     getReviewByProviderId();
-  }, [providerId]); // Fetch reviews whenever providerId changes
+  }, [providerId]);
 
   return (
     <>
