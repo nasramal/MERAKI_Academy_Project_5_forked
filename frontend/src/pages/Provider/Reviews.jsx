@@ -10,7 +10,7 @@ const Reviews = ({ providerId, userId }) => {
   const createReviewByUserId = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/review/${providerId}`,
+        `http://localhost:5000/review/${4}`,
         { comment }
       );
       if (response.data.success) {
@@ -28,7 +28,7 @@ const Reviews = ({ providerId, userId }) => {
   const getReviewByProviderId = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/review/${providerId}`
+        `http://localhost:5000/review/${4}`
       );
       if (response.data.success) {
         setReviews(response.data.result);
@@ -60,6 +60,7 @@ const Reviews = ({ providerId, userId }) => {
   useEffect(() => {
     getReviewByProviderId();
   }, [providerId]);
+
 
   return (
     <>

@@ -47,9 +47,9 @@ const getScheduleByProviderId =  (req, res) => {
 
 // user used
   const getNotBookedScheduleByProviderId =  (req, res) => {
-    const provider_id = req.token.userId;
+    const provider_id = req.params.id;
     pool
-      .query(`SELECT * FROM Schedule WHERE provider_id = $1 AND booked = false RETURNING *`, [
+      .query(`SELECT * FROM Schedule WHERE provider_id = $1 AND booked = false AND is_deleted=0`, [
         provider_id,
       ])
       .then((result) => {
