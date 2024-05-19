@@ -14,18 +14,26 @@ const NavBar = () => {
   const logged = localStorage.getItem("token")
 
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const { isLoggedIn, role_id } = useSelector((state) => ({
-    role_id: state.auth.role_id,
-    isLoggedIn: state.auth.isLoggedIn
-  }));
+  const [searchQuery, setSearchQuery] = useState("");
+  const [doctors, setDoctors] = useState([]);
+  const [filteredDoctors, setFilteredDoctors] = useState([]);
 
+  useEffect(() => {
+
+    axios.get("http://localhost:5000/docInfo")
+      .then(response => {
+        setDoctors(response.data);
+        setFilteredDoctors(response.data);
+      })
+      .catch(error => console.error("Error fetching doctors:", error));
+  }, []);
+
+ 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
-  };
-
-  const handleSearchSubmit = () => {
-    console.log('Searching for:', searchQuery);
+    setFilteredDoctors(users.filter(doctor =>
+      doctor.firstName.toLowerCase().includes(event.target.value.toLowerCase())
+    ));
   };
   
   const logout = () => {
@@ -66,13 +74,17 @@ const NavBar = () => {
           )}
         </div>
         <div className="searchContainer">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-          <button onClick={handleSearchSubmit}>Search</button>
+      <input
+        type="text"
+        placeholder="Search doctors..."
+        value={searchQuery}
+        onChange={handleSearchChange}
+      />
+      <ul>
+        {filteredDoctors.map((doctor, index) => (
+          <li key={index}>{doctor.firstName}</li>
+        ))}
+      </ul>
         </div>
         {isLoggedIn && (
           <button className="logout" onClick={logout}>
