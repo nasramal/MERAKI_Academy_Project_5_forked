@@ -1,54 +1,71 @@
 import React, { useEffect, useState } from "react";
-import "./Appointment.css"
+import "./Appointment.css";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { setUsers, updateHistory } from "../../Service/Redux/Slice/Users";
+import { useSelector } from "react-redux";
 
 function Appointment() {
   const [message, setMessage] = useState("");
+  const [appointments, setAppointments] = useState([]);
+  const { token } = useSelector((state) => ({
+    token: state.auth.token,
+  }));
 
-const [Appointment, setAppointment] = useState("")
-const {token } = useSelector((state) => ({
-  token: state.auth.token,
-}));
-const getAppointmentByUser = async () => {
-  try {
+  const getAppointmentByUser = async () => {
+    try {
       const result = await axios.get("http://localhost:5000/appointment", {
-          headers: {
-              Authorization: `Bearer ${token}`,
-          },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (result.data.success) {
-        setAppointment(result.data.result);
-        console.log(result.data.result);
-          setMessage("");
+        setAppointments(result.data.result);
+        setMessage("");
       } else {
-          throw new Error();
+        throw new Error();
       }
-  } catch (error) {
+    } catch (error) {
       if (error.response && !error.response.data.success) {
-          setMessage(error.response.data.message);
+        setMessage(error.response.data.message);
       } else {
-          setMessage("Error happened while getting data, please try again.");
+        setMessage("Error happened while getting data, please try again.");
       }
-  }
-};
-useEffect(() => {
-  getAppointmentByUser();
-}, []);
+    }
+  };
+
+  useEffect(() => {
+    getAppointmentByUser();
+  }, []);
 
   return (
-    <div>
-{Appointment.length > 0 && Appointment.map((elem,index)=>{
-  return <div key={index} className="Appointment"> 
-  <p> Your Appointment Number : {elem.appointmint_id}  with Doctor : {elem.firstname} {elem.lastname} from {elem.timefrom} to {elem.timeto} Status is {elem.status} </p>
-  </div>
-})}
-{message && <div className="message">{message}</div>}
+    <div className="container">
+      {appointments.length > 0 &&
+        appointments.map((elem, index) => {
+          const statusClass =
+            elem.status === "accept"
+              ? "status-accept"
+              : elem.status === "pending"
+              ? "status-pending"
+              : "status-reject";
 
+          return (
+            <div key={index} className="Appointment">
+              <h1>Appointment Number: {elem.appointmint_id}</h1>
+              <h2>
+                Doctor: {elem.firstname} {elem.lastname}
+              </h2>
+              <h3>Date: {elem.date.split("T")[0]}</h3>
+              <h4>From: {elem.timefrom}</h4>
+              <h5>To: {elem.timeto}</h5>
+              <h6>
+                Status: <span className={statusClass}>{elem.status}</span>
+              </h6>
+            </div>
+          );
+        })}
+      {message && <div className="message">{message}</div>}
     </div>
-  )
+  );
 }
 
-export default Appointment
+export default Appointment;
