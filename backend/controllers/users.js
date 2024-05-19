@@ -185,9 +185,41 @@ const getProviderBySpecialty = (req, res)=>{
     });
 }
 
+const getProviderById = (req, res)=>{
+  const provider_id = req.params.id
+  
+  
+  const query = `SELECT * FROM users WHERE users_id= $1`;
+  const data = [provider_id];
+
+  pool
+    .query(query, data)
+    .then((result) => {
+      if (result.rows.length !== 0) {
+        res.status(200).json({
+          success: true,
+          message: `The user info`,
+          result: result.rows,
+        });
+      } else {
+        throw new Error("Error happened while getting review");
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err,
+      });
+    });
+}
+
+
+
+
 module.exports = {
   registerDoctor,
   registerPatient,
   login,
-  getuserinfo,getProviderBySpecialty
+  getuserinfo,getProviderBySpecialty,getProviderById
 };
