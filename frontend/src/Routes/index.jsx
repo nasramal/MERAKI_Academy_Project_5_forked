@@ -18,6 +18,7 @@ import Diagnosis from "../pages/Diagnosis/Diagnosis"
 import Landing from "../pages/Landing/Landing"
 import Main from "../layouts/Main";
 import DrProviders from "../pages/Provider/Providers"
+import Modal from "../pages/NaveBar/Modal"
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
         element: <ContactUs/>,
       },
       {
+        path: "/Modal",
+          element: <Modal/>,
+        },
+      {
         path: "/Diagnosis",
           element: <Diagnosis/>,
         },
@@ -69,6 +74,7 @@ export const router = createBrowserRouter([
                 path: "/Schedule",
                   element: <Schedule/>,
                 },
+          
                 {
                   path: "/Provider",
                     element: <DocProvider/>,
