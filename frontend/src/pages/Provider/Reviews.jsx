@@ -15,7 +15,6 @@ const Reviews = ({ providerId, userId }) => {
       );
       if (response.data.success) {
         getReviewByProviderId();
-        setComment("");
       } else {
         throw new Error(response.data.message);
       }

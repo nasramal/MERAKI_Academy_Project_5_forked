@@ -47,7 +47,7 @@ const getNotesByUserId = (req, res) => {
           result: result.rows,
         });
       } else {
-        throw new Error("Error happened while getting article");
+        throw new Error("Error happened while getting notes");
       }
     })
     .catch((err) => {
@@ -77,7 +77,7 @@ const getNotesByProviderId = (req, res) => {
           result: result.rows,
         });
       } else {
-        throw new Error("Error happened while getting article");
+        throw new Error("Error happened while getting notes");
       }
     })
     .catch((err) => {
@@ -103,7 +103,7 @@ const getNotesByProvider = (req, res) => {
           result: result.rows,
         });
       } else {
-        throw new Error("Error happened while getting article");
+        throw new Error("Error happened while getting notes");
       }
     })
     .catch((err) => {
@@ -132,7 +132,7 @@ const deleteNotesByProviderId = (req, res) => {
           result: result.rows,
         });
       } else {
-        throw new Error("Error happened while getting article");
+        throw new Error("Error happened while getting notes");
       }
     })
     .catch((err) => {
@@ -163,7 +163,7 @@ const upDateNotesByProviderId = (req, res) => {
           result: result.rows,
         });
       } else {
-        throw new Error("Error happened while getting article");
+        throw new Error("Error happened while getting notes");
       }
     })
     .catch((err) => {

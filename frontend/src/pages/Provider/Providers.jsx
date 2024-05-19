@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {  useDispatch,useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import img from "./profile.png";
 import axios from "axios"
 import {addAppointment} from "../../Service/Redux/Slice/Appointment"
@@ -12,7 +14,7 @@ export default function Providers() {
   const [timeFrom, setTimeFrom] = useState("")
   const [timeTo, setTimeTo] = useState("")
   const dispatch = useDispatch();
-
+const navigat = useNavigate()
 
   const { providerId, token  } = useSelector((state) => ({
     providerId: state.providerId.providerId,
@@ -57,7 +59,7 @@ console.log(providerId.users_id);
             </div>
             <p
               id="btn"
-              onClick={() => {
+              onClick={() => {navigat("/review")
                 setShow(true);
               }}
             >
@@ -67,6 +69,7 @@ console.log(providerId.users_id);
             <p
               id="btn"
               onClick={() => {
+                
                 setShow1(true);
               }}
             >
