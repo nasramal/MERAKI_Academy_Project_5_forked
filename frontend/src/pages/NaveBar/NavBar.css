@@ -1,63 +1,60 @@
 .NavBar {
   display: flex;
+  width:auto;
+  
+  height: 60px;
   align-items: center;
-  justify-content: space-between;
-  background-color: #007bff; /* Navbar background color */
-  padding: 10px 20px; /* Adjust padding as needed */
+  padding: 5px 5px;
+  background-color: #5477f9;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.logoContainer {
-  margin-right: auto; /* Pushes the logo and navLinks to the left */
-}
 
-.logo {
-  width: 100px; /* Adjust the width of the logo as needed */
+.Medical {
+  width: 100px;
+  height: 100px;
+
 }
 
 .navLinks {
   display: flex;
+  align-items: center;
+  margin-left:50px;
+ 
 }
 
 .Link {
-  color: #fff; /* Text color for links */
+  margin-right: 20px;
+  color: #333;
   text-decoration: none;
-  margin: 0 10px; /* Adjust spacing between links */
+  font-size: 16px;
+  font-weight: bold;
+  transition: color 0.3s;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.Link:hover {
+  color: #ff2600;
 }
 
 .logout {
+  background-color: #ff0000;
   color: #fff;
-  background-color: #dc3545; /* Background color for logout button */
   border: none;
-  cursor: pointer;
-  padding: 8px 15px;
+  padding: 10px 15px;
   border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, border-radius 0.3s;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 .logout:hover {
-  background-color: #c82333; /* Background color on hover */
+  background-color: #cc0000;
+  border-radius: 10px; 
 }
 
-/* Style for search input and button */
-.searchInput {
-  padding: 8px;
-  border: 1px solid #ccc; /* Border color */
-  border-radius: 5px;
-  margin-right: 10px; /* Adjust margin between input and button */
-}
+.logout:hover {
+  background-color: #061f3aa4;
 
-.searchButton {
-  padding: 8px 15px;
-  background-color: #fff; /* Button background color */
-  color: #007bff; /* Button text color */
-  border: 1px solid #007bff; /* Button border */
-  border-radius: 5px;
-  cursor: pointer;
 }
-
-.searchButton:hover {
-  background-color: #007bff; /* Button background color on hover */
-  color: #fff; /* Button text color on hover */
-}
- .active{
-  background-color: aqua;
- }
