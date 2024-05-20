@@ -44,8 +44,8 @@ console.log(providerId.users_id);
         <div id="card">
           <img id="avatar" src={img} alt="avatar" />
           <div id="info">
-            <p id="name">
-              {providerId.firstname} {providerId.lastname}
+            <p id="name">  {providerId.firstname} {providerId.lastname}
+            
             </p>
             <p id="activity"> </p>
             <div id="stats">
