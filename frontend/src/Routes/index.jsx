@@ -17,7 +17,7 @@ import Diagnosis from "../pages/Diagnosis/Diagnosis";
 import Landing from "../pages/Landing/Landing";
 import Main from "../layouts/Main";
 import DrProviders from "../pages/Provider/Providers";
-import Review from "../pages/Provider/Reviews";
+import Review from "../pages/Provider/Review";
 
 export const router = createBrowserRouter([
   {

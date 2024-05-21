@@ -4,9 +4,9 @@ export const authSlice = createSlice({
 
   name: "auth",
   initialState: {
-    token: null || localStorage.getItem("token"),
-    userId: null || localStorage.getItem("userId"),
-    role_id: null || localStorage.getItem("role_id"),
+    token: localStorage.getItem("token") || null ,
+    userId: localStorage.getItem("userId") || null,
+    role_id: localStorage.getItem("role_id") || null,
     isLoggedIn: localStorage.getItem("token") ? true : false,
   },
 
