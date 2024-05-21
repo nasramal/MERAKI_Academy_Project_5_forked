@@ -108,13 +108,13 @@ console.log(speciality)
             ))}
           </select>
           <br />
-          {/* <input
+          <input
             type="text"
             placeholder="Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
-          /> */}
+          />
           <br />
           <input
             type="tel"
