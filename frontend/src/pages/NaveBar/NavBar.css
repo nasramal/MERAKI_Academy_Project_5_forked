@@ -5,7 +5,7 @@
   height: 60px;
   align-items: center;
   padding: 5px 5px;
-  background-color: #5477f9;
+  background-color: #007bff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -25,7 +25,7 @@
 
 .Link {
   margin-right: 20px;
-  color: #333;
+  color: #fff;
   text-decoration: none;
   font-size: 16px;
   font-weight: bold;
@@ -34,7 +34,7 @@
 }
 
 .Link:hover {
-  color: #ff2600;
+  color: #979797;
 }
 
 .logout {
