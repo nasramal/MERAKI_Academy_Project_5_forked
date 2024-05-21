@@ -7,8 +7,8 @@ const registerDoctor = async (req, res) => {
   const { firstName, lastName, age, specialty, address, email, password, phone } = req.body;
 
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
+  const role_id = 2;
 
-const role_id =2
   pool.query(
     `INSERT INTO users (firstName, lastName, age, specialty, address, email, password, role_id, phone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
     [
@@ -27,16 +27,15 @@ const role_id =2
     res.status(200).json({
       success: true,
       message: "Account created successfully",
-      result:result.rows
+      result: result.rows
     });
   })
   .catch((err) => {
-    console.log(err)
+    console.log(err);
     res.status(409).json({
       success: false,
       message: "The email already exists",
       err,
-
     });
   });
 };
@@ -45,7 +44,8 @@ const registerPatient = async (req, res) => {
   const { firstName, lastName, age, email, password, phone } = req.body;
 
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
-  const role_id =1
+  const role_id = 1;
+
   pool.query(
     `INSERT INTO users (firstName, lastName, age, email, password, role_id, phone) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
     [
@@ -72,8 +72,6 @@ const registerPatient = async (req, res) => {
     });
   });
 };
-
-/////////////////////////////////
 
 const login = (req, res) => {
   const password = req.body.password;
@@ -103,15 +101,6 @@ const login = (req, res) => {
               userId: result.rows[0].users_id,
               role_id: result.rows[0].role_id,
               specialty: result.rows[0].specialty
-              });
-            } else {
-              throw Error;
-            }
-          } else {
-            res.status(403).json({
-              success: false,
-              message: `The email doesn’t exist or the password you’ve entered is incorrect`,
-
             });
           } else {
             throw Error;
@@ -123,7 +112,9 @@ const login = (req, res) => {
           });
         }
       });
-    } else throw Error;
+    } else {
+      throw Error;
+    }
   })
   .catch((err) => {
     res.status(403).json({
@@ -134,10 +125,8 @@ const login = (req, res) => {
   });
 };
 
-////////////////////////////////////////////////
-
-const getuserinfo = (req, res)=>{
-  const users_id = req.token.userId
+const getuserinfo = (req, res) => {
+  const users_id = req.token.userId;
   const query = `SELECT firstName, lastName, age, email, phone FROM users WHERE users_id= $1`;
   const data = [users_id];
 
@@ -161,8 +150,6 @@ const getuserinfo = (req, res)=>{
     });
   });
 };
-
-////////////////////////////////////////////////
 
 const getUserByFirstName = (req, res) => {
   const firstname = req.query.firstname;
@@ -194,10 +181,8 @@ const getUserByFirstName = (req, res) => {
   });
 };
 
-///////////////////////////////////////////////
-
-const getProviderBySpecialty = (req, res)=>{
-  const specialty_id = req.params.id
+const getProviderBySpecialty = (req, res) => {
+  const specialty_id = req.params.id;
   
   const query = `SELECT * FROM users WHERE specialty= $1`;
   const data = [specialty_id];
@@ -223,10 +208,8 @@ const getProviderBySpecialty = (req, res)=>{
   });
 };
 
-//////////////////////////////////////////////
-
-const getProviderById = (req, res)=>{
-  const provider_id = req.params.id
+const getProviderById = (req, res) => {
+  const provider_id = req.params.id;
   
   const query = `SELECT * FROM users WHERE users_id= $1`;
   const data = [provider_id];
@@ -244,9 +227,13 @@ const getProviderById = (req, res)=>{
     }
   })
   .catch((err) => {
-    res.status
-
-  })}
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      err: err,
+    });
+  });
+};
 
 module.exports = {
   registerDoctor,
