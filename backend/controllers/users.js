@@ -4,19 +4,20 @@ const jwt = require("jsonwebtoken");
 const saltRounds = parseInt(process.env.SALT);
 
 const registerDoctor = async (req, res) => {
-  const { firstName, lastName, age,Speciality, email, password, role_id, phone } =
+  const { firstName, lastName, age,Speciality,address, email, password, role_id, phone } =
     req.body;
 
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
   pool
     .query(
-      `INSERT INTO users (firstName, lastName, age,Speciality, email, password, role_id , phone) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+      `INSERT INTO users (firstName, lastName, age,Speciality,address email, password, role_id , phone) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
       [
         firstName,
         lastName,
         age,
         Speciality,
+        address,
         email.toLowerCase(),
         encryptedPassword,
         role_id,
