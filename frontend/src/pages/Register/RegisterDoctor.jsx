@@ -38,8 +38,8 @@ const RegisterDoctor = () => {
         firstName,
         lastName,
         age,
-        speciality,
-        address,
+        Speciality:speciality,
+        // address,
         email,
         password,
         phone,
@@ -104,18 +104,17 @@ console.log(speciality)
                         specialities.map((spe) => (
               <option key={spe.specialty_id} value={spe.specialty_id}>
                 {spe.specialty}
-         
               </option>
             ))}
           </select>
           <br />
-          <input
+          {/* <input
             type="text"
             placeholder="Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
-          />
+          /> */}
           <br />
           <input
             type="tel"

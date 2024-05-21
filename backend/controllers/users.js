@@ -4,19 +4,22 @@ const jwt = require("jsonwebtoken");
 const saltRounds = parseInt(process.env.SALT);
 
 const registerDoctor = async (req, res) => {
-  const { firstName, lastName, age,Speciality, email, password, role_id, phone } =
+  const { firstName, lastName, age,Speciality,address, email, password, role_id, phone } =
     req.body;
 
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
   pool
     .query(
-      `INSERT INTO users (firstName, lastName, age,Speciality, email, password, role_id , phone) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+
+      `INSERT INTO users (firstName, lastName, age,Speciality,address email, password, role_id , phone) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+
       [
         firstName,
         lastName,
         age,
         Speciality,
+        address,
         email.toLowerCase(),
         encryptedPassword,
         role_id,
@@ -84,7 +87,7 @@ const login = (req, res) => {
   const data = [email.toLowerCase()];
   pool
     .query(query, data)
-    .then((result) => {
+    .then((result) => {console.log(result);
       if (result.rows.length) {
         bcrypt.compare(password, result.rows[0].password, (err, response) => {
           if (err) res.json(err);
@@ -93,6 +96,7 @@ const login = (req, res) => {
               userId: result.rows[0].users_id,
               firstName: result.rows[0].firstName,
               role_id: result.rows[0].role_id,
+              specialty: result.rows[0].specialty
             };
             const options = { expiresIn: "1day" };
             const secret = process.env.SECRET;
@@ -103,7 +107,8 @@ const login = (req, res) => {
                 success: true,
                 message: `Valid login credentials`,
                 userId: result.rows[0].users_id,
-                role_id: result.rows[0].role_id
+                role_id: result.rows[0].role_id,
+                specialty: result.rows[0].specialty
               });
             } else {
               throw Error;

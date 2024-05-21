@@ -18,6 +18,7 @@ import Landing from "../pages/Landing/Landing";
 import Main from "../layouts/Main";
 import DrProviders from "../pages/Provider/Providers";
 import Review from "../pages/Provider/Review";
+import DocInfo from "../pages/Provider//docInfo";
 
 export const router = createBrowserRouter([
   {
@@ -89,6 +90,9 @@ export const router = createBrowserRouter([
       {
         path: "/review",
         element: <Review />,
+      },{
+        path: "/docInfo",
+        element: <DocInfo />,
       },
       {
         path: "*",

@@ -39,6 +39,7 @@ function Provider() {
         },
       })
       .then((result) => {
+        console.log(result);
         setDocInfo(result.data.result);
       })
       .catch((err) => {
@@ -101,7 +102,7 @@ axios
                 }}>Save</button>
               </div>
             ) : (
-              <div
+              <div 
                 onClick={() => {
                   setEditExperience(!editExperience); 
                 }}
