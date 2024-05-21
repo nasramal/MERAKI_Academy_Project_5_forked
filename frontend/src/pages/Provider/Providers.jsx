@@ -41,25 +41,25 @@ console.log(providerId.users_id);
   return (
     <div>
       {providerId && (
-        <div id="card">
-          <img id="avatar" src={img} alt="avatar" />
-          <div id="info">
-            <p id="name">  {providerId.firstname} {providerId.lastname}
+        <div id="cards">
+          <img id="avatars" src={img} alt="avatar" />
+          <div id="infos">
+            <p id="names">  {providerId.firstname} {providerId.lastname}
             
             </p>
-            <p id="activity"> </p>
-            <div id="stats">
-              <p className="stats-text">
+            <p id="activitys"> </p>
+            <div id="statss">
+              <p className="stats-texts">
                 <span>📞</span>
                 {providerId.phone}
               </p>
-              <p className="stats-text">
+              <p className="stats-texts">
                 <span>📧</span>
                 {providerId.email}
               </p>
             </div>
             <p
-              id="btn"
+              id="btns"
               onClick={() => {navigat("/review")
                 setShow(true);
               }}
@@ -68,7 +68,7 @@ console.log(providerId.users_id);
             </p>
             <>{show ? <div> review</div> : <></>}</>
             <p
-              id="btn" onDoubleClick={()=>{setShow1(false)}}
+              id="btns" onDoubleClick={()=>{setShow1(false)}}
               onClick={() => {
                 
                 setShow1(true);
@@ -121,14 +121,17 @@ try {
   }
 } catch (error) {
   console.log(error);
-  setMessage("Error happened while creating history, please try again.");
+  setMessage("Error happened while creating Appointment, please try again.");
 }
 }}>{schedule.date.split("T")[0]} - {schedule.timefrom} - {schedule.timeto}</button>
 </div>
+
             })}</div> : <></>}</>
           </div>
         </div>
       )}
+         {message && <div className="message">{message}</div>}
+
     </div>
   );
 }

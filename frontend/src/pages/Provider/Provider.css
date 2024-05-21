@@ -141,3 +141,123 @@ grid-column: 2;
 table, th, td {
   border:1px solid black;
 }
+
+
+/* ......................................... */
+
+#cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff; 
+  border-radius: 10px;
+  padding: 40px 20px; 
+  margin: 30px auto; 
+  max-width: 800px; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  border: 1px solid #e0e0e0;
+}
+
+#avatars {
+  width: 150px; 
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 30px; 
+  border: 3px solid #007bff; 
+}
+
+#infos {
+  text-align: center;
+  width: 100%;
+}
+
+#names {
+  font-size: 2rem; 
+  font-weight: bold;
+  margin-bottom: 15px; 
+  color: #333333; 
+}
+
+#activitys {
+  font-size: 1.25rem; 
+  color: #6c757d;
+  margin-bottom: 25px; 
+}
+
+#statss {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin: 25px 0; 
+  width: 100%;
+}
+
+.stats-texts {
+  font-size: 1.25rem; 
+  margin: 10px 0; 
+  color: #555555;
+}
+
+#btns {
+  background: #007bff; 
+  color: white; 
+  padding: 12px 25px; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 15px 0; 
+  transition: background 0.3s ease;
+}
+
+#btns:hover {
+  background: #0056b3;
+}
+
+.message {
+  margin: 30px auto; 
+  padding: 15px; 
+  border-radius: 5px;
+  max-width: 800px; 
+  text-align: center;
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.schedule-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; 
+  margin-top: 30px; 
+}
+
+.schedule-button {
+  background: #28a745;
+  color: white;
+  padding: 12px; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.schedule-button:hover {
+  background: #218838;
+}
+
+.schedule-info {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  padding: 12px; 
+  border-radius: 5px;
+  text-align: center;
+  min-width: 150px;
+}
+
+@media (max-width: 768px) {
+  #statss {
+    flex-direction: column;
+    align-items: center;
+  }
+}
