@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="footer-section about-us">
         <h3>About Us</h3>
         <p>
-          Our health app revolutionizes the way individuals manage their healthcare. With seamless appointment booking functionality, users can easily schedule appointments with trusted doctors. Once booked, users receive timely notifications upon the doctor's acceptance. The app streamlines the healthcare journey further by enabling doctors to provide personalized diagnoses directly to patients' profiles, ensuring efficient and confidential communication between healthcare providers and users.
+        Our health app revolutionizes the way individuals manage their healthcare. With seamless appointment booking functionality, users can easily schedule appointments with trusted doctors.
         </p>
       </div>
       <div className="footer-section product">

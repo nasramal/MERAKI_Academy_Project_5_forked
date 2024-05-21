@@ -39,6 +39,7 @@ function Provider() {
         },
       })
       .then((result) => {
+        console.log(result);
         setDocInfo(result.data.result);
       })
       .catch((err) => {
@@ -51,7 +52,7 @@ function Provider() {
     getDocInfo();
   }, []);
 
-
+console.log(docInfo);
   return (
     <>
       <div className="infoContainer">
@@ -101,7 +102,7 @@ axios
                 }}>Save</button>
               </div>
             ) : (
-              <div
+              <div 
                 onClick={() => {
                   setEditExperience(!editExperience); 
                 }}

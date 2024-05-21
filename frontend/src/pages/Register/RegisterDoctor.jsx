@@ -35,7 +35,9 @@ const RegisterDoctor = () => {
     e.preventDefault();
     try {
       const result = await axios.post("http://localhost:5000/users/registerDoctor", {
+
         firstName, lastName, age, specialty:speciality, address, email, password, phone
+
       });
       if (result.data.success) {
         setStatus(true);
@@ -96,18 +98,17 @@ console.log(speciality)
                         specialities.map((spe) => (
               <option key={spe.specialty_id} value={spe.specialty_id}>
                 {spe.specialty}
-         
               </option>
             ))}
           </select>
           <br />
-          <input
+          {/* <input
             type="text"
             placeholder="Address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
-          />
+          /> */}
           <br />
           <input
             type="tel"

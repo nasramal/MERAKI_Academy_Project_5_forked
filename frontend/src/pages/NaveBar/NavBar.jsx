@@ -8,7 +8,6 @@ import "./NavBar.css";
 const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const logged = localStorage.getItem("token");
 
   const { isLoggedIn, role_id } = useSelector((state) => ({
     role_id: state.auth.role_id,
@@ -32,14 +31,14 @@ const NavBar = () => {
         </NavLink>
       </div>
       <div className="navLinks">
-        {(logged && role_id === 1) ? (
+        {(isLoggedIn && role_id == "1") ? (
           <>
             <NavLink className="Link" to="/">Home Page</NavLink>
             <NavLink className="Link" to="/Diagnosis">My Diagnosis</NavLink>
             <NavLink className="Link" to="/Appointment">Book Appointment</NavLink>
             <NavLink className="Link" to="/user">My Profile</NavLink>
           </>
-        ) : (logged && role_id === 2) ? (
+        ) : (isLoggedIn && role_id == "2") ? (
           <>
             <NavLink className="Link" to="/">Home Page</NavLink>
             <NavLink className="Link" to="/Appointments">My Appointments</NavLink>
@@ -56,9 +55,9 @@ const NavBar = () => {
             <NavLink className="Link" to="/login">Login</NavLink>
           </>
         )}
-        <SearchResult/>
+          <SearchResult/>
       </div>
-      
+    
       {isLoggedIn && (
         <button className="logout" onClick={logout}>
           Logout

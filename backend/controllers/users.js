@@ -7,6 +7,7 @@ const registerDoctor = async (req, res) => {
   const { firstName, lastName, age, specialty, address, email, password, phone } = req.body;
 
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
+
 const role_id =2
   pool.query(
     `INSERT INTO users (firstName, lastName, age, specialty, address, email, password, role_id, phone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
@@ -35,6 +36,7 @@ const role_id =2
       success: false,
       message: "The email already exists",
       err,
+
     });
   });
 };
@@ -78,6 +80,7 @@ const login = (req, res) => {
   const email = req.body.email;
   const query = `SELECT * FROM users WHERE email = $1`;
   const data = [email.toLowerCase()];
+
   pool.query(query, data)
   .then((result) => {
     if (result.rows.length) {
@@ -98,7 +101,17 @@ const login = (req, res) => {
               success: true,
               message: `Valid login credentials`,
               userId: result.rows[0].users_id,
-              role_id: result.rows[0].role_id
+              role_id: result.rows[0].role_id,
+              specialty: result.rows[0].specialty
+              });
+            } else {
+              throw Error;
+            }
+          } else {
+            res.status(403).json({
+              success: false,
+              message: `The email doesn’t exist or the password you’ve entered is incorrect`,
+
             });
           } else {
             throw Error;

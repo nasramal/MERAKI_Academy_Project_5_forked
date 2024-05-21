@@ -4,9 +4,11 @@ export const authSlice = createSlice({
 
   name: "auth",
   initialState: {
+
     token: null || localStorage.getItem("token"),
     userId: null || localStorage.getItem("userId"),
     role_id: null || localStorage.getItem("role_id"),
+    specialty:null || localStorage.getItem("specialty"),
     isLoggedIn: localStorage.getItem("token") ? true : false,
   },
 
@@ -28,7 +30,10 @@ export const authSlice = createSlice({
         localStorage.setItem("role_id", action.payload)
 
       },
-
+      setSpecialty: (state, action) => {
+        state.userId = action.payload;
+        localStorage.setItem("specialty", action.payload)
+      },
       setLogout: (state, action) => {
         state.token = null;
         state.userId = null;
@@ -42,7 +47,7 @@ export const authSlice = createSlice({
 })
 
 
-export const { setLogin, setUserId, setRoleId, setLogout } = authSlice.actions;
+export const { setLogin, setUserId, setRoleId, setLogout ,setSpecialty} = authSlice.actions;
 
 
 export default authSlice.reducer;

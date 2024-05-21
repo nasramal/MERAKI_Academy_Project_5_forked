@@ -39,7 +39,7 @@ const navigat = useNavigate()
 console.log(providerId.users_id);
 
   return (
-    <>
+    <div>
       {providerId && (
         <div id="card">
           <img id="avatar" src={img} alt="avatar" />
@@ -68,7 +68,7 @@ console.log(providerId.users_id);
             </p>
             <>{show ? <div> review</div> : <></>}</>
             <p
-              id="btn"
+              id="btn" onDoubleClick={()=>{setShow1(false)}}
               onClick={() => {
                 
                 setShow1(true);
@@ -91,16 +91,16 @@ try {
           },
       }
   );
-  if (result.data.success) {
+  if (result) {console.log(result);
     dispatch(addAppointment(result.data.result))
-    console.log(result.data.result);
+    
       setMessage("Appointment added successfully.");
   } else {
       setMessage("Failed to add Appointment.");
   }
 } catch (error) {
   console.log(error);
-  setMessage("Error happened while creating history, please try again.");
+  setMessage("Error happened while creating appointment, please try again.");
 }
 try {
   const result = axios.put(
@@ -129,6 +129,6 @@ try {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
