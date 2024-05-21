@@ -19,6 +19,7 @@ import Main from "../layouts/Main";
 import DrProviders from "../pages/Provider/Providers";
 import Review from "../pages/Provider/Review";
 import DocInfo from "../pages/Provider//docInfo";
+
 export const router = createBrowserRouter([
   {
     path: "/",
