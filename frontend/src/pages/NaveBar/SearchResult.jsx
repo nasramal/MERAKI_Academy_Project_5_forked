@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import NavBar from "../../pages/NaveBar/NavBar"
+// import NavBar from "../../pages/NaveBar/NavBar"
 import { useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import axios from "axios";
 import "./SearchResult.css"
-import Provider from "../../pages/Provider/Provider"
-import { setProviderId } from '../../Service/Redux/Slice/ProviderId';
-import { FcSearch } from "react-icons/fc";
+// import Provider from "../../pages/Provider/Provider"
+// import { setProviderId } from '../../Service/Redux/Slice/ProviderId';
+// import { FcSearch } from "react-icons/fc";
 
 const SearchResult = () => {
   const navigate = useNavigate()

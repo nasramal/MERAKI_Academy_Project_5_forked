@@ -6,13 +6,15 @@ const createAppointmentByUserId = (req, res) => {
   const user_id = req.token.userId;
   pool
     .query(
-      `INSERT INTO appointmint (date, timeFrom, timeTo,provider_id,user_id) VALUES ($1,$2,$3,$4,$5) RETURNING *`,
+      `INSERT INTO appointmint (date, timeFrom, timeTo, provider_id, user_id) VALUES ($1, $2, $3, $4, $5)`,
       [date, timeFrom, timeTo, provider_id, user_id]
     )
     .then((result) => {
+      console.log(result);
       res.status(200).json({
         success: true,
         message: "appointment created successfully",
+        result: result.rows,
       });
     })
     .catch((err) => {
