@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import "./Login.css"
 
-import { setLogin, setUserId, setRoleId, setLogout } from "../../Service/Redux/Slice/Auth";
+import { setLogin, setUserId, setRoleId, setLogout, setSpecialty } from "../../Service/Redux/Slice/Auth";
 
 
 
@@ -42,6 +42,8 @@ console.log(result.data)
         dispatch(setLogin(result.data));
         dispatch(setRoleId(result.data.role_id));
         dispatch(setUserId(result.data.userId));
+        dispatch(setSpecialty(result.data.specialty));
+
         navigate("/");
       } else throw Error;
     } catch (error) {

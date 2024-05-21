@@ -1,8 +1,8 @@
 const pool = require("../models/db");
 
 const createDocInfoByProviderId =  (req, res) => {
-  const { specialty, experience, certificates } = req.body;
-  const provider_id = req.token.userId;
+  const {  experience, certificates } = req.body;
+  const {provider_id,specialty} = req.token.userId;
   pool
     .query(
       `INSERT INTO docInfo (specialty,experience,certificates,provider_id) VALUES ($1,$2,$3,$4)RETURNING *`,

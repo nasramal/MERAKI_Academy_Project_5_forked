@@ -20,10 +20,10 @@ export const schedulesSlice = createSlice({
       addSchedules: (state, action) => {
         
         state.schedules = state.schedules.map((elem, i) => {
-          if (elem.schedules_id == action.payload.schedules_id) {
-            return elem.schedules.push(action.payload.schedules);
+          if (elem.schedules_id === action.payload.schedules_id) {
+            elem.schedules.push(action.payload.schedules);
           }
-        return elem});
+          return elem;});
         
       },
     },

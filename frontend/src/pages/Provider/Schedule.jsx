@@ -9,7 +9,7 @@ import {
 } from "../../Service/Redux/Slice/Schedules";
 import Table from "react-bootstrap/Table";
 import { ToastContainer, toast } from "react-toastify";
-
+import 'react-toastify/dist/ReactToastify.css';
 function Schedule() {
   const dispatch = useDispatch();
   const [data, setDate] = useState("");
@@ -167,7 +167,7 @@ function Schedule() {
           />
         </form>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }

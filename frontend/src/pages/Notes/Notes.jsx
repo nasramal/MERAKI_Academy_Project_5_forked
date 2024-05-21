@@ -32,7 +32,7 @@ export default function ProviderInfo() {
 
   useEffect(() => {
     getInfo();
-  }, []);
+  }, [note]);
 console.log(note);
   return (
     <div>
