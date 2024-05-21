@@ -51,7 +51,7 @@ function Provider() {
     getDocInfo();
   }, []);
 
-
+console.log(docInfo);
   return (
     <>
       <div className="infoContainer">

@@ -8,6 +8,7 @@ import "./Landing.css";
 import Providers from '../Provider/Providers';
 import { setProviderId } from '../../Service/Redux/Slice/ProviderId';
 import NavBar from '../NaveBar/NavBar';
+
 function Landing() {
   const specialtiesWithPhotos = [
     { photo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG5X52F9HR3UXmzg6jIM4WWua1AhkYncSxFEP_2R16CA&s' },
@@ -35,7 +36,6 @@ function Landing() {
     axios.get('http://localhost:5000/specialty')
       .then((result) => {
         if (result.data) {
-          console.log(result.data.result);
           setSpecialties(result.data.result);
         }
       })
@@ -43,8 +43,8 @@ function Landing() {
         console.error('Error fetching specialties:', error);
       });
   }, []);
-
-  const getDocbySpecialty = (id) => {
+  
+const getDocbySpecialty = (id) => {
     axios.get(`http://localhost:5000/users/provBySpec/${id}`)
       .then((result) => {
         if (result.data.success) {
@@ -89,7 +89,7 @@ console.log(provider);
           To use our health app, simply log in with your credentials or register if you are new. Once logged in, you can book appointments with specialized doctors, receive notifications, and manage your health journey seamlessly.
         </p>
       </div>
-
+<>
       <div className="specialties">
         <h2>Doctors specialties</h2>
         <div className="specialties-container">
@@ -104,7 +104,7 @@ console.log(provider);
           ))}
         </div>
       </div>
-
+</>
       {show?provider && provider.map((pro,i) => (
             <div key={i} id="card">
               <img 
