@@ -56,9 +56,9 @@ const NavBar = () => {
             <NavLink className="Link" to="/login">Login</NavLink>
           </>
         )}
-        <SearchResult/>
+          <SearchResult/>
       </div>
-      
+    
       {isLoggedIn && (
         <button className="logout" onClick={logout}>
           Logout
