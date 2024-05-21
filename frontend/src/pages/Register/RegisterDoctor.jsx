@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 const RegisterDoctor = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState(0);
   const [speciality, setSpeciality] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(0);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(false);
   const [specialities, setSpecialities] = useState([]);
@@ -35,15 +35,9 @@ const RegisterDoctor = () => {
     e.preventDefault();
     try {
       const result = await axios.post("http://localhost:5000/users/registerDoctor", {
-        firstName,
-        lastName,
-        age,
-        Speciality:speciality,
-        // address,
-        email,
-        password,
-        phone,
-        role_id: 2
+
+        firstName, lastName, age, specialty:speciality, address, email, password, phone
+
       });
       if (result.data.success) {
         setStatus(true);

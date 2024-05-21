@@ -9,7 +9,7 @@ const RegisterPatient = () => {
   const [country, setCountry] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(0);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(false);
 
@@ -19,13 +19,7 @@ const RegisterPatient = () => {
     e.preventDefault();
     try {
       const result = await axios.post("http://localhost:5000/users/registerPatient", {
-        firstName,
-        lastName,
-        age,
-        email,
-        password,
-        phone,
-        role_id: 1 
+      firstName, lastName, age, email, password, phone
       });
       if (result.data.success) {
         setStatus(true);
@@ -71,7 +65,7 @@ const RegisterPatient = () => {
           <br />
           
           <input
-            type="number"
+            type="tel"
             placeholder="Phone number"
             onChange={(e) => setPhone(e.target.value)}
           />
