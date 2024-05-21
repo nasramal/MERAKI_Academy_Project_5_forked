@@ -71,6 +71,8 @@ const registerPatient = async (req, res) => {
   });
 };
 
+/////////////////////////////////
+
 const login = (req, res) => {
   const password = req.body.password;
   const email = req.body.email;
@@ -119,6 +121,8 @@ const login = (req, res) => {
   });
 };
 
+////////////////////////////////////////////////
+
 const getuserinfo = (req, res)=>{
   const users_id = req.token.userId
   const query = `SELECT firstName, lastName, age, email, phone FROM users WHERE users_id= $1`;
@@ -144,6 +148,8 @@ const getuserinfo = (req, res)=>{
     });
   });
 };
+
+////////////////////////////////////////////////
 
 const getUserByFirstName = (req, res) => {
   const firstname = req.query.firstname;
@@ -175,6 +181,8 @@ const getUserByFirstName = (req, res) => {
   });
 };
 
+///////////////////////////////////////////////
+
 const getProviderBySpecialty = (req, res)=>{
   const specialty_id = req.params.id
   
@@ -201,6 +209,8 @@ const getProviderBySpecialty = (req, res)=>{
     });
   });
 };
+
+//////////////////////////////////////////////
 
 const getProviderById = (req, res)=>{
   const provider_id = req.params.id
