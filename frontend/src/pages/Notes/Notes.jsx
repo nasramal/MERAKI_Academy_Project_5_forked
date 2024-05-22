@@ -35,17 +35,17 @@ export default function ProviderInfo() {
   }, [note]);
 console.log(note);
   return (
-    <div>
+    <div className="container">
       {note &&
         note.map((note, index) => {
           return (
-            <div id="card">
-              <div id="info">
-                <p id="name">{note.users_id}</p>
-                <p id="activity"> </p>
-                <p id="">
+            <div id="cards">
+              <div id="infos">
+                <p id="names">{note.users_id}</p>
+                <p id="activitys"> </p>
+                <p id="s">
                   <p>{note.notes}</p>
-                  <p className="stats-text">
+                  <p className="stats-texts">
                     <p>{note.provider_id}</p>
                   </p>
                   <input
@@ -57,7 +57,7 @@ console.log(note);
                   />
                 </p>
                 <p
-                  id="btn"
+                  id="btns"
                   onClick={() => {
                     axios
                       .put(
@@ -87,7 +87,7 @@ console.log(note);
       <br></br>
       
       <p
-        id="btn"
+        id="btns"
         onClick={() => {
           setShowInput(true);
         }}
@@ -105,14 +105,14 @@ console.log(note);
           />
           <br />
           <input
-            type="text"
+            type="texts"
             placeholder="Note"
             onChange={(e) => {
               setNoteCreate(e.target.value);
             }}
           />
           <button
-            id="btn"
+            id="btns"
             onClick={()=>{axios
               .post(
                 `http://localhost:5000/notes/newNotes`,
