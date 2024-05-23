@@ -33,7 +33,7 @@ export default function ProviderInfo() {
   useEffect(() => {
     getInfo();
   }, [note]);
-console.log(note);
+  // console.log(note);
   return (
     <div className="container">
       {note &&
@@ -70,7 +70,7 @@ console.log(note);
                         }
                       )
                       .then((result) => {
-                        console.log(result.data.result);
+                        // console.log(result.data.result);
                         dispatch(updateNote(result.data.result));
                       })
                       .catch((err) => {
@@ -85,7 +85,7 @@ console.log(note);
           );
         })}
       <br></br>
-      
+
       <p
         id="btns"
         onClick={() => {
@@ -113,22 +113,24 @@ console.log(note);
           />
           <button
             id="btns"
-            onClick={()=>{axios
-              .post(
-                `http://localhost:5000/notes/newNotes`,
-                { users_id: users_id, notes: note1 },
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                }
-              )
-              .then((result) => {
-                dispatch(addNote(result.data.result));
-              })
-              .catch((err) => {
-                console.log(err);
-              })}}
+            onClick={() => {
+              axios
+                .post(
+                  `http://localhost:5000/notes/newNotes`,
+                  { users_id: users_id, notes: note1 },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
+                )
+                .then((result) => {
+                  dispatch(addNote(result.data.result));
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
           >
             Save
           </button>

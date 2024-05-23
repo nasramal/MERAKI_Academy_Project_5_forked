@@ -1,6 +1,6 @@
 const pool = require("../models/db");
 
-const createSpecialty =  (req, res) => {
+const createSpecialty = (req, res) => {
   const { specialty } = req.body;
   pool
     .query(`INSERT INTO specialty (specialty) VALUES ($1)RETURNING *`, [
@@ -21,26 +21,26 @@ const createSpecialty =  (req, res) => {
     });
 };
 
-const getSpecialty =  (req, res) => {
-    
-    pool
-      .query(`SELECT * FROM specialty `)
-      .then((result) => {
-        res.status(200).json({
-          success: true,
-          message: "specialty ",
-          result: result.rows,
-        });
-      })
-      .catch((err) => {
-        res.status(500).json({
-          success: false,
-          message: "Server error",
-          err: err,
-        });
+const getSpecialty = (req, res) => {
+  pool
+    .query(`SELECT * FROM specialty `)
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: "specialty ",
+        result: result.rows,
       });
-  };
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err,
+      });
+    });
+};
 
 module.exports = {
-    createSpecialty,getSpecialty
-  };
+  createSpecialty,
+  getSpecialty,
+};

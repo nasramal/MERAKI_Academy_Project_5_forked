@@ -65,7 +65,7 @@ function Schedule() {
   useEffect(() => {
     getSchedule();
   }, [schedules]);
-  console.log(schedules);
+  // console.log(schedules);
   return (
     <div>
       <Table>

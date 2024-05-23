@@ -7,9 +7,9 @@ import img from "./profile.png";
 function Provider() {
   const [information, setInformation] = useState(null);
   const [docInfo, setDocInfo] = useState(null);
-  const [editExperience, setEditExperience] = useState(false); 
-  const [editCertificates, setEditCertificates] = useState(false); 
-  const [newExperience, setNewExperience] = useState(""); 
+  const [editExperience, setEditExperience] = useState(false);
+  const [editCertificates, setEditCertificates] = useState(false);
+  const [newExperience, setNewExperience] = useState("");
   const [newCertificates, setNewCertificates] = useState("");
 
   const { token } = useSelector((state) => ({
@@ -39,7 +39,7 @@ function Provider() {
         },
       })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setDocInfo(result.data.result);
       })
       .catch((err) => {
@@ -52,7 +52,7 @@ function Provider() {
     getDocInfo();
   }, []);
 
-console.log(docInfo);
+  // console.log(docInfo);
   return (
     <>
       <div className="infoContainer">
@@ -83,28 +83,38 @@ console.log(docInfo);
                   type="text"
                   autoFocus
                   value={newExperience}
-                  onChange={(e)=>{setNewExperience(e.target.value)}}
+                  onChange={(e) => {
+                    setNewExperience(e.target.value);
+                  }}
                   placeholder="Update your Experience"
                 />
-                <button onClick={()=>{
-axios
-.put(`http://localhost:5000/docInfo/`,{experience:newExperience}, {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-})
-.then((result) => {
-  setDocInfo(result);
-})
-.catch((err) => {
-  console.log(err);
-});
-                }}>Save</button>
+                <button
+                  onClick={() => {
+                    axios
+                      .put(
+                        `http://localhost:5000/docInfo/`,
+                        { experience: newExperience },
+                        {
+                          headers: {
+                            Authorization: `Bearer ${token}`,
+                          },
+                        }
+                      )
+                      .then((result) => {
+                        setDocInfo(result);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
+                >
+                  Save
+                </button>
               </div>
             ) : (
-              <div 
+              <div
                 onClick={() => {
-                  setEditExperience(!editExperience); 
+                  setEditExperience(!editExperience);
                 }}
               >
                 ✏️ Experience: {docInfo[0].experience}
@@ -117,22 +127,33 @@ axios
                   type="text"
                   autoFocus
                   value={newCertificates}
-                  onChange={(e)=>{setNewCertificates(e.target.value)}}
+                  onChange={(e) => {
+                    setNewCertificates(e.target.value);
+                  }}
                   placeholder="Update your Certificates"
                 />
-                <button onClick={()=>{axios
-.put(`http://localhost:5000/docInfo/`,{certificates:newCertificates}, {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-})
-.then((result) => {
-  setDocInfo(result);
-  
-})
-.catch((err) => {
-  console.log(err);
-});}}>Save</button>
+                <button
+                  onClick={() => {
+                    axios
+                      .put(
+                        `http://localhost:5000/docInfo/`,
+                        { certificates: newCertificates },
+                        {
+                          headers: {
+                            Authorization: `Bearer ${token}`,
+                          },
+                        }
+                      )
+                      .then((result) => {
+                        setDocInfo(result);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
+                >
+                  Save
+                </button>
               </div>
             ) : (
               <div
