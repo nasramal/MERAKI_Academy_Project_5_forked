@@ -1,0 +1,30 @@
+.review {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    max-width: 30%;
+  }
+  
+  .review::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent #f9f9f9;
+    transform: translateY(-50%);
+  }
+  
+  .review::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #f9f9f9 transparent transparent;
+    transform: translateY(-50%);
+  }

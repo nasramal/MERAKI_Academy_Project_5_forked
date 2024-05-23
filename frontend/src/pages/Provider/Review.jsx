@@ -1,125 +1,130 @@
-import "./Review.css";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addReview, setReview } from "../../Service/Redux/Slice/Review"
 import axios from "axios";
+import { setReview, addReview, deleteReview } from "../../Service/Redux/Slice/Review";
+import "./Review.css";
 
-const Reviews = ({ providerId, userId }) => {
-
+const Reviews = () => {
+  const [rev, setRev] = useState([]);
   const [comment, setComment] = useState("");
   const [message, setMessage] = useState("");
-  // const [showComment, setShowComment] = useState("");
 
+  const dispatch = useDispatch();
 
-const dispatch = useDispatch()
-const {token,review} = useSelector((state)=>({
-  token: state.auth.token,
-  review: state.auth.review,
-}))
+  const { providerId, token, users, reviewId} = useSelector((state) => ({
+    providerId: state.providerId.providerId,
+    token: state.auth.token,
+    users: state.users.users,
+    reviewId: state.reviewId.reviewId
+  }));
 
-const getReviewByProviderId = async (provider_id) => {
-  try {
-    const response = await axios.get(
-      `http://localhost:5000/review/${provider_id}`
-    );
-    if (response.data.success) {
-      dispatch(setReview(result.data.result));
- 
-
-    } else {
-      throw new Error(response.data.message);
+  const getReviewByProviderId = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/review/${providerId.users_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(setReview(response.data.result));
+      setRev(response.data.result);
+    } catch (error) {
+      setMessage("Error getting reviews. Please try again.");
     }
-  } catch (error) {
-    console.error("Error getting reviews:", error);
-    setMessage("Error getting reviews. Please try again.");
-  }
-};
+  };
 
-
-
-  const createReviewByUserId = async (provider_id) => {
+  const createReviewByUserId = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/review/${provider_id}`,
-
-    {comment},
-   ) .then((result) => {
-      dispatch(addReview(result.data.result));
-    })
-} catch (error) {
-  console.log(error);
-}
-};
-
-
-
-  
-  const deleteReviewByUserId = async ( review_id) => {
-    try {
-      const response = await axios.delete(
-        `http://localhost:5000/review/${ review_id}`
+        `http://localhost:5000/review/${providerId.users_id}`,
+        {
+          comment: comment,
+          users: users,
+          providers_id: providerId.users_id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      if (response.data.success) {
-        getReviewByProviderId();
-      } else {
-        throw new Error(response.data.message);
-      }
+  
+      dispatch(addReview(response.data.result));
+      const newReview = response.data.review;
+      setRev([...rev, newReview]); 
+  
+      setComment("");
     } catch (error) {
-      console.error("Error deleting review:", error);
+      console.log(error);
+      setMessage("Error adding review. Please try again.");
+    }
+  };
+
+  const deletereviewByUserId = async (reviewId) => {
+    try {
+      const response =  await axios.put(
+        `http://localhost:5000/review/${providerId.users_id}`, 
+        {
+          users: users,
+          providers_id: providerId.users_id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch(deleteReview(response.data.result));
+    
+     
+      const updatedReviews = rev.filter(review => review.review_id !== reviewId);
+      
+      setRev(updatedReviews);
+    } catch (error) {
+      console.log(error);
       setMessage("Error deleting review. Please try again.");
     }
   };
 
   useEffect(() => {
     getReviewByProviderId();
-  }, []); 
+  }, [providerId, token,reviewId]);
+
   return (
     <>
-      {review?.map((review,i) => (
-        <div key={i} className="review">
-          <div>{review.comment}</div>
-          {!review && (
-            <button
-              className="ShowBtn"
-              onClick={() => {
-                getReviewByProviderId(review.id)
-                setComment(review.review_id)}}
-            >
-              Show comment
-            </button>
-          )}
-          <div>
-            {review?.map((comment,i) => (
-              <p className="comment" key={i}>
-                {comment.comment}
-              </p>
-            ))}
+      <div>
+        <br />
+        {rev.map((review, index) => (
+          <div key={index} className="review">
+            <div>{review.comment}</div>
+            {review.user_id === users.id && (
+              <button onClick={() => deletereviewByUserId(review.review_id)}>Delete</button>
+            )}
           </div>
-          {showComment == review.review_id && (
-            <div>
-              <textarea
-                className="commentBox"
-                placeholder="Comment..."
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <button className="commentBtn" onClick={createReviewByUserId}>
-                Add comment
-              </button>
-            </div>
-          )}
-            <>
-              <button
-                className="delete"
-                onClick={() => deleteReviewByUserId(review.review_id)}
-              >
-                Delete
-              </button>
-            </>
-       
-        </div>
-      ))}
-      {message && <div>{message}</div>}
+        ))}
+        {message && <div>{message}</div>}
+      </div>
+      <div>
+        <br />
+        <textarea
+          className="commentBox"
+          placeholder="Add your review ..."
+          value={comment}
+          onChange={(e) => {
+            setComment(e.target.value);
+          }}
+        />
+        <button
+          className="newReview"
+          onClick={() => {
+            createReviewByUserId(); 
+          }}
+        >
+          Add Review
+        </button>
+      </div>
     </>
   );
 };

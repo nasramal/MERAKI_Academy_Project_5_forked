@@ -3,21 +3,27 @@ import { createSlice } from "@reduxjs/toolkit";
 export const reviewSlice = createSlice({
   name: "review",
   initialState: {
-    review: [],
+    reviews: [],
   },
   reducers: {
     setReview: (state, action) => {
-      state.note = action.payload;
+      state.reviews = action.payload;
     },
     addReview: (state, action) => {
-        state.review = state.review.map((elem, i) => {
-            if (elem.users_id == action.payload.users_id) {
-              return elem.review.push(action.payload.review);
+      const newReview = action.payload;
+      state.reviews.push(newReview);
+    },
+    deleteReview: (state, action) => {
   
-    }
-  })
-}
-  }})
-export const { setReview, addReview, } = reviewSlice.actions;
+        state.reviews=state.reviews.filter((elem,i)=>{
+         
+          return elem.review_id!==action.payload
+        })
+      }
+    },
+  },
+);
+
+export const { setReview, addReview, deleteReview } = reviewSlice.actions;
 
 export default reviewSlice.reducer;
