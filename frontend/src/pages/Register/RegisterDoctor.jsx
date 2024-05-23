@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useGoogleOneTapLogin } from '@react-oauth/google';
-import { jwtDecode } from "jwt-decode";
+
 
 
 const RegisterDoctor = () => {
@@ -65,35 +64,9 @@ const RegisterDoctor = () => {
     }
   };
 
-  // console.log(speciality);
 
-useGoogleOneTapLogin({
-  onSuccess: async (credentialResponse) => {
-    console.log(credentialResponse);
-    const { credential } = credentialResponse;
-    const payload = credential ? jwtDecode(credential) : undefined;
-    if (payload) {
-      console.log(payload);
-      try {
-        const response = await axios.get("http://localhost:5000/protected", {
-          headers: {
-            Authorization: `Bearer ${credential}`,
-          },
-        });
-        console.log(response.data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
 
-  },
-  onError: () => {
-    console.log('Login Failed');
-  },
-  googleAccountConfigs: {
-    client_id: "987698598333-k4tmcvlhbhu00dkd614nhif9p3spre1l.apps.googleusercontent.com"
-  }
-});
+
 
   return (
     <>
