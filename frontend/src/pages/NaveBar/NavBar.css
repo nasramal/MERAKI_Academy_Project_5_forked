@@ -1,60 +1,68 @@
+
 .NavBar {
   display: flex;
-  width:auto;
-  
-  height: 60px;
+  justify-content: space-between;
   align-items: center;
-  padding: 5px 5px;
   background-color: #007bff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
 }
 
+.logoContainer {
+  flex: 1;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+}
 
 .Medical {
-  width: 100px;
-  height: 100px;
-
+  width: 100px;  
+  height: 100px; 
 }
 
 .navLinks {
   display: flex;
   align-items: center;
-  margin-left:50px;
- 
+  flex: 2;
+  justify-content: space-around;
 }
 
 .Link {
-  margin-right: 20px;
   color: #fff;
   text-decoration: none;
   font-size: 16px;
-  font-weight: bold;
-  transition: color 0.3s;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
 }
 
 .Link:hover {
-  color: #979797;
+  background-color: #0056b3;
+  border-radius: 5px;
 }
 
 .logout {
-  background-color: #ff0000;
+  background-color: #ff4d4d;
   color: #fff;
   border: none;
   padding: 10px 15px;
-  border-radius: 5px;
   cursor: pointer;
+  border-radius: 5px;
   font-size: 16px;
-  transition: background-color 0.3s, border-radius 0.3s;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  transition: background-color 0.3s ease;
 }
 
 .logout:hover {
   background-color: #cc0000;
-  border-radius: 10px; 
 }
 
-.logout:hover {
-  background-color: #061f3aa4;
+@media (max-width: 768px) {
+  .navLinks {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
+  .Link {
+    padding: 10px 0;
+  }
 }
