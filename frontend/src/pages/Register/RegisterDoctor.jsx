@@ -14,16 +14,14 @@ const RegisterDoctor = () => {
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(false);
   const [specialities, setSpecialities] = useState([]);
-
   const navigate = useNavigate();
 
   useEffect(() => {
-   
     axios
       .get("http://localhost:5000/specialty")
       .then((result) => {
         setSpecialities(result.data.result);
-        console.log(result.data.result)
+        console.log(result.data.result);
       })
       .catch((error) => {
         console.error("Error fetching specialties:", error);
@@ -34,11 +32,19 @@ const RegisterDoctor = () => {
   const addNewDoctor = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post("http://localhost:5000/users/registerDoctor", {
-
-        firstName, lastName, age, specialty:speciality, address, email, password, phone
-
-      });
+      const result = await axios.post(
+        "http://localhost:5000/users/registerDoctor",
+        {
+          firstName,
+          lastName,
+          age,
+          specialty: speciality,
+          address,
+          email,
+          password,
+          phone,
+        }
+      );
       if (result.data.success) {
         setStatus(true);
         setMessage(result.data.message);
@@ -49,11 +55,13 @@ const RegisterDoctor = () => {
     } catch (error) {
       console.error("Error registering doctor:", error);
       setStatus(false);
-      setMessage(error.message || "Error happened while registering. Please try again.");
+      setMessage(
+        error.message || "Error happened while registering. Please try again."
+      );
     }
   };
 
-console.log(speciality)
+  // console.log(speciality);
 
   return (
     <>
@@ -87,19 +95,19 @@ console.log(speciality)
           <br />
           <select
             value={speciality}
-            onChange={(e) => {setSpeciality(e.target.value)
-              console.log(e.target.value)
-            }
-          }
+            onChange={(e) => {
+              setSpeciality(e.target.value);
+              console.log(e.target.value);
+            }}
             required
           >
             <option> Select Speciality </option>
-            {specialities && 
-                        specialities.map((spe) => (
-              <option key={spe.specialty_id} value={spe.specialty_id}>
-                {spe.specialty}
-              </option>
-            ))}
+            {specialities &&
+              specialities.map((spe) => (
+                <option key={spe.specialty_id} value={spe.specialty_id}>
+                  {spe.specialty}
+                </option>
+              ))}
           </select>
           <br />
           <input
@@ -134,7 +142,9 @@ console.log(speciality)
             required
           />
           <br />
-          <button className="docRegBut" type="submit">Register</button>
+          <button className="docRegBut" type="submit">
+            Register
+          </button>
         </form>
         {status ? (
           <div className="SuccessMessage">{message}</div>

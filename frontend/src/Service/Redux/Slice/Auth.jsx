@@ -14,7 +14,6 @@ export const authSlice = createSlice({
 
     reducers: {
       setLogin: (state, action) => {
-        //  console.log(action.payload);
         state.token = action.payload.token;
         state.isLoggedIn = true;
         localStorage.setItem("token", state.token)

@@ -5,9 +5,8 @@ import img from"./profile.png";
 import { useDispatch, useSelector } from 'react-redux'; 
 import { setProvider } from '../../Service/Redux/Slice/Provider';
 import "./Landing.css";
-import Providers from '../Provider/Providers';
 import { setProviderId } from '../../Service/Redux/Slice/ProviderId';
-import NavBar from '../NaveBar/NavBar';
+
 
 function Landing() {
   const specialtiesWithPhotos = [
@@ -50,8 +49,6 @@ const getDocbySpecialty = (id) => {
         if (result.data.success) {
           dispatch(setProvider(result.data.result));
           setShow(true); 
-          
-          console.log(result.data.result);
         } else {
           console.error('Error fetching doctors:', result.data.message);
         }
@@ -103,7 +100,7 @@ console.log(provider);
             </div>
           ))}
         </div>
-      </div>
+      </div>[]
 </>
       {show?provider && provider.map((pro,i) => (
             <div key={i} id="card">

@@ -8,7 +8,7 @@ export const providerIdSlice = createSlice({
   reducers: {
     setProviderId: (state, action) => {
       state.providerId = action.payload;
-      localStorage.setItem("providerIdSlice",action.payload)
+      localStorage.setItem("providerIdSlice", action.payload);
     },
   },
 });
