@@ -118,7 +118,7 @@ const errMsg = (error)=>{
         });
       
       }}>
-      <GoogleLogin onSuccess={respMsg} onError={err}
+      <GoogleLogin onSuccess={respMsg} onError={errMsg}
 />
 </button>
 

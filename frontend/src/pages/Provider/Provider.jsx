@@ -6,7 +6,7 @@ import img from "./profile.png";
 
 function Provider() {
   const [information, setInformation] = useState(null);
-  const [docInfo, setDocInfo] = useState(null);
+  const [docInfo, setDocInfo] = useState({});
   const [editExperience, setEditExperience] = useState(false);
   const [editCertificates, setEditCertificates] = useState(false);
   const [newExperience, setNewExperience] = useState("");
@@ -76,7 +76,7 @@ function Provider() {
 
         {docInfo && (
           <div className="info">
-            <div>Specialty: {docInfo[0].specialty}</div>
+            <div>Specialty: {docInfo[0]?.specialty}</div>
             {editExperience ? (
               <div>
                 <input
@@ -88,12 +88,21 @@ function Provider() {
                   }}
                   placeholder="Update your Experience"
                 />
+                 <input
+                  type="text"
+                  autoFocus
+                  value={newCertificates}
+                  onChange={(e) => {
+                    setNewCertificates(e.target.value);
+                  }}
+                  placeholder="Update your Certificates"
+                />
                 <button
                   onClick={() => {
                     axios
                       .put(
                         `http://localhost:5000/docInfo/`,
-                        { experience: newExperience },
+                        {experience :newExperience, certificates: newCertificates },
                         {
                           headers: {
                             Authorization: `Bearer ${token}`,
@@ -101,7 +110,11 @@ function Provider() {
                         }
                       )
                       .then((result) => {
-                        setDocInfo(result);
+                        console.log(result);
+                        setDocInfo(result.data.result);
+    getDocInfo();
+setEditExperience(!editExperience)
+
                       })
                       .catch((err) => {
                         console.log(err);
@@ -117,43 +130,14 @@ function Provider() {
                   setEditExperience(!editExperience);
                 }}
               >
-                ✏️ Experience: {docInfo[0].experience}
+                ✏️ Experience: {docInfo[0]?.experience}<br></br>✏️ Certificates: {docInfo[0]?.certificates}
               </div>
             )}
 
-            {editCertificates ? (
+            {/* {editCertificates ? (
               <div>
-                <input
-                  type="text"
-                  autoFocus
-                  value={newCertificates}
-                  onChange={(e) => {
-                    setNewCertificates(e.target.value);
-                  }}
-                  placeholder="Update your Certificates"
-                />
-                <button
-                  onClick={() => {
-                    axios
-                      .put(
-                        `http://localhost:5000/docInfo/`,
-                        { certificates: newCertificates },
-                        {
-                          headers: {
-                            Authorization: `Bearer ${token}`,
-                          },
-                        }
-                      )
-                      .then((result) => {
-                        setDocInfo(result);
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
-                  }}
-                >
-                  Save
-                </button>
+               
+                
               </div>
             ) : (
               <div
@@ -161,9 +145,9 @@ function Provider() {
                   setEditCertificates(!editCertificates);
                 }}
               >
-                ✏️ Certificates: {docInfo[0].certificates}
+                
               </div>
-            )}
+            )} */}
           </div>
         )}
       </div>
