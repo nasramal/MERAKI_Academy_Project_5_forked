@@ -63,7 +63,7 @@ const NavBar = () => {
               My Profile
             </NavLink>
             <NavLink className="Link" to="/docInfo">
-              My Profile
+              My Info
             </NavLink>
           </>
         ) : (

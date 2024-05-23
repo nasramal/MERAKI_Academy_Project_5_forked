@@ -33,7 +33,7 @@ export default function Appointment() {
 
   useEffect(() => {
     getAppointments();
-  }, []);
+  }, [appointment]);
 
   // console.log(appointment);
 
@@ -61,7 +61,7 @@ export default function Appointment() {
                     { status: "approved" }
                   )
                   .then((result) => {
-                    // console.log(result.data);
+                    console.log(result.data);
                     dispatch(updateAppointment(result.data.result));
                   })
                   .catch((err) => {

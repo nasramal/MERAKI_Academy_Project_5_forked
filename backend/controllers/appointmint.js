@@ -62,7 +62,7 @@ const getByAppointmentByProviderId = (req, res) => {
     .then((result) => {
       res.status(200).json({
         success: true,
-        message: "appointment's ",
+        message: "appointment's",
         result: result.rows,
       });
     })
@@ -100,11 +100,11 @@ const deleteAppointmentByUserId = (req, res) => {
 
 const updateAppointmentByAppointmentId = (req, res) => {
   let { status } = req.body;
-  const appointment_id = req.params.id;
+  const appointmint_id = req.params.id;
   pool
     .query(
-      `UPDATE appointmint SET status = COALESCE($1,status) WHERE appointmint_id=$2 AND is_deleted = 0 RETURNING *`,
-      [status, appointment_id]
+      `UPDATE appointmint SET status = COALESCE($1,status) WHERE appointmint_id=$2 AND is_deleted=0`,
+      [status, appointmint_id]
     )
     .then((result) => {
       if (result.rows.length !== 0) {
