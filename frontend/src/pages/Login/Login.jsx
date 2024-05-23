@@ -1,8 +1,9 @@
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from "@react-oauth/google";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+
 import "./Login.css"
 
 import { setLogin, setUserId, setRoleId, setLogout, setSpecialty } from "../../Service/Redux/Slice/Auth";
@@ -10,16 +11,12 @@ import { setLogin, setUserId, setRoleId, setLogout, setSpecialty } from "../../S
 import { jwtDecode } from "jwt-decode";
 
 
+
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
-
-  const { token, isLoggedIn, role_id } = useSelector((state) => ({
-    token: state.auth.token,
-    role_id:state.auth.role_id,
-
+  const { isLoggedIn } = useSelector((state) => ({
     isLoggedIn: state.auth.isLoggedIn,
   }));
 
@@ -28,7 +25,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const login = async (e) => {
-
     e.preventDefault();
     try {
       const result = await axios.post("http://localhost:5000/users/login", {
@@ -39,7 +35,6 @@ const Login = () => {
       if (result.data) {
         console.log(result.data.role_id);
         setMessage("");
-console.log(result.data)
         dispatch(setLogin(result.data));
         dispatch(setRoleId(result.data.role_id));
         dispatch(setUserId(result.data.userId));
@@ -50,14 +45,13 @@ console.log(result.data)
     } catch (error) {
       if (error.response && error.response.data) {
         setMessage(error.response.data.message);
-
       } else {
-        console.log(error)
+        console.log(error);
         setMessage("Error happened while Login, please try again");
-
       }
     }
   };
+
 
 const [google,setGoogle]=useState("")
 const respMsg= (response)=>{
@@ -71,9 +65,8 @@ const errMsg = (error)=>{
 
   useEffect(() => {
     if (isLoggedIn) {
-
     }
-  }, []); 
+  }, []);
 
   return (
     <>
@@ -95,12 +88,11 @@ const errMsg = (error)=>{
           <br />
           <button>Login</button>
         </form>
-        {status ? (
-          message && <div className="SuccessMessage">{message}</div>
-        ) : (
-          message && <div className="ErrorMessage">{message}</div>
-        )}
+        {status
+          ? message && <div className="SuccessMessage">{message}</div>
+          : message && <div className="ErrorMessage">{message}</div>}
       </div>
+
       <div className='google' style={{ textAlign: 'center' }}>
         <button onClick={()=>{
         axios.post("http://localhost:5000/users/login", {
@@ -129,6 +121,7 @@ const errMsg = (error)=>{
       <GoogleLogin onSuccess={respMsg} onError={err}
 />
 </button>
+
       </div>
     </>
   );

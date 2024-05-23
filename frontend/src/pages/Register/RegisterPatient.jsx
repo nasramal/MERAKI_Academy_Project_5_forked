@@ -6,7 +6,6 @@ const RegisterPatient = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState(0);
-  const [country, setCountry] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState(0);
@@ -18,9 +17,17 @@ const RegisterPatient = () => {
   const addNewPatient = async (e) => {
     e.preventDefault();
     try {
-      const result = await axios.post("http://localhost:5000/users/registerPatient", {
-      firstName, lastName, age, email, password, phone
-      });
+      const result = await axios.post(
+        "http://localhost:5000/users/registerPatient",
+        {
+          firstName,
+          lastName,
+          age,
+          email,
+          password,
+          phone,
+        }
+      );
       if (result.data.success) {
         setStatus(true);
         setMessage(result.data.message);
@@ -63,7 +70,7 @@ const RegisterPatient = () => {
             onChange={(e) => setAge(e.target.value)}
           />
           <br />
-          
+
           <input
             type="tel"
             placeholder="Phone number"
@@ -82,14 +89,14 @@ const RegisterPatient = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <button className="patregbut" type="submit">Register</button>
+          <button className="patregbut" type="submit">
+            Register
+          </button>
           <br />
         </form>
-        {status ? (
-          message && <div className="SuccessMessage">{message}</div>
-        ) : (
-          message && <div className="ErrorMessage">{message}</div>
-        )}
+        {status
+          ? message && <div className="SuccessMessage">{message}</div>
+          : message && <div className="ErrorMessage">{message}</div>}
       </div>
     </>
   );

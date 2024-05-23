@@ -3,7 +3,6 @@ const usersRouter = express.Router()
 const {registerDoctor,registerPatient,login,getuserinfo ,getProviderBySpecialty,getProviderById,getUserByFirstName} = require("../controllers/users");
 const authentication = require("../middlewares/authentication")
 
-
 usersRouter.post("/registerDoctor", registerDoctor);
 usersRouter.post("/registerPatient", registerPatient);
 usersRouter.post("/login",login)

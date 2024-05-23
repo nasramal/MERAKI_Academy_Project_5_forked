@@ -10,7 +10,6 @@ const createAppointmentByUserId = (req, res) => {
       [date, timeFrom, timeTo, provider_id, user_id]
     )
     .then((result) => {
-      console.log(result);
       res.status(200).json({
         success: true,
         message: "appointment created successfully",
@@ -30,12 +29,13 @@ const getByAppointmentByUserId = (req, res) => {
   const user_id = req.token.userId;
 
   pool
-    .query(`SELECT appointmint.*, users.firstname, users.lastname
+    .query(
+      `SELECT appointmint.*, users.firstname, users.lastname
     FROM appointmint
     INNER JOIN users ON appointmint.provider_id = users.users_id
-    WHERE appointmint.user_id = $1`, [
-      user_id,
-    ])
+    WHERE appointmint.user_id = $1`,
+      [user_id]
+    )
     .then((result) => {
       res.status(200).json({
         success: true,
@@ -62,7 +62,7 @@ const getByAppointmentByProviderId = (req, res) => {
     .then((result) => {
       res.status(200).json({
         success: true,
-        message: "appointment's ",
+        message: "appointment's",
         result: result.rows,
       });
     })
@@ -98,17 +98,13 @@ const deleteAppointmentByUserId = (req, res) => {
     });
 };
 
-// provider use
-//update status = prov or cancle
-
 const updateAppointmentByAppointmentId = (req, res) => {
-  // const user_id = req.token.userId;
   let { status } = req.body;
-  const appointment_id = req.params.id;
+  const appointmint_id = req.params.id;
   pool
     .query(
-      `UPDATE appointmint SET status = COALESCE($1,status) WHERE appointmint_id=$2 AND is_deleted = 0 RETURNING *`,
-      [status, appointment_id]
+      `UPDATE appointmint SET status = COALESCE($1,status) WHERE appointmint_id=$2 AND is_deleted=0`,
+      [status, appointmint_id]
     )
     .then((result) => {
       if (result.rows.length !== 0) {
@@ -122,7 +118,6 @@ const updateAppointmentByAppointmentId = (req, res) => {
       }
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({
         success: false,
         message: "Server error",

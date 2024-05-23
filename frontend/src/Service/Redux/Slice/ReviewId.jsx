@@ -8,7 +8,7 @@ export const reviewIdSlice = createSlice({
   reducers: {
     setReviewId: (state, action) => {
       state.reviewId = action.payload;
-      localStorage.setItem("reviewIdSlice",action.payload)
+      localStorage.setItem("reviewIdSlice", action.payload);
     },
   },
 });

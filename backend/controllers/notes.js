@@ -1,15 +1,12 @@
 const pool = require("../models/db");
 const createNotesByProviderId = (req, res) => {
   const provider_id = req.token.userId;
-
   const { users_id, notes } = req.body;
-
   pool
     .query(
       `INSERT INTO notes (users_id,notes,provider_id) VALUES ($1,$2,$3) RETURNING * `,
       [users_id, notes, provider_id]
     )
-
     .then((result) => {
       res.status(201).json({
         success: true,
@@ -26,19 +23,13 @@ const createNotesByProviderId = (req, res) => {
     });
 };
 
-// it views the notes for the user id (WHERE notes.users_id=$1)that was written by the provider id(users.users_id=notes.provider_id)
-
 const getNotesByUserId = (req, res) => {
   const user_id = req.token.userId;
-
   pool
     .query(
       `SELECT notes.notes, notes.provider_id, users.* FROM notes INNER JOIN users ON notes.provider_id = users.users_id WHERE notes.users_id = $1 `,
       [user_id]
     )
-
-    // pool.query (`SELECT * FROM notes WHERE users_id=$1 AND is_deleted=0`,[user_id])
-
     .then((result) => {
       if (result.rows.length !== 0) {
         res.status(200).json({
@@ -62,13 +53,11 @@ const getNotesByUserId = (req, res) => {
 const getNotesByProviderId = (req, res) => {
   const user_id = req.params.id;
   const provider_id = req.token.userId;
-
   pool
     .query(
       `SELECT notes.notes, notes.users_id FROM users INNER JOIN notes ON users.users_id=notes.provider_id  WHERE notes.users_id=$1 AND notes.provider_id =$2  `,
       [user_id, provider_id]
     )
-
     .then((result) => {
       if (result.rows.length !== 0) {
         res.status(200).json({
@@ -91,10 +80,8 @@ const getNotesByProviderId = (req, res) => {
 
 const getNotesByProvider = (req, res) => {
   const provider_id = req.token.userId;
-
   pool
     .query(`SELECT * FROM notes WHERE notes.provider_id =$1`, [provider_id])
-
     .then((result) => {
       if (result.rows.length !== 0) {
         res.status(200).json({
@@ -147,14 +134,12 @@ const deleteNotesByProviderId = (req, res) => {
 const upDateNotesByProviderId = (req, res) => {
   const provider_id = req.token.userId;
   const users_id = req.params.id;
-  const {notes,notes_id} = req.body
-
+  const { notes, notes_id } = req.body;
   pool
     .query(
       `UPDATE notes SET notes=$3 WHERE provider_id=$1 AND users_id=$2 AND notes_id=$4 RETURNING * `,
-      [provider_id, users_id,notes,notes_id]
+      [provider_id, users_id, notes, notes_id]
     )
-
     .then((result) => {
       if (result.rows.length !== 0) {
         res.status(200).json({
@@ -175,11 +160,11 @@ const upDateNotesByProviderId = (req, res) => {
     });
 };
 
-
-
 module.exports = {
   createNotesByProviderId,
   getNotesByUserId,
   getNotesByProviderId,
-  deleteNotesByProviderId,getNotesByProvider,upDateNotesByProviderId
+  deleteNotesByProviderId,
+  getNotesByProvider,
+  upDateNotesByProviderId,
 };

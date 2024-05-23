@@ -10,7 +10,7 @@ CREATE TABLE permissions (
   PRIMARY KEY (permission_id)
 );
 CREATE TABLE role_permission (
-  id SERIAL NOT NULL,
+  id SERIAL PRIMARY KEY,
   role_id INT,
   permission_id INT,
   FOREIGN KEY (role_id) REFERENCES roles(roles_id),
@@ -19,8 +19,10 @@ CREATE TABLE role_permission (
 
 CREATE TABLE history (
  history_id SERIAL PRIMARY KEY,
+user_id INT
 medications VARCHAR(255),
 medicalHistory VARCHAR(255),
+FOREIGN KEY (user_id) REFERENCES users(users_id),
     created_at TIMESTAMP,
     is_deleted SMALLINT DEFAULT 0
 );
@@ -35,8 +37,9 @@ is_deleted SMALLINT DEFAULT 0
 CREATE TABLE specialty (
 specialty_id SERIAL PRIMARY KEY,
 specialty VARCHAR(255),
+img VARCHAR(255),
  created_at TIMESTAMP
-)
+);
 
 CREATE TABLE users(
 users_id SERIAL PRIMARY KEY,
@@ -51,12 +54,12 @@ history INT,
 insurance INT,
 specialty INT,
 role_id INT,
+img VARCHAR(255),
 is_deleted SMALLINT DEFAULT 0,
  FOREIGN KEY (specialty) REFERENCES specialty(specialty_id),
   FOREIGN KEY (insurance) REFERENCES insurance(insurance_id),
  FOREIGN KEY (history) REFERENCES history(history_id),
 FOREIGN KEY (role_id) REFERENCES roles(roles_id)
-
 );
 
 CREATE TABLE docInfo (
@@ -92,18 +95,14 @@ created_at TIMESTAMP,
  is_deleted SMALLINT DEFAULT 0
 );
 
- CREATE TABLE schedule (
+CREATE TABLE schedule (
  schedule_id SERIAL PRIMARY KEY,
  date DATE,
  timeFrom TIME,
  timeTo TIME,
 provider_id INT,
-user_id INT,
-FOREIGN KEY (user_id) REFERENCES users(users_id),
 FOREIGN KEY (provider_id) REFERENCES users(users_id),
-status varchar(255) DEFAULT 'pending'
--- booked BOOLEAN DEFAULT false 
-
+booked BOOLEAN DEFAULT false
 );
 
 CREATE TABLE notification (
@@ -115,4 +114,17 @@ created_at TIMESTAMP,
 FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id),
 is_deleted SMALLINT DEFAULT 0,
  FOREIGN KEY (users_id) REFERENCES users(users_id)
+);
+
+
+ CREATE TABLE appointmint (
+ appointmint_id SERIAL PRIMARY KEY,
+ date DATE,
+ timeFrom TIME,
+ timeTo TIME,
+provider_id INT,
+user_id INT,
+FOREIGN KEY (user_id) REFERENCES users(users_id),
+FOREIGN KEY (provider_id) REFERENCES users(users_id),
+status varchar(255) DEFAULT 'pending'
 );

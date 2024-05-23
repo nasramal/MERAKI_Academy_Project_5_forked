@@ -1,7 +1,5 @@
 const express = require("express");
 
-
-//controllers
 const {
   createRole,
   createPermission,

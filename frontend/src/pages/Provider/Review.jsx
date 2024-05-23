@@ -94,7 +94,7 @@ const Reviews = () => {
 
   return (
     <>
-      <div>
+      <div className="container">
         <br />
         {rev.map((review,index)=>{
         
@@ -112,7 +112,7 @@ const Reviews = () => {
        
         {message && <div>{message}</div>}
       </div>
-      <div>
+      <div  className="add-review-container">
         <br />
         <textarea
           className="commentBox"

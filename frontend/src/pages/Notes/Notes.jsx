@@ -33,19 +33,19 @@ export default function ProviderInfo() {
   useEffect(() => {
     getInfo();
   }, [note]);
-console.log(note);
+  // console.log(note);
   return (
-    <div>
+    <div className="container">
       {note &&
         note.map((note, index) => {
           return (
-            <div id="card">
-              <div id="info">
-                <p id="name">{note.users_id}</p>
-                <p id="activity"> </p>
-                <p id="">
+            <div id="cards">
+              <div id="infos">
+                <p id="names">{note.users_id}</p>
+                <p id="activitys"> </p>
+                <p id="s">
                   <p>{note.notes}</p>
-                  <p className="stats-text">
+                  <p className="stats-texts">
                     <p>{note.provider_id}</p>
                   </p>
                   <input
@@ -57,7 +57,7 @@ console.log(note);
                   />
                 </p>
                 <p
-                  id="btn"
+                  id="btns"
                   onClick={() => {
                     axios
                       .put(
@@ -70,7 +70,7 @@ console.log(note);
                         }
                       )
                       .then((result) => {
-                        console.log(result.data.result);
+                        // console.log(result.data.result);
                         dispatch(updateNote(result.data.result));
                       })
                       .catch((err) => {
@@ -85,9 +85,9 @@ console.log(note);
           );
         })}
       <br></br>
-      
+
       <p
-        id="btn"
+        id="btns"
         onClick={() => {
           setShowInput(true);
         }}
@@ -105,30 +105,32 @@ console.log(note);
           />
           <br />
           <input
-            type="text"
+            type="texts"
             placeholder="Note"
             onChange={(e) => {
               setNoteCreate(e.target.value);
             }}
           />
           <button
-            id="btn"
-            onClick={()=>{axios
-              .post(
-                `http://localhost:5000/notes/newNotes`,
-                { users_id: users_id, notes: note1 },
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                }
-              )
-              .then((result) => {
-                dispatch(addNote(result.data.result));
-              })
-              .catch((err) => {
-                console.log(err);
-              })}}
+            id="btns"
+            onClick={() => {
+              axios
+                .post(
+                  `http://localhost:5000/notes/newNotes`,
+                  { users_id: users_id, notes: note1 },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
+                )
+                .then((result) => {
+                  dispatch(addNote(result.data.result));
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
           >
             Save
           </button>
