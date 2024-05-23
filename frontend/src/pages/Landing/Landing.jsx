@@ -81,10 +81,14 @@ console.log(provider);
       </div>
 
       <div className="user-experience">
-        <h2>Join Us</h2>
-        <p>
-          To use our health app, simply log in with your credentials or register if you are new. Once logged in, you can book appointments with specialized doctors, receive notifications, and manage your health journey seamlessly.
-        </p>
+      <h2>Join Us</h2>
+  <p>
+    To use our health app, simply log in with your credentials or register if you are new. Once logged in, you can book appointments with specialized doctors, receive notifications, and manage your health journey seamlessly.
+  </p>
+  <h3>Are you a Doctor?</h3>
+  <p>
+    Doctors play a crucial role in our platform. If you're a doctor looking to join our community, we welcome you! After registering, please navigate to the <a href="/docInfo">My Info</a> page to add your professional details, including your experience and certifications. Your profile completeness ensures that patients can trust and connect with you more effectively. Thank you for choosing to be a part of our community!
+  </p>
       </div>
 <>
       <div className="specialties">
