@@ -3,14 +3,15 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import "./Login.css";
-import {
-  setLogin,
-  setUserId,
-  setRoleId,
-  setLogout,
-  setSpecialty,
-} from "../../Service/Redux/Slice/Auth";
+
+import "./Login.css"
+
+import { setLogin, setUserId, setRoleId, setLogout, setSpecialty } from "../../Service/Redux/Slice/Auth";
+
+import { jwtDecode } from "jwt-decode";
+
+
+
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -51,6 +52,17 @@ const Login = () => {
     }
   };
 
+
+const [google,setGoogle]=useState("")
+const respMsg= (response)=>{
+  const a = jwtDecode(response.credential)
+  setGoogle(a)
+}
+const errMsg = (error)=>{
+  console.log(error)
+}
+  
+
   useEffect(() => {
     if (isLoggedIn) {
     }
@@ -80,15 +92,36 @@ const Login = () => {
           ? message && <div className="SuccessMessage">{message}</div>
           : message && <div className="ErrorMessage">{message}</div>}
       </div>
-      <div className="google" style={{ textAlign: "center" }}>
-        <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
+
+      <div className='google' style={{ textAlign: 'center' }}>
+        <button onClick={()=>{
+        axios.post("http://localhost:5000/users/login", {
+          email: google.email,
+          password: google.azp, 
+        })
+        .then((result) => {
+          if (result.data) {
+            navigate("/");
+            setMessage("");
+            console.log(result.data);
+            dispatch(setLogin(result.data));
+            dispatch(setRoleId(result.data.role_id));
+            dispatch(setUserId(result.data.userId));
+            dispatch(setSpecialty(result.data.specialty));
+           
+          } else {
+            throw new Error("Login failed"); // Throwing an Error object
+          }
+        })
+        .catch((error) => {
+          console.error("Login error:", error.message); // Logging error message
+        });
+      
+      }}>
+      <GoogleLogin onSuccess={respMsg} onError={err}
+/>
+</button>
+
       </div>
     </>
   );

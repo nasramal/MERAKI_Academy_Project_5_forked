@@ -14,7 +14,7 @@ const Reviews = () => {
   const { providerId, token, users, reviewId} = useSelector((state) => ({
     providerId: state.providerId.providerId,
     token: state.auth.token,
-    users: state.users.users,
+    users: state.auth.userId,
     reviewId: state.reviewId.reviewId
   }));
 
@@ -96,14 +96,20 @@ const Reviews = () => {
     <>
       <div className="container">
         <br />
-        {rev.map((review, index) => (
-          <div key={index} className="review">
+        {rev.map((review,index)=>{
+        
+          return (
+<div key={index} className="review">
             <div>{review.comment}</div>
-            {review.user_id === users.id && (
-              <button onClick={() => deletereviewByUserId(review.review_id)}>Delete</button>
+            {review.users_id == users && (
+              <button onClick={() => 
+                
+                deletereviewByUserId(review.review_id)}>Delete</button>
             )}
           </div>
-        ))}
+          )
+        })}
+       
         {message && <div>{message}</div>}
       </div>
       <div  className="add-review-container">
