@@ -51,13 +51,14 @@ const getDocInfoByProviderId = (req, res) => {
 
 const updateDocInfoByProviderId = (req, res) => {
   const provider_id = req.token.userId;
-  let { experience, certificates } = req.body;
+  const { experience, certificates } = req.body;
   pool
     .query(
-      `UPDATE docInfo SET experience = COALESCE($1,experience), certificates = COALESCE($2, certificates) WHERE provider_id=$3 AND is_deleted=0`,
+      `UPDATE docInfo SET experience = COALESCE($1,experience), certificates = COALESCE($2, certificates) WHERE provider_id=$3 AND is_deleted=0 RETURNING *`,
       [experience || null, certificates || null, provider_id]
     )
     .then((result) => {
+      console.log(result.rows);
       if (result.rows.length !== 0) {
         res.status(200).json({
           success: true,

@@ -64,11 +64,14 @@ function Schedule() {
   };
   useEffect(() => {
     getSchedule();
+
   }, [schedules]);
   // console.log(schedules);
   return (
-    <div>
-      <Table>
+  <div>
+  <ToastContainer />
+    
+      <Table className="table">
         <thead>
           <tr>
             <th>Date</th>
@@ -102,10 +105,10 @@ function Schedule() {
                         .then((result) => {
                           // console.log(result);
                           dispatch(updateSchedules(schedule.schedule_id));
-                          notifyErr();
+                          notifySucc()
                         })
                         .catch((err) => {
-                          console.log(err);
+                          console.log(err);notifyErr();
                         });
                     }}
                   >
@@ -130,7 +133,6 @@ function Schedule() {
               }
             )
             .then((result) => {
-              // console.log(result);
               dispatch(addSchedules(result));
               notifySucc();
             })
@@ -167,7 +169,7 @@ function Schedule() {
           />
         </form>
       </div>
-      {/* <ToastContainer /> */}
+      
     </div>
   );
 }
