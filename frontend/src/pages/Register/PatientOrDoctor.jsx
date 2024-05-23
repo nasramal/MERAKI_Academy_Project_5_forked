@@ -1,24 +1,31 @@
-import React from 'react'
-import { useNavigate } from "react-router-dom";
-import "./Register.css"
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './PatientOrDoctor.css';
+
+
 const PatientOrDoctor = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
-    <div className='Patient,Doctor'>
-    <div className='Patient'>
-      <h1>Patient</h1>
-    <img className='patImgs' src="https://img.freepik.com/free-vector/tiny-doctor-heart-patient-with-high-blood-pressure-medical-checkup-hospital-clinic-risk-cholesterol-cardiovascular-disease-flat-vector-illustration-cardiology-health-concept_74855-20983.jpg?size=626&ext=jpg&ga=GA1.1.44546679.1716076800&semt=sph" onClick={()=>{
-navigate("/Register_patient")
-      }}/>
+    <div className="container">
+      <div className="patButton" onClick={() => navigate('/Register_patient')}>
+        <h1 className='pat'>Patient</h1>
+        <img
+          className="patimage"
+          src="https://www.clipartmax.com/png/full/87-874961_oncologie-patient-cartoon.png"
+          alt="Patient"
+        />
+      </div>
+      <div className="Button" onClick={() => navigate('/Register_Provider')}>
+        <h1 className='doc'>Doctor</h1>
+        <img
+          className="docimage"
+          src="https://i.pinimg.com/originals/2d/c8/c1/2dc8c1226be5e35e284a7925b027718c.jpg"
+          alt="Doctor"
+        />
+      </div>
     </div>
-       <div className='Doctor'>
-        <h2>Doctor</h2>
-       <img className='docImgs' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq5WoQ_ei9oSS3sxMdAH8BEj0wXQdx7LU-vrqwYgLcHg&s" onClick={()=>{
- navigate("/Register_Provider")
-       }}/>
-     </div>
- </div>
+  );
+};
 
-  )}
-  export default PatientOrDoctor
+export default PatientOrDoctor;
