@@ -100,7 +100,7 @@ console.log(provider);
             </div>
           ))}
         </div>
-      </div>[]
+      </div>
 </>
       {show?provider && provider.map((pro,i) => (
             <div key={i} id="card">
