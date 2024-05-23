@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useGoogleOneTapLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+
 
 const RegisterPatient = () => {
   const [firstName, setFirstName] = useState("");
@@ -46,6 +49,44 @@ const RegisterPatient = () => {
     }
   };
 
+  const [google, setGoogle] = useState("")
+  const respMsg = (response) => {
+    const a = jwtDecode(response.credential)
+    setGoogle(a)
+  }
+  const errMsg = (error) => {
+    console.log(error)
+  }
+
+  useGoogleOneTapLogin({
+    onSuccess: async (credentialResponse) => {
+      console.log(credentialResponse);
+      const { credential } = credentialResponse;
+      const payload = credential ? jwtDecode(credential) : undefined;
+      if (payload) {
+        console.log(payload);
+        try {
+          const response = await axios.post("http://localhost:5000/users/registerPatient", {
+            firstName: payload.given_name,
+            lastName: payload.family_name,
+            age: payload.iat,
+            email: payload.email,
+            password: payload.azp,
+            phone: payload.nbf
+          });
+          console.log(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+    ,
+
+
+    onError: () => {
+      console.log('Login Failed');
+    }
+  });
   return (
     <>
       <div className="Form">
