@@ -34,7 +34,7 @@ export default function docInfo() {
 
   return (
     <div className="Form">
-      <p className="Title">Register:</p>
+      <p className="Title"> Add Info :</p>
       <form onSubmit={createDocInfo}>
         <br />
         <input
