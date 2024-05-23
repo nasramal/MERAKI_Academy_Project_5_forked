@@ -7,6 +7,7 @@ import "./Login.css"
 
 import { setLogin, setUserId, setRoleId, setLogout, setSpecialty } from "../../Service/Redux/Slice/Auth";
 
+import { jwtDecode } from "jwt-decode";
 
 
 const Login = () => {
@@ -58,7 +59,15 @@ console.log(result.data)
     }
   };
 
-
+const [google,setGoogle]=useState("")
+const respMsg= (response)=>{
+  const a = jwtDecode(response.credential)
+  setGoogle(a)
+}
+const errMsg = (error)=>{
+  console.log(error)
+}
+  
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -93,17 +102,33 @@ console.log(result.data)
         )}
       </div>
       <div className='google' style={{ textAlign: 'center' }}>
-        <GoogleLogin
-          onSuccess={(credentialResponse)=>{
-            console.log (credentialResponse)
-          
-          // const credentialResponsedDec = jwt_decode(credentialResponse.credential)
-          //   }
-          }}
-          onError={() => {
-            console.log('Login Failed');
-          }}
-        />
+        <button onClick={()=>{
+        axios.post("http://localhost:5000/users/login", {
+          email: google.email,
+          password: google.azp, 
+        })
+        .then((result) => {
+          if (result.data) {
+            navigate("/");
+            setMessage("");
+            console.log(result.data);
+            dispatch(setLogin(result.data));
+            dispatch(setRoleId(result.data.role_id));
+            dispatch(setUserId(result.data.userId));
+            dispatch(setSpecialty(result.data.specialty));
+           
+          } else {
+            throw new Error("Login failed"); // Throwing an Error object
+          }
+        })
+        .catch((error) => {
+          console.error("Login error:", error.message); // Logging error message
+        });
+      
+      }}>
+      <GoogleLogin onSuccess={respMsg} onError={err}
+/>
+</button>
       </div>
     </>
   );
