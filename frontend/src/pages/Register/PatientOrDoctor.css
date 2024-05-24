@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+
+  }
+  
+  .button {
+    text-align: center;
+    margin: 20px; 
+  }
+  
+  .image {
+    width: 200px; 
+    height: auto; 
+  
+
+  }
+
+  .patimage{
+    width: 190px; 
+    height: 200px; 
+    margin-right: 250px;
+    cursor: pointer;
+    
+  } 
+
+  .docimage{
+    width: 200px; 
+    height: auto; 
+    margin-right: 300px;
+    cursor: pointer;
+ 
+    
+  }
+
+  .doc{
+    margin-right: 330px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+color:rgba(9, 52, 117, 0.992);
+
+  }
+  .pat{
+    margin-right: 270px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color:rgba(9, 52, 117, 0.992);
+  } 

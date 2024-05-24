@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
-
+import './RegisterPatient.css'
 
 const RegisterPatient = () => {
   const [firstName, setFirstName] = useState("");
@@ -89,58 +89,80 @@ const RegisterPatient = () => {
   });
   return (
     <>
-      <div className="Form">
-        <p className="Title">Register:</p>
-        <form onSubmit={addNewPatient}>
-          <br />
-          <input
-            type="text"
-            placeholder="First Name"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="Last Name"
-            onChange={(e) => setLastName(e.target.value)}
-          />
-          <br />
-          <input
-            type="number"
-            placeholder="Age"
-            onChange={(e) => setAge(e.target.value)}
-          />
-          <br />
-
-          <input
-            type="tel"
-            placeholder="Phone number"
-            onChange={(e) => setPhone(e.target.value)}
-          />
-          <br />
-          <input
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <button className="patregbut" type="submit">
-            Register
-          </button>
-          <br />
-        </form>
+     <div className="Form">
+  <p className="Title">Register as a patient:</p>
+  <form onSubmit={addNewPatient}>
+    <div className="input-container">
+      <label className="inf" htmlFor="firstName">First Name:</label>
+      <input
+        type="text"
+        id="firstName"
+        placeholder="Enter your first name"
+        onChange={(e) => setFirstName(e.target.value)}
+        required
+      />
+    </div>
+    <div className="input-container">
+      <label className="inf" htmlFor="lastName">Last Name:</label>
+      <input
+        type="text"
+        id="lastName"
+        placeholder="Enter your last name"
+        onChange={(e) => setLastName(e.target.value)}
+        required
+      />
+    </div>
+    <div className="input-container">
+      <label className="inf" htmlFor="age">Age:</label>
+      <input
+        type="number"
+        id="age"
+        placeholder="Enter your age"
+        onChange={(e) => setAge(e.target.value)}
+        required
+      />
+    </div>
+    <div className="input-container">
+      <label className="inf" htmlFor="phone">Phone number:</label>
+      <input
+        type="tel"
+        id="phone"
+        placeholder="Enter your phone number"
+        onChange={(e) => setPhone(e.target.value)}
+        required
+      />
+    </div>
+    <div className="input-container">
+      <label className="inf" htmlFor="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        onChange={(e) => setEmail(e.target.value)}
+        required
+      />
+    </div>
+    <div className="input-container">
+      <label className="inf" htmlFor="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+    </div>
+    <button className="patregbut" type="submit">
+      Register
+    </button>
+  </form>
+</div>
         {status
           ? message && <div className="SuccessMessage">{message}</div>
           : message && <div className="ErrorMessage">{message}</div>}
-      </div>
-    </>
-  );
-};
+  
+  
+</>
+  )}
 
 export default RegisterPatient;

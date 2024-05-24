@@ -98,65 +98,61 @@ const errMsg = (error)=>{
   }, []); 
 
   return (
-    <>
-      <div className="Form">
-        <p className="Title">Login:</p>
-        <form onSubmit={login}>
-          <br />
-          <input
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <button>Login</button>
-        </form>
-        {status ? (
-          message && <div className="SuccessMessage">{message}</div>
-        ) : (
-          message && <div className="ErrorMessage">{message}</div>
-        )}
+<>
+  <div className="Form">
+    <p className="Title">Login:</p>
+    <form onSubmit={login}>
+      <div className="input-container">
+        <input
+          className="inputField"
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
-      <div className='google' style={{ textAlign: 'center' }}>
-
-        <button onClick={()=>{
-        axios.post("http://localhost:5000/users/login", {
-          email: google.email,
-          password: google.azp, 
-        })
-        .then((result) => {
-          if (result.data) {
-            navigate("/");
-            setMessage("");
-            console.log(result.data);
-            dispatch(setLogin(result.data));
-            dispatch(setRoleId(result.data.role_id));
-            dispatch(setUserId(result.data.userId));
-            dispatch(setSpecialty(result.data.specialty));
-           
-          } else {
-            throw new Error("Login failed"); // Throwing an Error object
-          }
-        })
-        .catch((error) => {
-          console.error("Login error:", error.message); // Logging error message
-        });
-      
-      }}>
-      <GoogleLogin onSuccess={respMsg} onError={errMsg}
-/>
-</button>
-
-
-/>
+      <div className="input-container">
+        <input
+          className="inputField"
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </div>
-    </>
+      <button className="loginButton">Login</button>
+    </form>
+    {status ? (
+      message && <div className="SuccessMessage">{message}</div>
+    ) : (
+      message && <div className="ErrorMessage">{message}</div>
+    )}
+  </div>
+  <div className='google' style={{ textAlign: 'center' }}>
+    <button className="googleButton" onClick={()=>{
+      axios.post("http://localhost:5000/users/login", {
+        email: google.email,
+        password: google.azp, 
+      })
+      .then((result) => {
+        if (result.data) {
+          navigate("/");
+          setMessage("");
+          console.log(result.data);
+          dispatch(setLogin(result.data));
+          dispatch(setRoleId(result.data.role_id));
+          dispatch(setUserId(result.data.userId));
+          dispatch(setSpecialty(result.data.specialty));
+        } else {
+          throw new Error("Login failed"); // Throwing an Error object
+        }
+      })
+      .catch((error) => {
+        console.error("Login error:", error.message); // Logging error message
+      });
+    }}>
+      <GoogleLogin onSuccess={respMsg} onError={errMsg} />
+    </button>
+  </div>
+</>
   );
 };
 

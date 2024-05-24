@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import "./RegisterDoctor.css"
 
 
 const RegisterDoctor = () => {
@@ -71,82 +71,114 @@ const RegisterDoctor = () => {
   return (
     <>
       <div className="Form">
-        <p className="Title">Register:</p>
+        <p className="Title">Register as a Doctor:</p>
         <form onSubmit={addNewDoctor}>
           <br />
-          <input
-            type="text"
-            placeholder="First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-          <br />
-          <input
-            type="number"
-            placeholder="Age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-            required
-          />
-          <br />
-          <select
-            value={speciality}
-            onChange={(e) => {
-              setSpeciality(e.target.value);
-              console.log(e.target.value);
-            }}
-            required
-          >
-            <option> Select Speciality </option>
-            {specialities &&
-              specialities.map((spe) => (
-                <option key={spe.specialty_id} value={spe.specialty_id}>
-                  {spe.specialty}
-                </option>
-              ))}
-          </select>
-          <br />
-          <input
-            type="text"
-            placeholder="Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
-          <br />
-          <input
-            type="tel"
-            placeholder="Phone number"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-          <br />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <br />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <br />
+          <div className="input-container">
+  <label className="inf" htmlFor="firstName">First Name:</label>
+  <input
+    type="text"
+    id="firstName"
+    placeholder="Enter your first name"
+    value={firstName}
+    onChange={(e) => setFirstName(e.target.value)}
+    required
+  />
+</div>
+
+<div className="input-container">
+  <label className="inf" htmlFor="lastName">Last Name:</label>
+  <input
+    type="text"
+    id="lastName"
+    placeholder="Enter your last name"
+    value={lastName}
+    onChange={(e) => setLastName(e.target.value)}
+    required
+  />
+</div>
+
+<div className="input-container">
+  <label className="inf" htmlFor="age">Age:</label>
+  <input
+    type="number"
+    id="age"
+    placeholder="Enter your age"
+    value={age}
+    onChange={(e) => setAge(e.target.value)}
+    required
+  />
+</div>
+
+<div className="input-container">
+  <label className="inf" htmlFor="speciality">Speciality:</label>
+  <select
+    id="speciality"
+    value={speciality}
+    onChange={(e) => {
+      setSpeciality(e.target.value);
+      console.log(e.target.value);
+    }}
+    required
+  >
+    <option> Select Speciality </option>
+    {specialities &&
+      specialities.map((spe) => (
+        <option key={spe.specialty_id} value={spe.specialty_id}>
+          {spe.specialty}
+        </option>
+      ))}
+  </select>
+</div>
+
+<div className="input-container">
+  <label className="inf" htmlFor="address">Address:</label>
+  <input
+    type="text"
+    id="address"
+    placeholder="Enter your address"
+    value={address}
+    onChange={(e) => setAddress(e.target.value)}
+    required
+  />
+</div>
+
+<div className="input-container">
+  <label className="inf" htmlFor="phone">Phone number:</label>
+  <input
+    type="tel"
+    id="phone"
+    placeholder="Enter your phone number"
+    value={phone}
+    onChange={(e) => setPhone(e.target.value)}
+    required
+  />
+</div>
+
+<div className="input-container">
+  <label className="inf" htmlFor="email">Email:</label>
+  <input
+    type="email"
+    id="email"
+    placeholder="Enter your email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    required
+  />
+</div>
+
+<div className="input-container">
+  <label className="inf" htmlFor="password">Password:</label>
+  <input
+    type="password"
+    id="password"
+    placeholder="Enter your password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    required
+  />
+</div>
+         
           <button className="docRegBut" type="submit">
             Register
           </button>
