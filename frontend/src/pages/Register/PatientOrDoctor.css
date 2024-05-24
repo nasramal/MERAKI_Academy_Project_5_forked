@@ -1,8 +1,7 @@
 .container {
     display: flex;
     justify-content: center; 
-    align-items: center; 
-
+    align-items: center;
   }
   
   .button {
@@ -12,9 +11,7 @@
   
   .image {
     width: 200px; 
-    height: auto; 
-  
-
+    height: auto;
   }
 
   .patimage{
@@ -22,7 +19,6 @@
     height: 200px; 
     margin-right: 250px;
     cursor: pointer;
-    
   } 
 
   .docimage{
@@ -30,8 +26,6 @@
     height: auto; 
     margin-right: 300px;
     cursor: pointer;
- 
-    
   }
 
   .doc{
@@ -45,4 +39,5 @@ color:rgba(9, 52, 117, 0.992);
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color:rgba(9, 52, 117, 0.992);
   } 
+
 
