@@ -65,7 +65,7 @@ const RegisterDoctor = () => {
     }
   };
 
-  // console.log(speciality);
+
 
 
 
