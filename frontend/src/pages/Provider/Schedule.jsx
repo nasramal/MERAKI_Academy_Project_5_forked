@@ -9,7 +9,7 @@ import {
 } from "../../Service/Redux/Slice/Schedules";
 import Table from "react-bootstrap/Table";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 function Schedule() {
   const dispatch = useDispatch();
   const [data, setDate] = useState("");
@@ -64,13 +64,12 @@ function Schedule() {
   };
   useEffect(() => {
     getSchedule();
-
   }, [schedules]);
   // console.log(schedules);
   return (
-  <div>
-  <ToastContainer />
-    
+    <div>
+      <ToastContainer />
+
       <Table className="table">
         <thead>
           <tr>
@@ -89,7 +88,7 @@ function Schedule() {
                   <td>{schedule.date.split("T")[0]}</td>
                   <td>{schedule.timefrom}</td>
                   <td>{schedule.timeto}</td>
-                  <td>{schedule.booked.toString()}</td>
+                  <td className={schedule.booked == true ? "green" : "red"}>{schedule.booked.toString()=="true"?"true":"false"}</td>
                   {/* *********delete schedule************* */}
                   <td
                     onClick={() => {
@@ -103,12 +102,12 @@ function Schedule() {
                           }
                         )
                         .then((result) => {
-                          // console.log(result);
                           dispatch(updateSchedules(schedule.schedule_id));
-                          notifySucc()
+                          notifyErr();
                         })
                         .catch((err) => {
-                          console.log(err);notifyErr();
+                          console.log(err);
+                          
                         });
                     }}
                   >
@@ -119,8 +118,8 @@ function Schedule() {
             );
           })}
       </Table>
-      {/* *****************add new schedule******************** */}
-      <button
+      <br/>
+      <button className="schedule-button"
         onClick={() => {
           axios
             .post(
@@ -133,7 +132,8 @@ function Schedule() {
               }
             )
             .then((result) => {
-              dispatch(addSchedules(result));
+              console.log(result.data);
+              dispatch(addSchedules(result.data.result));
               notifySucc();
             })
             .catch((err) => {
@@ -143,6 +143,7 @@ function Schedule() {
       >
         Add New Schedule
       </button>
+      <br/>
       <div className="Form">
         <form>
           <label> Date </label>
@@ -169,7 +170,6 @@ function Schedule() {
           />
         </form>
       </div>
-      
     </div>
   );
 }

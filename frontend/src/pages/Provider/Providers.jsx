@@ -5,6 +5,9 @@ import img from "./profile.png";
 import axios from "axios";
 import { addAppointment } from "../../Service/Redux/Slice/Appointment";
 import { updateSchedules } from "../../Service/Redux/Slice/Schedules";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function Providers() {
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
@@ -24,20 +27,45 @@ export default function Providers() {
     axios
       .get(`http://localhost:5000/schedule/notBooked/${providerId.users_id}`)
       .then((result) => {
-        console.log(result.data);
+        // console.log(result.data);
         setSchedules(result.data.result);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+   // **************for notification************************
+ const notifySucc = () =>
+  toast.success("Approved Appointment", {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+
+const notifyErr = () =>
+  toast.error("Reject Appointment", {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+// *****************************************
   useEffect(() => {
     getNotBookedSchedule();
-  }, []);
+  }, [schedules]);
   // console.log(schedules);
   // console.log(providerId.users_id);
 
-  return (
+  return (<><ToastContainer />
     <div>
       {providerId && (
         <div id="cards">
@@ -112,9 +140,10 @@ export default function Providers() {
                                 }
                               } catch (error) {
                                 console.log(error);
-                                setMessage(
-                                  "Error happened while creating appointment, please try again."
-                                );
+                                notifySucc()
+                                // setMessage(
+                                //   "Error happened while creating appointment, please try again."
+                                // );
                               }
                               try {
                                 const result = axios.put(
@@ -157,7 +186,7 @@ export default function Providers() {
           </div>
         </div>
       )}
-      {message && <div className="message">{message}</div>}
-    </div>
+      {/* {message && <div className="message">{message}</div>} */}
+    </div></>
   );
 }

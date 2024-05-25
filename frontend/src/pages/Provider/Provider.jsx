@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import "./Providerr.css";
 import img from "./profile.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Provider() {
   const [information, setInformation] = useState(null);
@@ -46,7 +48,31 @@ function Provider() {
         console.log(err);
       });
   };
+  // **************for notification************************
+  const notifySucc = () =>
+    toast.success("Schedule Add Successfully", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
 
+  const notifyErr = () =>
+    toast.error("Schedule Deleted Successfully", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  // *****************************************
   useEffect(() => {
     getInfo();
     getDocInfo();
@@ -54,7 +80,7 @@ function Provider() {
 
   // console.log(docInfo);
   return (
-    <>
+    <><ToastContainer />
       <div className="infoContainer">
         {information && (
           <div className="providerImg">
@@ -88,7 +114,7 @@ function Provider() {
                   }}
                   placeholder="Update your Experience"
                 />
-                 <input
+                <input
                   type="text"
                   autoFocus
                   value={newCertificates}
@@ -102,7 +128,10 @@ function Provider() {
                     axios
                       .put(
                         `http://localhost:5000/docInfo/`,
-                        {experience :newExperience, certificates: newCertificates },
+                        {
+                          experience: newExperience,
+                          certificates: newCertificates,
+                        },
                         {
                           headers: {
                             Authorization: `Bearer ${token}`,
@@ -112,12 +141,13 @@ function Provider() {
                       .then((result) => {
                         console.log(result);
                         setDocInfo(result.data.result);
-    getDocInfo();
-setEditExperience(!editExperience)
-
+                        getDocInfo();
+                        setEditExperience(!editExperience);
+                        notifySucc()
                       })
                       .catch((err) => {
                         console.log(err);
+                        notifyErr()
                       });
                   }}
                 >
@@ -130,24 +160,10 @@ setEditExperience(!editExperience)
                   setEditExperience(!editExperience);
                 }}
               >
-                ✏️ Experience: {docInfo[0]?.experience}<br></br>✏️ Certificates: {docInfo[0]?.certificates}
+                ✏️ Experience: {docInfo[0]?.experience}
+                <br></br>✏️ Certificates: {docInfo[0]?.certificates}
               </div>
             )}
-
-            {/* {editCertificates ? (
-              <div>
-               
-                
-              </div>
-            ) : (
-              <div
-                onClick={() => {
-                  setEditCertificates(!editCertificates);
-                }}
-              >
-                
-              </div>
-            )} */}
           </div>
         )}
       </div>
