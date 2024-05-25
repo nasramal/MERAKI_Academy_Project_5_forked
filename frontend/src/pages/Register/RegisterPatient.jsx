@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
 import './RegisterPatient.css'
+import Swal from "sweetalert2";
 
 const RegisterPatient = () => {
   const [firstName, setFirstName] = useState("");
@@ -152,9 +153,24 @@ const RegisterPatient = () => {
         required
       />
     </div>
-    <button className="patregbut" type="submit">
-      Register
-    </button>
+    <button 
+  className="patregbut" 
+  onClick={(e) => {
+    e.preventDefault(); 
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "account created successfully",
+      showConfirmButton: false,
+      timer: 2500
+    });
+   
+    addNewPatient(e);
+  }}
+  type="submit"
+>
+  Register
+</button>
   </form>
 </div>
         {status
