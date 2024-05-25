@@ -1,6 +1,6 @@
 .Form {
-    max-width: 500px;
-    margin: 20px;
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -9,11 +9,11 @@
   
   .Title {
     font-size: 25px;
-  font-weight: bold;
-padding-left: 170px;
-  margin-bottom: 20px;
-  align-content: center;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+  padding-left: 20px;
+margin-left: -100px;
+    align-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
   
   .input-container {

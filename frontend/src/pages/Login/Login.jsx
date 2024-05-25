@@ -90,6 +90,30 @@ const errMsg = (error)=>{
   console.log(error)
 }
   
+const handleGoogleLogin = () => {
+  axios
+    .post("http://localhost:5000/users/login", {
+      email: google.email,
+      password: google.azp,
+    })
+    .then((result) => {
+      if (result.data) {
+        navigate("/");
+        setMessage("");
+        console.log(result.data);
+        dispatch(setLogin(result.data));
+        dispatch(setRoleId(result.data.role_id));
+        dispatch(setUserId(result.data.userId));
+        dispatch(setSpecialty(result.data.specialty));
+      } else {
+        throw new Error("Login failed");
+      }
+    })
+    .catch((error) => {
+      console.error("Login error:", error.message);
+    });
+};
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -127,28 +151,7 @@ const errMsg = (error)=>{
     )}
   </div>
   <div className='google' style={{ textAlign: 'center' }}>
-    <button className="googleButton" onClick={()=>{
-      axios.post("http://localhost:5000/users/login", {
-        email: google.email,
-        password: google.azp, 
-      })
-      .then((result) => {
-        if (result.data) {
-          navigate("/");
-          setMessage("");
-          console.log(result.data);
-          dispatch(setLogin(result.data));
-          dispatch(setRoleId(result.data.role_id));
-          dispatch(setUserId(result.data.userId));
-          dispatch(setSpecialty(result.data.specialty));
-        } else {
-          throw new Error("Login failed"); 
-        }
-      })
-      .catch((error) => {
-        console.error("Login error:", error.message); 
-      });
-    }}>
+    <button className="googleButton" onClick={handleGoogleLogin}>
       <GoogleLogin onSuccess={respMsg} onError={errMsg} />
     </button>
   </div>
