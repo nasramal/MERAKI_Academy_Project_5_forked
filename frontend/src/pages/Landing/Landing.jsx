@@ -87,7 +87,7 @@ console.log(provider);
   </p>
   <h3>Are you a Doctor?</h3>
   <p>
-    Doctors play a crucial role in our platform. If you're a doctor looking to join our community, we welcome you! After registering, please navigate to the <a href="/docInfo">My Info</a> page to add your professional details, including your experience and certifications. Your profile completeness ensures that patients can trust and connect with you more effectively. Thank you for choosing to be a part of our community!
+    Doctors play a crucial role in our platform. If you're a doctor looking to join our community, we welcome you! After registering, please navigate to the <mark>My Info</mark> page to add your professional details, including your experience and certifications. Your profile completeness ensures that patients can trust and connect with you more effectively. Thank you for choosing to be a part of our community!
   </p>
       </div>
 <>

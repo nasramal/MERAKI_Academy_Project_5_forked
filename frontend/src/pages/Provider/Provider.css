@@ -239,7 +239,8 @@ table, th, td {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  margin: 0 auto;
+  display: flex;
 }
 
 .schedule-button:hover {
@@ -388,4 +389,13 @@ body {
 }
 .table{
   margin: 0 auto;
+}
+.green{
+  background-color:#29ba49c0;
+  font-size: 20px;
+}
+.red{
+  background-color:#f22323b0;
+  font-size: 20px;
+
 }

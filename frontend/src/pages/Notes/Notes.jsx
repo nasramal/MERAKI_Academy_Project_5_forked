@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { addNote, setNote, updateNote } from "../../Service/Redux/Slice/Note";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ProviderInfo() {
   const [showInput, setShowInput] = useState(false);
@@ -14,7 +16,30 @@ export default function ProviderInfo() {
     token: state.auth.token,
     note: state.note.note,
   }));
-
+ // **************for notification************************
+ const notifySucc = () =>
+  toast.success("Note Add Successfully", {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+const notifyErr = () =>
+  toast.error("Note Deleted Successfully", {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+// *****************************************
   const getInfo = () => {
     axios
       .get(`http://localhost:5000/notes/provider`, {
@@ -29,12 +54,10 @@ export default function ProviderInfo() {
         console.log(err);
       });
   };
-
   useEffect(() => {
     getInfo();
   }, [note]);
-  // console.log(note);
-  return (
+  return (<><ToastContainer />
     <div className="container">
       {note &&
         note.map((note, index) => {
@@ -48,7 +71,7 @@ export default function ProviderInfo() {
                   <p className="stats-texts">
                     <p>{note.provider_id}</p>
                   </p>
-                  <input
+                  <input style={{transform: "translate(20px, 0px)"}} 
                     type="text"
                     placeholder="Edit Note"
                     onChange={(e) => {
@@ -70,8 +93,8 @@ export default function ProviderInfo() {
                         }
                       )
                       .then((result) => {
-                        // console.log(result.data.result);
                         dispatch(updateNote(result.data.result));
+                        notifySucc();
                       })
                       .catch((err) => {
                         console.log(err);
@@ -95,8 +118,8 @@ export default function ProviderInfo() {
         Create Note
       </p>
       {showInput && (
-        <div>
-          <input
+        <div >
+          <input style={{transform: "translate(11px, 10px)"}} 
             type="text"
             placeholder="user_id"
             onChange={(e) => {
@@ -126,6 +149,7 @@ export default function ProviderInfo() {
                 )
                 .then((result) => {
                   dispatch(addNote(result.data.result));
+                  notifySucc()
                 })
                 .catch((err) => {
                   console.log(err);
@@ -136,6 +160,7 @@ export default function ProviderInfo() {
           </button>
         </div>
       )}
-    </div>
+      
+    </div></>
   );
 }

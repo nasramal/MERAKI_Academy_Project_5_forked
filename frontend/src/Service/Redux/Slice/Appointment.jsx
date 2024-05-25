@@ -12,7 +12,7 @@ export const appointmentSlice = createSlice({
 
     updateAppointment: (state, action) => {
       state.appointment = state.appointment.filter((appointment, i) => {
-        return appointment.appointmint_id !== action.payload.appointmnt_id;
+        return appointment.appointmint_id !== action.payload.appointmint_id;
       });
     },
 
