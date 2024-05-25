@@ -142,11 +142,11 @@ const errMsg = (error)=>{
           dispatch(setUserId(result.data.userId));
           dispatch(setSpecialty(result.data.specialty));
         } else {
-          throw new Error("Login failed"); // Throwing an Error object
+          throw new Error("Login failed"); 
         }
       })
       .catch((error) => {
-        console.error("Login error:", error.message); // Logging error message
+        console.error("Login error:", error.message); 
       });
     }}>
       <GoogleLogin onSuccess={respMsg} onError={errMsg} />

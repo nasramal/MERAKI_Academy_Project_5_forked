@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setLogout } from "../../Service/Redux/Slice/Auth";
 import SearchResult from "../../pages/NaveBar/SearchResult";
 import "./NavBar.css";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -14,8 +15,21 @@ const NavBar = () => {
   }));
 
   const logout = () => {
-    dispatch(setLogout());
-    navigate("/");
+    Swal.fire({
+      title: "Are you sure to logout?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(setLogout());
+        navigate("/");
+      }
+    });
+
+   
   };
 
   return (

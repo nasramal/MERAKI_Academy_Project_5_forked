@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./RegisterDoctor.css"
+import Swal from "sweetalert2";
 
 
 const RegisterDoctor = () => {
@@ -179,9 +180,24 @@ const RegisterDoctor = () => {
   />
 </div>
          
-          <button className="docRegBut" type="submit">
-            Register
-          </button>
+<button 
+  className="docRegBut" 
+  onClick={(e) => {
+    e.preventDefault(); 
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "account created successfully",
+      showConfirmButton: false,
+      timer: 2500
+    });
+   
+    addNewDoctor(e);
+  }}
+  type="submit"
+>
+  Register
+</button>
         </form>
         {status ? (
           <div className="SuccessMessage">{message}</div>

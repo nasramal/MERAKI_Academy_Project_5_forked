@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setReview, addReview, deleteReview } from "../../Service/Redux/Slice/Review";
 import "./Review.css";
+import Swal from "sweetalert2";
+
 
 const Reviews = () => {
   const [rev, setRev] = useState([]);
@@ -37,55 +39,85 @@ const Reviews = () => {
 
   const createReviewByUserId = async () => {
     try {
-      const response = await axios.post(
-        `http://localhost:5000/review/${providerId.users_id}`,
-        {
-          comment: comment,
-          users: users,
-          providers_id: providerId.users_id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-  
-      dispatch(addReview(response.data.result));
-      const newReview = response.data.review;
-      setRev([...rev, newReview]); 
-  
-      setComment("");
+        const newReview = {
+            comment: comment,
+            users_id: users,
+            review_id: Date.now(),
+        };
+        setRev([...rev, newReview]);
+        setComment("");
+
+        const response = await axios.post(
+            `http://localhost:5000/review/${providerId.users_id}`,
+            {
+                comment: comment,
+                users: users,
+                providers_id: providerId.users_id,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Thank you for sharing your experience",
+            showConfirmButton: false,
+            timer: 2500
+        });
+
+        dispatch(addReview(response.data.result));
     } catch (error) {
-      console.log(error);
-      setMessage("Error adding review. Please try again.");
+        console.log(error);
+        setMessage("Error adding review. Please try again.");
     }
-  };
+};
 
   const deletereviewByUserId = async (reviewId) => {
-    try {
-      const response =  await axios.put(
-        `http://localhost:5000/review/${providerId.users_id}`, 
-        {
-          users: users,
-          providers_id: providerId.users_id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.put(
+            `http://localhost:5000/review/${providerId.users_id}`,
+            {
+              users: users,
+              providers_id: providerId.users_id,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          dispatch(deleteReview(response.data.result));
+  
+          const updatedReviews = rev.filter(
+            (review) => review.review_id !== reviewId
+          );
+  
+          setRev(updatedReviews);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your review has been deleted.",
+            icon: "success",
+          });
+        } catch (error) {
+          console.log(error);
+          setMessage("Error deleting review. Please try again.");
         }
-      );
-      dispatch(deleteReview(response.data.result));
-    
-     
-      const updatedReviews = rev.filter(review => review.review_id !== reviewId);
-      
-      setRev(updatedReviews);
-    } catch (error) {
-      console.log(error);
-      setMessage("Error deleting review. Please try again.");
-    }
+      }
+    });
   };
 
   useEffect(() => {
