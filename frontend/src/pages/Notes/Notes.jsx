@@ -68,9 +68,9 @@ const notifyErr = () =>
                 <p id="activitys"> </p>
                 <p id="s">
                   <p>{note.notes}</p>
-                  <p className="stats-texts">
+                  {/* <p className="stats-texts">
                     <p>{note.provider_id}</p>
-                  </p>
+                  </p> */}
                   <input style={{transform: "translate(20px, 0px)"}} 
                     type="text"
                     placeholder="Edit Note"

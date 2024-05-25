@@ -105,8 +105,9 @@ console.log(provider);
           ))}
         </div>
       </div>
-</>
+</><div className='mainSp'>
       {show?provider && provider.map((pro,i) => (
+    
             <div key={i} id="card">
               <img 
                 id="avatar"
@@ -132,7 +133,7 @@ console.log(provider);
               </div>
             </div>
           )):<></>}
-        
+        </div>
       
     </div>
   );
