@@ -8,12 +8,12 @@ import Swal from "sweetalert2";
 const RegisterDoctor = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState();
   const [speciality, setSpeciality] = useState("");
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState(0);
+  const [phone, setPhone] = useState();
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState(false);
   const [specialities, setSpecialities] = useState([]);
